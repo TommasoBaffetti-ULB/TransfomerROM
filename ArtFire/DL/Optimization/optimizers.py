@@ -1,10 +1,11 @@
+from __future__ import annotations
 from collections import defaultdict
 
 import torch
+from torch import nn
+
 from torch.optim.optimizer import Optimizer
 
-
-from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Mapping, Optional, Union
@@ -120,6 +121,70 @@ def _build_adagrad(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
         **cfg.kwargs,
     )
 
+
+def build_parameter_groups(
+    model: nn.Module,
+    lr: float,
+    weight_decay: float,
+    no_weight_decay_on_norm: bool = True,
+    no_weight_decay_on_bias: bool = True,
+) -> List[Dict]:
+    """
+    Build parameter groups with selective weight decay.
+
+    Splits parameters into:
+    - decay group
+    - no_decay group
+
+    Typical rule:
+    - NO weight decay for:
+        - bias
+        - normalization layers (LayerNorm, BatchNorm, etc.)
+    """
+
+    decay_params = []
+    no_decay_params = []
+
+    norm_layers = (
+        nn.LayerNorm,
+        nn.BatchNorm1d,
+        nn.BatchNorm2d,
+        nn.BatchNorm3d,
+        nn.GroupNorm,
+    )
+    decay_names=[]
+    no_decay_names=[]
+    for module_name, module in model.named_modules():
+        for param_name, param in module.named_parameters(recurse=False):
+
+            if not param.requires_grad:
+                continue
+
+            full_name = f"{module_name}.{param_name}" if module_name else param_name
+
+            # --- rules ---
+            is_bias = param_name.endswith("bias")
+            is_norm = isinstance(module, norm_layers)
+
+            if (no_weight_decay_on_bias and is_bias) or (
+                no_weight_decay_on_norm and is_norm
+            ):
+                no_decay_names.append(full_name)
+                no_decay_params.append(param)
+            else:
+                decay_names.append(full_name)
+                decay_params.append(param)
+
+    return ([decay_names, no_decay_names],
+            [
+        {
+            "params": decay_params,
+        },
+        {
+            "params": no_decay_params,
+            "weight_decay": 0.0,
+        },
+    ])
 
 def build_optimizer(
     params: ParamsLike,

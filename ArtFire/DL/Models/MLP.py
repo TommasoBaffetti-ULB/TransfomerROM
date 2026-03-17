@@ -13,12 +13,12 @@ class CustomRegressor(nn.Module):
             hidden_layers (list or None): List of hidden layer sizes (e.g., [64, 64]).
                                          Use `None` or an empty list for 0 hidden layers -> input layer - output layer.
             dropout (float): Dropout rate (default: 0.0).
-            use_batch_norm (bool): Whether to use batch normalization (default: False).
+            normalization (string): Whether to use batch normalization (default: Batch-Norm).
             activation (str): Activation function to use ("relu", "gelu", "elu", "tanh", "sigmoid", "leaky_relu" ).
         """
         super(CustomRegressor, self).__init__()
         self.generator = torch.Generator().manual_seed(seed)
-        assert (initialization in ["xavier uniform", " xavier normal", "kaiming uniform"])
+        assert (initialization in ["xavier uniform", " xavier normal", "kaiming uniform", "default"])
         self.initialization = initialization
         layers = []
 
@@ -33,6 +33,9 @@ class CustomRegressor(nn.Module):
         }
         if activation not in activations:
             raise ValueError(f"Unsupported activation function '{activation}'. Choose from {list(activations.keys())}.")
+
+        if normalization not in ["Batch-Norm", "Layer-Norm"]:
+            raise ValueError(f"Unsupported normalization '{normalization}'. Choose from 'Batch-Norm' 'Layer-Norm'")
         activation_fn = activations[activation]
         self.activation = activation
 
@@ -67,7 +70,8 @@ class CustomRegressor(nn.Module):
             layers.append(nn.Linear(hidden_layers[-1], output_dim))
 
         self.network = nn.Sequential(*layers)
-        self.initialize()   # not called because I am not sure it is properly done
+        if initialization != "default":
+            self.initialize()  # not called because I am not sure it is properly done
 
     def initialize(self):
         for l in range(len(self.network)):
@@ -96,7 +100,7 @@ class CustomSoftmax(nn.Module):
         """
         super(CustomSoftmax, self).__init__()
         self.generator = torch.Generator().manual_seed(seed)
-        assert (initialization in ["xavier uniform", " xavier normal", "kaiming uniform"])
+        assert (initialization in ["xavier uniform", " xavier normal", "kaiming uniform", "default"])
         self.initialization = initialization
         layers = []
 
@@ -146,7 +150,8 @@ class CustomSoftmax(nn.Module):
             layers.append(nn.Softmax(dim=1))
 
         self.network = nn.Sequential(*layers)
-        self.initialize()   # not called because I am not sure it is properly done
+        if initialization!="default":
+            self.initialize()   # not called because I am not sure it is properly done
 
     def initialize(self):
         for l in range(len(self.network)):
