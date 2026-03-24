@@ -1,0 +1,13 @@
+cae:
+  in_channels: 13
+  encoder_channels: [32, 64, 128, 256]
+  latent_dim: 256
+  input_hw: [256, 64]
+
+transformer:
+  latent_dim: 256
+  d_model: 256
+  nhead: 8
+  num_layers: 4
+  dim_feedforward: 1024
+  dropout: 0.1

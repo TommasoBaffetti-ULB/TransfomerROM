@@ -1,0 +1,3 @@
+test:
+  enabled: true
+  metrics: [mse]

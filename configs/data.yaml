@@ -1,0 +1,15 @@
+dataset:
+  nt: 2001
+  nf: 13
+  nz: 256
+  nx: 64
+
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+
+preprocessing:
+  scaler: standard_per_feature
+
+window:
+  nw: 50

@@ -1,0 +1,16 @@
+training:
+  device: cpu
+  batch_size: 8
+  cae_lr: 0.001
+  transformer_lr: 0.0001
+  epochs_cae: 5
+  epochs_transformer: 5
+
+modes:
+  joint_cae_transformer: false
+  with_boundary_conditions: false
+  recursive_training: false
+  recursive_steps: 3
+  autoregressive: false
+  autoregressive_context: 3
+  physics_informed_loss: false

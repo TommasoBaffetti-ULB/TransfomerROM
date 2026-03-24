@@ -1,0 +1,6 @@
+loss:
+  reconstruction: mse
+  latent_prediction: mse
+  physics_informed:
+    enabled: false
+    weight: 0.1
