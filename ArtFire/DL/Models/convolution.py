@@ -182,7 +182,7 @@ class TCNNblock(nn.Module):
         activation_fn = activations[activation]
         layers = []
 
-        for i in range(n_layers):
+        for i in range(n_layers-1):
             in_ch = channels[i]
             out_ch = channels[i + 1]
             k = kernel_sizes[i]
@@ -222,6 +222,19 @@ class TCNNblock(nn.Module):
                 layers.append(nn.GroupNorm(num_groups=num_groups, num_channels=out_ch))
 
             layers.append(activation_fn())
+
+        layers.append(
+            self._make_conv_transpose(
+                dim=dim,
+                in_ch=channels[-2],
+                out_ch=channels[-1],
+                k=kernel_sizes[-1],
+                s=strides[-1],
+                p=paddings[-1],
+                op=output_paddings[-1],
+                bias=(normalization is None),
+            )
+        )
 
         self.backbone = nn.Sequential(*layers)
 
