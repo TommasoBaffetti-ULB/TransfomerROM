@@ -3,7 +3,7 @@ import torch
 
 
 class CustomMLP(nn.Module):
-    def __init__(self, input_dim: int, output_dim=None, hidden_layers=None, dropout_p=0.0, normalization="Batch-Norm",
+    def __init__(self, input_dim: int, output_dim=None, hidden_layers=None, dropout_p= 0.0, normalization="Batch-Norm",
                  activation="leaky_relu", seed=42, initialization="kaiming uniform"):
         super().__init__()
         self.generator = torch.Generator().manual_seed(seed)
@@ -28,9 +28,8 @@ class CustomMLP(nn.Module):
         if normalization not in ["Batch-Norm", "Layer-Norm"]:
             raise ValueError(f"Unsupported normalization '{normalization}'. Choose from 'Batch-Norm' 'Layer-Norm'")
         activation_fn = activations[activation]
-        self.activation = activation
-        self.dropouted_layers=[]
-
+        self.activation_fn = activation_fn
+        self.activation=activation
         # Case 1: 0 Hidden Layers
         if not hidden_layers:
             layers.append(nn.Linear(input_dim, output_dim))
@@ -56,27 +55,24 @@ class CustomMLP(nn.Module):
                 if normalization == "Layer-Norm":
                     layers.append(nn.LayerNorm(hidden_layers[i]))
                 layers.append(activation_fn())
-                if dropout_p > 0:
+                if dropout_p>0:
                     layers.append(nn.Dropout(dropout_p))
-
             # Output layer (no activation or batch normalization)
             layers.append(nn.Linear(hidden_layers[-1], output_dim))
 
-        self.mlp = nn.Sequential(*layers)
+        self.backbone = nn.Sequential(*layers)
 
         if initialization != "default":
             self.initialize()
 
 
     def initialize(self):
-        for l in range(len(self.mlp)):
-            custom_init(self.mlp[l], generator=self.generator, init_type=self.initialization,
+        for l in range(len(self.backbone)):
+            custom_init(self.backbone[l], generator=self.generator, init_type=self.initialization,
                         nonlinearity=self.activation)
 
     def forward(self, x : torch.Tensor) -> torch.Tensor:
-        raise self.mlp(x)
-
-
+        return self.backbone(x)
 
 
 def custom_init(m, generator=None, bias_range=0.005, init_type="uniform", nonlinearity=None):
@@ -88,5 +84,5 @@ def custom_init(m, generator=None, bias_range=0.005, init_type="uniform", nonlin
         if init_type == "kaiming uniform":
             nn.init.kaiming_uniform_(m.weight, generator=generator, nonlinearity=nonlinearity)
 
-        nn.init.uniform_(m.bias, -bias_range, bias_range)
+        nn.init.constant_(m.bias, bias_range)
 
