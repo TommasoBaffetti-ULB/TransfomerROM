@@ -1,0 +1,31 @@
+{
+  "Nt": 2001,
+  "Nf": 13,
+  "Nz": 256,
+  "Nx": 64,
+
+  "data_path": "/globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/data/D_t2001_f13_z256_x64.npy",
+  "grid_path": "/globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/data/xyz.npy",
+
+  "plot_start_epoch": 100,
+
+  "train_ratio": 0.7,
+  "test_ratio": 0.3,
+
+  "autoregressive": false,
+  "n_past": 1,
+
+  "N_teststeps": 50,
+  "channels": [32, 64, 128, 256],
+
+  "transformer_embed_dim": 128,
+  "transformer_layers": 4,
+  "transformer_heads": 8,
+  "transformer_hidden_dim": 256,
+  
+  "test_dir": "/globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/test/",
+  "models_dir": "/globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/models/",
+
+  "features": ["rho", "p", "U1", "U3", "T", "CH4", "CO", "CO2", "H2", "H2O", "N2", "O2", "OH"]
+
+}

@@ -1,0 +1,35 @@
+{
+  "Nt": 2001,
+  "Nf": 13,
+  "Nz": 256,
+  "Nx": 64,
+  "data_path": "/globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/data/D_t2001_f13_z256_x64.npy",
+  "grid_path": "/globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/data/xyz.npy",
+
+  "epochs": 1000,
+  "batch_size": 64,
+  "lr": 0.0001,
+
+  "train_ratio": 0.7,
+  "test_ratio": 0.3,
+
+  "train_together": false,
+  "train_autoencoder": true,
+  "train_transformer": true,
+
+  "autoregressive": false,
+  "n_past": 1,
+
+  "recursive": false,
+  "recursive_steps": 1,
+  "recursive_discount": 0.7,
+
+  "channels": [32, 64, 128, 256],
+  "transformer_embed_dim": 128,
+  "transformer_layers": 4,
+  "transformer_heads": 8,
+  "transformer_hidden_dim": 256,
+
+  "models_dir": "/globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/models/",
+  "checkpoint_path": "trained_model.pt"
+}
