@@ -3,7 +3,14 @@ import torch.nn as nn
 
 
 class CAE(nn.Module):
-    pass
+    def __init__(self, ConvEncoder, ConvDecoder):
+        super().__init__()
+        self.ConvEncoder=ConvEncoder
+        self.ConvDecoder=ConvDecoder
+
+    def forward(self,x):
+        x=self.ConvEncoder(x)
+        return self.ConvDecoder(x)
 
 
 class ConvEncoder(nn.Module):
