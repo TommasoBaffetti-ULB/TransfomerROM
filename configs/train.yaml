@@ -10,7 +10,8 @@ CAE:
   scheduler:
     power: 2
     min_lr: 5.0e-5
-    warmup_steps: 5
+    min_lr_warmup: 5.0e-5
+    warmup_steps: 3
     warmup_type: linear
 
 Transformer:
@@ -24,7 +25,8 @@ Transformer:
   saving_folder: training_Transformer
   scheduler:
     power: 2
-    min_lr: 1.0e-6
+    min_lr: 5.0e-5
+    min_lr_warmup: 5e-6
     warmup_steps: 5
     warmup_type: linear
 

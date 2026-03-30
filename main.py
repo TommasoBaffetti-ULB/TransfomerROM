@@ -18,7 +18,7 @@ import torch.nn as nn
 # Others
 from pathlib import Path
 
-def main():
+def main(verbose=False):
     print("Loading config...")
     data_config = load_data_config()
     model_config = load_model_config()
@@ -85,6 +85,7 @@ def main():
                          model_config["CAE"]["no_flatten_dim"])
 
     CAEmodel = CAE(CAEenc, CAEdec).to(train_config["CAE"]["device"])
+    if verbose: print("model \n", CAEmodel, "\n")
 
     print("Setting up optimizer and scheduler...")
 
@@ -98,9 +99,10 @@ def main():
                                     "use_lookahead": train_config["CAE"]["use_lookahead"],
                                 }
                                 )
+    if verbose: print("optimizer",cae_optimizer)
     scheduler = PolynomialScheduler(optimizer=cae_optimizer, total_steps=train_config["CAE"]["n_epochs"],
                                     power=train_config["CAE"]["scheduler"]["power"], min_lr=train_config["CAE"]["scheduler"]["min_lr"])
-    cae_warmup_scheduler = WarmupScheduler(cae_optimizer, scheduler, warmup_steps=train_config["CAE"]["scheduler"]["warmup_steps"],
+    cae_warmup_scheduler = WarmupScheduler(cae_optimizer, scheduler, min_lr=train_config["CAE"]["scheduler"]["min_lr_warmup"], warmup_steps=train_config["CAE"]["scheduler"]["warmup_steps"],
                                        warmup_type=train_config["CAE"]["scheduler"]["warmup_type"])
 
     print("Setting up the CAE Trainer...")
@@ -211,6 +213,7 @@ def main():
         use_residual=model_config["Transformer"]["use_residual"],
     ).to(train_config["Transformer"]["device"])
 
+    if verbose: print("\n Transformer", model_forecast , "\n")
     print("Setting up optimizer and scheduler...")
 
     parameters_groups=build_parameter_groups(model_forecast, lr=train_config["Transformer"]["lr"],
@@ -227,8 +230,10 @@ def main():
                                     total_steps=train_config["Transformer"]["n_epochs"],
                                     power=train_config["Transformer"]["scheduler"]["power"],
                                     min_lr=train_config["Transformer"]["scheduler"]["min_lr"])
-    trans_warmup_scheduler = WarmupScheduler(trans_optimizer, scheduler, warmup_steps=train_config["Transformer"]["scheduler"]["warmup_steps"],
-                                       warmup_type=train_config["Transformer"]["scheduler"]["warmup_type"])
+    trans_warmup_scheduler = WarmupScheduler(trans_optimizer, scheduler,
+                                             warmup_steps=train_config["Transformer"]["scheduler"]["warmup_steps"],
+                                             min_lr=train_config["CAE"]["scheduler"]["min_lr_warmup"],
+                                             warmup_type=train_config["Transformer"]["scheduler"]["warmup_type"])
 
     print("Setting up the Transformer Trainer...")
 
