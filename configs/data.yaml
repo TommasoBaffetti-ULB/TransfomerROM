@@ -1,6 +1,6 @@
 CAE:
    data_path: D_t2001_f13_z256_x64.npy
-   split: (0.6,0.2,0.2)
+   split: [0.6,0.2,0.2]
    normalize: true
    train_batch_size: 32
    val_batch_size: 32
@@ -11,7 +11,7 @@ CAE:
      persistent_workers: true
 
 Transformer:
-  split: (0.6,0.2,0.2)
+  split: [0.6,0.2,0.2]
   horizon: 30
   normalize: true
   train_batch_size: 32
