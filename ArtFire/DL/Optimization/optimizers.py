@@ -41,8 +41,6 @@ class OptimizerConfig:
     - `lookahead` can wrap the base optimizer if enabled.
     """
     name: str
-    lr: float
-    weight_decay: float = 0.0
 
     # Lookahead wrapper
     use_lookahead: bool = False
@@ -63,8 +61,6 @@ def _config_from_dict(config: Mapping[str, Any]) -> OptimizerConfig:
 
     known_fields = {
         "name",
-        "lr",
-        "weight_decay",
         "use_lookahead",
         "kwargs",
     }
@@ -80,8 +76,8 @@ def _config_from_dict(config: Mapping[str, Any]) -> OptimizerConfig:
 def _build_sgd(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.SGD(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
+        
+        
         **cfg.kwargs,
     )
 
@@ -89,8 +85,8 @@ def _build_sgd(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_adam(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.Adam(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
+        
+        
         **cfg.kwargs,
     )
 
@@ -98,8 +94,8 @@ def _build_adam(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_adamw(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.AdamW(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
+        
+        
         **cfg.kwargs,
     )
 
@@ -107,8 +103,8 @@ def _build_adamw(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_rmsprop(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.RMSprop(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
+        
+        
         **cfg.kwargs,
     )
 
@@ -116,8 +112,8 @@ def _build_rmsprop(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_adagrad(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.Adagrad(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
+        
+        
         **cfg.kwargs,
     )
 

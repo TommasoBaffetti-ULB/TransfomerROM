@@ -99,9 +99,9 @@ def main():
                                 }
                                 )
     scheduler = PolynomialScheduler(optimizer=cae_optimizer, total_steps=train_config["CAE"]["n_epochs"],
-                                    power=train_config["CAE"]["power"], min_lr=train_config["CAE"]["min_lr"])
-    cae_warmup_scheduler = WarmupScheduler(cae_optimizer, scheduler, warmup_steps=train_config["CAE"]["warmup_steps"],
-                                       warmup_type=train_config["CAE"]["warmup_type"])
+                                    power=train_config["CAE"]["scheduler"]["power"], min_lr=train_config["CAE"]["scheduler"]["min_lr"])
+    cae_warmup_scheduler = WarmupScheduler(cae_optimizer, scheduler, warmup_steps=train_config["CAE"]["scheduler"]["warmup_steps"],
+                                       warmup_type=train_config["CAE"]["scheduler"]["warmup_type"])
 
     print("Setting up the CAE Trainer...")
 
@@ -223,10 +223,12 @@ def main():
                                     "use_lookahead": train_config["Transformer"]["use_lookahead"],
                                 }
                                 )
-    scheduler = PolynomialScheduler(optimizer=trans_optimizer, total_steps=train_config["Transformer"]["n_epochs"],
-                                    power=train_config["Transformer"]["power"], min_lr=train_config["Transformer"]["min_lr"])
-    trans_warmup_scheduler = WarmupScheduler(trans_optimizer, scheduler, warmup_steps=train_config["Transformer"]["warmup_steps"],
-                                       warmup_type=train_config["Transformer"]["warmup_type"])
+    scheduler = PolynomialScheduler(optimizer=trans_optimizer,
+                                    total_steps=train_config["Transformer"]["n_epochs"],
+                                    power=train_config["Transformer"]["scheduler"]["power"],
+                                    min_lr=train_config["Transformer"]["scheduler"]["min_lr"])
+    trans_warmup_scheduler = WarmupScheduler(trans_optimizer, scheduler, warmup_steps=train_config["Transformer"]["scheduler"]["warmup_steps"],
+                                       warmup_type=train_config["Transformer"]["scheduler"]["warmup_type"])
 
     print("Setting up the Transformer Trainer...")
 
