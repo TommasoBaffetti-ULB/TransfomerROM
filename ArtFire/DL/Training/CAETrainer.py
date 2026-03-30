@@ -78,7 +78,7 @@ class CAETrainer:
             train_losses.append(t_l)
             val_losses.append(v_l)
 
-            print(f"Epoch {epoch + 1:03d} | train loss: {t_l:.6f} | val loss: {v_l:.6f}")
+            print(f"\n Epoch {epoch + 1:03d} | train loss: {t_l:.6f} | val loss: {v_l:.6f}")
             if self.scheduler is not None:
                 # for ReduceLROnPlateau
                 if isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
