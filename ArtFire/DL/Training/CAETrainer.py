@@ -29,7 +29,7 @@ class CAETrainer:
         running_loss = 0.0
         total_samples = 0
 
-        for batch in tqdm(self.train_loader):
+        for batch in self.train_loader:
             x = batch["x"].to(self.device)
             y = batch["y"].to(self.device)
 

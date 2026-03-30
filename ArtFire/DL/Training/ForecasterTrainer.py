@@ -29,7 +29,7 @@ class ForecasterTrainer:
         total_loss = 0.0
         total_samples = 0
 
-        for batch in tqdm(self.train_loader):
+        for batch in self.train_loader:
             z_t = batch["z_t"].to(self.device)
             z_seq = batch["z_seq"].to(self.device)
 
