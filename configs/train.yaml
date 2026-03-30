@@ -1,6 +1,6 @@
 CAE:
   device: cuda
-  lr: 1e-4
+  lr: 1e-3
   weight_decay: 5.0e-5
   optimizer: adamw
   use_lookahead: true
@@ -9,9 +9,9 @@ CAE:
   saving_folder: training_CAE
   scheduler:
     power: 2
-    min_lr: 5.0e-5
-    min_lr_warmup: 5.0e-5
-    warmup_steps: 3
+    min_lr: 5.0e-4
+    min_lr_warmup: 5.0e-4
+    warmup_steps: 0
     warmup_type: linear
 
 Transformer:

@@ -8,15 +8,23 @@ from ArtFire.DL.Training.CAETrainer import CAETrainer
 from ArtFire.DL.Training.ForecasterTrainer import ForecasterTrainer
 from ArtFire.DL.Models.Forecast import ARTransformerForecaster
 from ArtFire.utils.save import save_json
-
+from ArtFire.utils.seed import set_seed,seed_worker
 # PYTORCH IMPORT
 from pytorch_scheduler.scheduler.polynomial import PolynomialScheduler
 from pytorch_scheduler.base.warmup import WarmupScheduler
 from torch.utils.data import DataLoader
 import torch.nn as nn
+import torch
 
 # Others
 from pathlib import Path
+
+
+# Set seed
+SEED = 42
+set_seed(SEED)
+g = torch.Generator()
+g.manual_seed(SEED)
 
 def main(verbose=False):
     print("Loading config...")
@@ -59,6 +67,8 @@ def main(verbose=False):
         num_workers=cae_config["loader"]["loaders_num_workers"],
         pin_memory= cae_config["loader"]["pin_memory"],
         persistent_workers= cae_config["loader"]["persistent_workers"],
+        worker_init_fn=seed_worker,
+        generator=g,
     )
 
     val_loader = DataLoader(
@@ -68,6 +78,8 @@ def main(verbose=False):
         num_workers=cae_config["loader"]["loaders_num_workers"],
         pin_memory=cae_config["loader"]["pin_memory"],
         persistent_workers=cae_config["loader"]["persistent_workers"],
+        worker_init_fn=seed_worker,
+        generator=g,
     )
     test_loader = DataLoader(
         test_dataset,
@@ -76,9 +88,11 @@ def main(verbose=False):
         num_workers=cae_config["loader"]["loaders_num_workers"],
         pin_memory=cae_config["loader"]["pin_memory"],
         persistent_workers=cae_config["loader"]["persistent_workers"],
+        worker_init_fn=seed_worker,
+        generator=g,
     )
 
-    print("Initializing CAE model...")
+    print("\nInitializing CAE model...")
 
     CAEenc = ConvEncoder(model_config["CAE"]["spatial_conv_config"], model_config["CAE"]["temporal_conv_config"])
     CAEdec = ConvDecoder(model_config["CAE"]["spatial_tconv_config"], model_config["CAE"]["temporal_tconv_config"],
@@ -87,7 +101,7 @@ def main(verbose=False):
     CAEmodel = CAE(CAEenc, CAEdec).to(train_config["CAE"]["device"])
     if verbose: print("model \n", CAEmodel, "\n")
 
-    print("Setting up optimizer and scheduler...")
+    print("\nSetting up optimizer and scheduler...")
 
     parameters_groups=build_parameter_groups(CAEmodel, lr=train_config["CAE"]["lr"],
                                              weight_decay=train_config["CAE"]["weight_decay"]
@@ -105,7 +119,7 @@ def main(verbose=False):
     cae_warmup_scheduler = WarmupScheduler(cae_optimizer, scheduler, min_lr=train_config["CAE"]["scheduler"]["min_lr_warmup"], warmup_steps=train_config["CAE"]["scheduler"]["warmup_steps"],
                                        warmup_type=train_config["CAE"]["scheduler"]["warmup_type"])
 
-    print("Setting up the CAE Trainer...")
+    print("\nSetting up the CAE Trainer...")
 
     cae_trainer = CAETrainer(model=CAEmodel,
                              loaders=[train_loader, val_loader, test_loader],
@@ -116,7 +130,7 @@ def main(verbose=False):
                              gradient_clip=train_config["CAE"]["gradient_clip"],
                              )
 
-    print(f"learning for {train_config['CAE']['n_epochs']} epochs")
+    print(f"\nlearning for {train_config['CAE']['n_epochs']} epochs")
 
     cae_train_results=cae_trainer.learn(num_epochs=train_config["CAE"]["n_epochs"])
     saving_folder=Path(train_config["CAE"]["saving_folder"])
@@ -124,11 +138,11 @@ def main(verbose=False):
     save_json(cae_train_results,saving_folder / "train_results.json")
 
 
-    print("Evaluating CAE model...")
+    print("\nEvaluating CAE model...")
     cae_test_results=cae_trainer.test()
     save_json(cae_test_results,saving_folder / "test_result.json")
 
-    print("Setting up Transformer forecaster data...")
+    print("\nSetting up Transformer forecaster data...")
     trans_data_config = data_config["Transformer"]
     full_cae_dataset = CAEDataset(
         npy_path=data_path,
@@ -143,7 +157,9 @@ def main(verbose=False):
         shuffle=False,  # do not shuffle for time series
         num_workers= trans_data_config["cae_dataloader"]["loaders_num_workers"],
         pin_memory= trans_data_config["cae_dataloader"]["pin_memory"],
-        persistent_workers =  trans_data_config["cae_dataloader"]["persistent_workers"]
+        persistent_workers =  trans_data_config["cae_dataloader"]["persistent_workers"],
+        worker_init_fn=seed_worker,
+        generator=g,
     )
 
     train_forecast = ForecastDataset(
@@ -153,6 +169,7 @@ def main(verbose=False):
         mode="train",
         horizon=trans_data_config["horizon"],
         normalize=trans_data_config["normalize"],
+
     )
 
     val_forecast = ForecastDataset(
@@ -181,7 +198,9 @@ def main(verbose=False):
         shuffle=False,  # do not shuffle for time series
         num_workers=trans_data_config["loader"]["loaders_num_workers"],
         pin_memory=trans_data_config["loader"]["pin_memory"],
-        persistent_workers=trans_data_config["loader"]["persistent_workers"]
+        persistent_workers=trans_data_config["loader"]["persistent_workers"],
+        worker_init_fn=seed_worker,
+        generator=g,
     )
 
     val_dataloader = DataLoader(
@@ -190,7 +209,9 @@ def main(verbose=False):
         shuffle=False,  # do not shuffle for time series
         num_workers=trans_data_config["loader"]["loaders_num_workers"],
         pin_memory=trans_data_config["loader"]["pin_memory"],
-        persistent_workers=trans_data_config["loader"]["persistent_workers"]
+        persistent_workers=trans_data_config["loader"]["persistent_workers"],
+        worker_init_fn=seed_worker,
+        generator=g,
     )
 
     test_dataloader = DataLoader(
@@ -199,9 +220,12 @@ def main(verbose=False):
         shuffle=False,  # do not shuffle for time series
         num_workers=trans_data_config["loader"]["loaders_num_workers"],
         pin_memory=trans_data_config["loader"]["pin_memory"],
-        persistent_workers=trans_data_config["loader"]["persistent_workers"]
+        persistent_workers=trans_data_config["loader"]["persistent_workers"],
+        worker_init_fn=seed_worker,
+        generator=g,
     )
-    print("Initializing the Transformer model...")
+    print("\nInitializing the Transformer model...")
+    model_config["Transformer"]["mlp_config"]["seed"]= SEED
     model_forecast = ARTransformerForecaster(
         n_tokens=model_config["Transformer"]["n_tokens"],
         token_dim=model_config["Transformer"]["token_dim"],
@@ -214,7 +238,7 @@ def main(verbose=False):
     ).to(train_config["Transformer"]["device"])
 
     if verbose: print("\n Transformer", model_forecast , "\n")
-    print("Setting up optimizer and scheduler...")
+    print("\nSetting up optimizer and scheduler...")
 
     parameters_groups=build_parameter_groups(model_forecast, lr=train_config["Transformer"]["lr"],
                                              weight_decay=train_config["Transformer"]["weight_decay"]
@@ -235,7 +259,7 @@ def main(verbose=False):
                                              min_lr=train_config["CAE"]["scheduler"]["min_lr_warmup"],
                                              warmup_type=train_config["Transformer"]["scheduler"]["warmup_type"])
 
-    print("Setting up the Transformer Trainer...")
+    print("\nSetting up the Transformer Trainer...")
 
     trans_trainer=ForecasterTrainer(model=model_forecast,
                                     loaders=[train_dataloader,val_dataloader,test_dataloader],
@@ -245,14 +269,14 @@ def main(verbose=False):
                                     gradient_clip=train_config["Transformer"]["gradient_clip"],
                                     )
 
-    print(f"learning for {train_config['Transformer']['n_epochs']} epochs")
+    print(f"\nlearning for {train_config['Transformer']['n_epochs']} epochs")
 
     trans_train_results = trans_trainer.learn(num_epochs=train_config["Transformer"]["n_epochs"])
     saving_folder = Path(train_config["Transformer"]["saving_folder"])
     saving_folder.mkdir(parents=True, exist_ok=True)
     save_json(trans_train_results, saving_folder / "train_results.json")
 
-    print("Evaluating Transformer model...")
+    print("\nEvaluating Transformer model...")
     trans_test_results = trans_trainer.test()
     save_json(trans_test_results, saving_folder / "test_result.json")
 
