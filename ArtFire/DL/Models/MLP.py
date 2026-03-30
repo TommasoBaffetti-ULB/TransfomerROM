@@ -25,8 +25,7 @@ class CustomMLP(nn.Module):
         if activation not in activations:
             raise ValueError(f"Unsupported activation function '{activation}'. Choose from {list(activations.keys())}.")
 
-        if normalization not in ["Batch-Norm", "Layer-Norm"]:
-            raise ValueError(f"Unsupported normalization '{normalization}'. Choose from 'Batch-Norm' 'Layer-Norm'")
+
         activation_fn = activations[activation]
         self.activation_fn = activation_fn
         self.activation=activation
