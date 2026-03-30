@@ -3,8 +3,8 @@ CAE:
     input_channels: 13
     output_channels: 64
     hidden_channels: [32]
-    dim: 2,
-    paddings: 0,
+    dim: 2
+    paddings: 0
     strides: 2
   temporal_conv_config:
     input_channels: 1
@@ -20,7 +20,7 @@ CAE:
     hidden_channels: [32]
     dim: 2
     paddings: 0
-    output_paddings: [ (0, 0), (1, 1) ]
+    output_paddings: [ [0, 0], [1, 1] ]
     strides: 2
   temporal_tconv_config:
     input_channels: 64
@@ -28,9 +28,9 @@ CAE:
     hidden_channels: [32]
     dim: 2
     paddings: 0
-    output_paddings: [(0, 0), (1, 0)]
+    output_paddings: [[0, 0], [1, 0]]
     strides: 2
-  no_flatten_dim: (64,15,3)
+  no_flatten_dim: [64,15,3]
 
 Transformer:
   n_tokens: 63
@@ -38,8 +38,8 @@ Transformer:
   d_model: 512
   n_heads: 8
   n_layers: 4
-  dropout: 0.1,
-  use_residual: true,
+  dropout: 0.1
+  use_residual: true
   mlp_config:
     hidden_layers: [256]
     dropout_p: 0.0

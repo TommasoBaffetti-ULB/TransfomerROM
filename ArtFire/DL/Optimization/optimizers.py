@@ -184,6 +184,7 @@ def build_parameter_groups(
         },
         {
             "params": no_decay_params,
+            "lr": lr,
             "weight_decay": 0.0,
         },
     ])
