@@ -179,6 +179,8 @@ def build_parameter_groups(
             [
         {
             "params": decay_params,
+            "lr": lr,
+            "weight_decay": weight_decay,
         },
         {
             "params": no_decay_params,

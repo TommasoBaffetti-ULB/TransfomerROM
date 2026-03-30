@@ -1,0 +1,30 @@
+CAE:
+  device: cuda
+  lr: 1e-4
+  weight_decay: 5e-5
+  optimizer: adamw
+  use_lookahead: true
+  n_epochs: 20
+  gradient_clip: -1
+  saving_folder: training_CAE
+  scheduler:
+    power: 2
+    min_lr: 5e-5
+    warmup_steps: 5
+    warmup_type: linear
+
+Transformer:
+  device: cuda
+  lr: 1e-4
+  weight_decay: 5e-5
+  optimizer: adamw
+  use_lookahead: true
+  n_epochs: 50
+  gradient_clip: 3
+  saving_folder: training_Transformer
+  scheduler:
+    power: 2
+    min_lr: 1e-6
+    warmup_steps: 5
+    warmup_type: linear
+

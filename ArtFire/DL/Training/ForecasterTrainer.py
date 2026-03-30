@@ -6,15 +6,23 @@ from pathlib import Path
 from typing import List, Dict
 
 
-class CAETrainer:
-    def __init__(self,model: ARTransformerForecaster, loaders: List[DataLoader], optimizer: torch.optim.Optimizer,criterion:torch.nn=torch.nn.MSELoss() ,device:torch.device= "cuda"):
+class ForecasterTrainer:
+    def __init__(self,model: ARTransformerForecaster,
+                 loaders: List[DataLoader],
+                 optimizer: torch.optim.Optimizer,
+                 criterion:torch.nn=torch.nn.MSELoss(),
+                 scheduler: torch.optim.lr_scheduler=None,
+                 device:torch.device= "cuda",
+                 gradient_clip=3):
         self.model = model
         self.train_loader = loaders[0]
         self.val_loader = loaders[1]
         self.test_loader = loaders[2]
         self.optimizer = optimizer
         self.criterion = criterion
+        self.scheduler = scheduler
         self.device = torch.device(device if torch.cuda.is_available() else "cpu")
+        self.gradient_clip = gradient_clip
 
     def train_one_epoch(self):
         self.model.train()
@@ -32,7 +40,11 @@ class CAETrainer:
             pred_seq = self.model(z_t, horizon=horizon)
 
             loss = self.criterion(pred_seq, z_seq)
+
             loss.backward()
+            if self.gradient_clip>0:
+                torch.nn.utils.clip_grad_value_(self.model.parameters(),
+                                            self.gradient_clip)
             self.optimizer.step()
 
             total_loss += loss.item() * B
@@ -79,7 +91,12 @@ class CAETrainer:
             val_losses.append(v_l)
 
             print(f"Epoch {epoch + 1:03d} | train loss: {t_l:.6f} | val loss: {v_l:.6f}")
-
+            if self.scheduler is not None:
+                # for ReduceLROnPlateau
+                if isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
+                    self.scheduler.step(v_l)
+                else:
+                    self.scheduler.step()
             if v_l < best_val_loss:
                 best_val_loss = v_l
                 torch.save(self.model.state_dict(), "best_cae.pt")

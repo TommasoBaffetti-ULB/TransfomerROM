@@ -1,0 +1,32 @@
+CAE:
+   data_path: D_t2001_f13_z256_x64.npy
+   split: (0.6,0.2,0.2)
+   normalize: true
+   train_batch_size: 32
+   val_batch_size: 32
+   test_batch_size: 64
+   loader:
+     loaders_num_workers: 8
+     pin_memory: true
+     persistent_workers: true
+
+Transformer:
+  split: (0.6,0.2,0.2)
+  horizon: 30
+  normalize: true
+  train_batch_size: 32
+  val_batch_size: 32
+  test_batch_size: 64
+  cae_dataloader:
+    batch_size: 64
+    loaders_num_workers: 8
+    pin_memory: true
+    persistent_workers: true
+  loader:
+    loaders_num_workers: 8
+    pin_memory: true
+    persistent_workers: true
+
+
+
+
