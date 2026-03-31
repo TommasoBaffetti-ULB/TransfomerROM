@@ -33,7 +33,7 @@ Transformer:
 ArtFire:
   device: cuda
   lr: 1.0e-6
-  weight_decay: 1e-3
+  weight_decay: 1.0e-3
   optimizer: adamw
   use_lookahead: true
   n_epochs: 1 #5

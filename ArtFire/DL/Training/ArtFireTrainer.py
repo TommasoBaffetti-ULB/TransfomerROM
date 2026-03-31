@@ -76,7 +76,9 @@ class ArtFireTrainer:
 
             horizon = x_seq.shape[1]
             if time_loss is None:
-                time_loss = torch.zeros(horizon, requires_grad=False)
+                time_loss = torch.zeros(
+                    horizon, requires_grad=False, device=self.device
+                )
 
             pred_seq = self.model(x_t, horizon=horizon)
             loss, loss_m = self.criterion(pred_seq, x_seq)

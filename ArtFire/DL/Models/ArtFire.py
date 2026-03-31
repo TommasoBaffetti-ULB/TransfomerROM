@@ -10,7 +10,10 @@ class Artfire(nn.Module):
         self.cae = cae
         self.forecast = forecast
 
-    def forward(self, x):
+    def forward(self, x, horizon):
         x = self.cae.ConvEncoder(x)
-        y = self.forecast(x)
-        return self.cae.ConvDecoder(y)
+        y = self.forecast(x, horizon=horizon)
+        B, T, NT, D = y.shape
+        y = y.view(B * T, NT, D)
+        y = self.cae.ConvDecoder(y)
+        return y.view(B, T, y.shape[1], y.shape[2], y.shape[3])
