@@ -5,7 +5,7 @@ from typing import Dict, Literal
 import torch
 import torch.nn.functional as F
 
-from ArtFire.DL.Loss import Loss
+from ArtFire.DL.Loss.Loss import Loss
 
 
 class MSEReconstructionLoss(Loss):

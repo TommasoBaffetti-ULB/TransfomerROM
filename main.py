@@ -1,4 +1,5 @@
 # ARTFIRE IMPORT
+from ArtFire.DL.Training.ArtFireTrainer import ArtFireTrainer
 from ArtFire.utils.config import load_data_config, load_model_config, load_train_config
 from ArtFire.DL.Models.CAE import CAE, ConvEncoder, ConvDecoder
 from ArtFire.Data.CAEDataset import CAEDataset
@@ -18,6 +19,7 @@ from pytorch_scheduler.base.warmup import WarmupScheduler
 from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch
+import gc
 
 # Others
 from pathlib import Path
@@ -183,6 +185,24 @@ def main(verbose=False):
     print("\nEvaluating CAE model...\n")
     cae_test_results = cae_trainer.test()
     save_json(cae_test_results, saving_folder / "test_result.json")
+    gc.collect()
+    torch.cuda.empty_cache()
+
+    del (
+        train_dataset,
+        val_dataset,
+        test_dataset,
+        train_loader,
+        val_loader,
+        test_loader,
+        cae_trainer,
+        cae_train_results,
+        cae_test_results,
+        parameters_groups,
+        cae_optimizer,
+        scheduler,
+        cae_warmup_scheduler,
+    )
 
     print("\nSetting up Transformer forecaster data...\n")
     trans_data_config = data_config["Transformer"]
@@ -333,6 +353,25 @@ def main(verbose=False):
     trans_test_results = trans_trainer.test()
     save_json(trans_test_results, saving_folder / "test_result.json")
 
+    gc.collect()
+    torch.cuda.empty_cache()
+
+    del (
+        train_forecast,
+        val_forecast,
+        test_forecast,
+        train_dataloader,
+        val_dataloader,
+        test_dataloader,
+        trans_trainer,
+        trans_train_results,
+        trans_test_results,
+        parameters_groups,
+        trans_optimizer,
+        scheduler,
+        trans_warmup_scheduler,
+    )
+
     ### train the overall architecture with a very low learning rate and high regularization
 
     print("\n Training the overall architecture...\n")
@@ -396,12 +435,12 @@ def main(verbose=False):
         generator=g,
     )
 
-    print("\nInitializing the ArtFire model...\n")
+    print("\n2) Initializing the ArtFire model...\n")
     arf_model = Artfire(cae=CAEmodel, forecast=model_forecast)
 
     if verbose:
         print("\n Artfire: ", arf_model, "\n")
-    print("\nSetting up optimizer and scheduler...\n")
+    print("\n3) Setting up optimizer and scheduler...\n")
 
     parameters_groups = build_parameter_groups(
         arf_model,
@@ -430,9 +469,9 @@ def main(verbose=False):
         warmup_type=train_config["ArtFire"]["scheduler"]["warmup_type"],
     )
 
-    print("\nSetting up the ArtFire Trainer...\n")
+    print("\n4) Setting up the ArtFire Trainer...\n")
 
-    artfire_trainer = ForecasterTrainer(
+    artfire_trainer = ArtFireTrainer(
         model=arf_model,
         loaders=[train_loader, val_loader, test_loader],
         optimizer=artfire_optimizer,
@@ -450,7 +489,7 @@ def main(verbose=False):
     saving_folder.mkdir(parents=True, exist_ok=True)
     save_json(arf_train_results, saving_folder / "train_results.json")
 
-    print("\nEvaluating ArtFire model...\n")
+    print("\n5) Evaluating ArtFire model...\n")
     arf_test_results = artfire_trainer.test()
     save_json(arf_test_results, saving_folder / "test_result.json")
 

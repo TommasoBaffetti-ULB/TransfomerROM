@@ -115,13 +115,15 @@ class ArtFireTrainer:
                     self.scheduler.step()
             if v_l < best_val_loss:
                 best_val_loss = v_l
-                torch.save(self.model.state_dict(), "best_cae.pt")
+                torch.save(self.model.state_dict(), "best_artfire.pt")
 
     def test(self):
-        best_model_path = Path("best_cae.pt")
+        best_model_path = Path("best_artfire.pt")
         if not best_model_path.exists():
             raise FileNotFoundError(f"best_model_path not found, first train the model")
-        self.model.load_state_dict(torch.load("best_cae.pt", map_location=self.device))
+        self.model.load_state_dict(
+            torch.load("best_artfire.pt", map_location=self.device)
+        )
         test_loss = self.evaluate(self.test_loader, "test")
         tl = test_loss["test loss"]
         print(f"Test loss: {tl:.6f}")

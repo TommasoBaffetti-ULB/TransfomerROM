@@ -109,7 +109,7 @@ class SimulatedDataset(BaseDataset):
 
         return {
             "x_t": x_t,
-            "y_seq": y_seq,
+            "x_seq": y_seq,
             "bc_seq": bc_seq,
         }
 
