@@ -443,16 +443,16 @@ def main(verbose=False):
 
     print(f"\nlearning for {train_config['ArtFire']['n_epochs']} epochs\n")
 
-    trans_train_results = trans_trainer.learn(
+    arf_train_results = artfire_trainer.learn(
         num_epochs=train_config["ArtFire"]["n_epochs"]
     )
     saving_folder = Path(train_config["ArtFire"]["saving_folder"])
     saving_folder.mkdir(parents=True, exist_ok=True)
-    save_json(trans_train_results, saving_folder / "train_results.json")
+    save_json(arf_train_results, saving_folder / "train_results.json")
 
     print("\nEvaluating ArtFire model...\n")
-    trans_test_results = trans_trainer.test()
-    save_json(trans_test_results, saving_folder / "test_result.json")
+    arf_test_results = artfire_trainer.test()
+    save_json(arf_test_results, saving_folder / "test_result.json")
 
 
 # Press the green button in the gutter to run the script.
