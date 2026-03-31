@@ -52,6 +52,9 @@ def main(verbose=False):
                                    A R T F I R E   T R A N S F O R M E R
     """
     )
+    gc.collect()
+    torch.cuda.empty_cache()
+
     print("\nLoading config...\n")
     data_config = load_data_config()
     model_config = load_model_config()

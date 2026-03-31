@@ -105,6 +105,8 @@ class ForecasterTrainer:
                 best_val_loss = v_l
                 torch.save(self.model.state_dict(), "best_transformer.pt")
 
+        return {"train epoch loss": train_losses, "val epoch loss": val_losses}
+
     def test(self):
         best_model_path = Path("best_transformer.pt")
         if not best_model_path.exists():

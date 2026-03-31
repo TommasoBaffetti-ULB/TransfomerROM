@@ -90,7 +90,7 @@ class ArtFireTrainer:
 
         avg_loss = total_loss / max(n_batches, 1)
         time_loss = time_loss / max(n_batches, 1)
-        return {f"{mode} loss": avg_loss, f"{mode} time loss": time_loss}
+        return {f"{mode} loss": avg_loss, f"{mode} time loss": time_loss.tolist()}
 
     def learn(self, num_epochs: int):
         best_val_loss = float("inf")
@@ -118,6 +118,8 @@ class ArtFireTrainer:
             if v_l < best_val_loss:
                 best_val_loss = v_l
                 torch.save(self.model.state_dict(), "best_artfire.pt")
+
+        return {"train epoch loss": train_losses, "val epoch loss": val_losses}
 
     def test(self):
         best_model_path = Path("best_artfire.pt")
