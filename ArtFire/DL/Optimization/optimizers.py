@@ -8,7 +8,17 @@ from torch.optim.optimizer import Optimizer
 
 
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Mapping, Optional, Union
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Iterable,
+    Iterator,
+    List,
+    Mapping,
+    Optional,
+    Union,
+)
 
 """  How to use it
 from Optimization.optimizers import build_optimizer
@@ -29,6 +39,7 @@ ParamsLike = Union[
     Iterable[Dict[str, Any]],
 ]
 
+
 @dataclass
 class OptimizerConfig:
     """
@@ -40,9 +51,8 @@ class OptimizerConfig:
     - `kwargs` stores optimizer-specific arguments not explicitly listed here.
     - `lookahead` can wrap the base optimizer if enabled.
     """
+
     name: str
-    lr: float
-    weight_decay: float = 0.0
 
     # Lookahead wrapper
     use_lookahead: bool = False
@@ -50,8 +60,10 @@ class OptimizerConfig:
     # Extra optimizer-specific kwargs
     kwargs: Dict[str, Any] = field(default_factory=dict)
 
+
 def _normalize_name(name: str) -> str:
     return name.strip().lower().replace("_", "").replace("-", "")
+
 
 def _validate_params(params: ParamsLike) -> None:
     if params is None:
@@ -63,8 +75,6 @@ def _config_from_dict(config: Mapping[str, Any]) -> OptimizerConfig:
 
     known_fields = {
         "name",
-        "lr",
-        "weight_decay",
         "use_lookahead",
         "kwargs",
     }
@@ -77,11 +87,10 @@ def _config_from_dict(config: Mapping[str, Any]) -> OptimizerConfig:
     config["kwargs"] = extra_kwargs
     return OptimizerConfig(**config)
 
+
 def _build_sgd(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.SGD(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
         **cfg.kwargs,
     )
 
@@ -89,8 +98,6 @@ def _build_sgd(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_adam(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.Adam(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
         **cfg.kwargs,
     )
 
@@ -98,8 +105,6 @@ def _build_adam(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_adamw(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.AdamW(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
         **cfg.kwargs,
     )
 
@@ -107,8 +112,6 @@ def _build_adamw(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_rmsprop(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.RMSprop(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
         **cfg.kwargs,
     )
 
@@ -116,8 +119,6 @@ def _build_rmsprop(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
 def _build_adagrad(params: ParamsLike, cfg: OptimizerConfig) -> Optimizer:
     return torch.optim.Adagrad(
         params,
-        lr=cfg.lr,
-        weight_decay=cfg.weight_decay,
         **cfg.kwargs,
     )
 
@@ -152,11 +153,10 @@ def build_parameter_groups(
         nn.BatchNorm3d,
         nn.GroupNorm,
     )
-    decay_names=[]
-    no_decay_names=[]
+    decay_names = []
+    no_decay_names = []
     for module_name, module in model.named_modules():
         for param_name, param in module.named_parameters(recurse=False):
-
             if not param.requires_grad:
                 continue
 
@@ -175,16 +175,22 @@ def build_parameter_groups(
                 decay_names.append(full_name)
                 decay_params.append(param)
 
-    return ([decay_names, no_decay_names],
-            [
-        {
-            "params": decay_params,
-        },
-        {
-            "params": no_decay_params,
-            "weight_decay": 0.0,
-        },
-    ])
+    return (
+        [decay_names, no_decay_names],
+        [
+            {
+                "params": decay_params,
+                "lr": lr,
+                "weight_decay": weight_decay,
+            },
+            {
+                "params": no_decay_params,
+                "lr": lr,
+                "weight_decay": 0.0,
+            },
+        ],
+    )
+
 
 def build_optimizer(
     params: ParamsLike,
@@ -226,7 +232,9 @@ def build_optimizer(
 
     if name not in optimizer_builders:
         available = ", ".join(sorted(optimizer_builders.keys()))
-        raise ValueError(f"Unsupported optimizer '{config.name}'. Available: {available}.")
+        raise ValueError(
+            f"Unsupported optimizer '{config.name}'. Available: {available}."
+        )
 
     optimizer = optimizer_builders[name](params, config)
 
@@ -262,21 +270,21 @@ class Lookahead(Optimizer):
 
         # Cache the current optimizer parameters
         for group in optimizer.param_groups:
-            for p in group['params']:
+            for p in group["params"]:
                 param_state = self.state[p]
-                param_state['cached_params'] = torch.zeros_like(p.data)
-                param_state['cached_params'].copy_(p.data)
+                param_state["cached_params"] = torch.zeros_like(p.data)
+                param_state["cached_params"].copy_(p.data)
                 if self.pullback_momentum == "pullback":
-                    param_state['cached_mom'] = torch.zeros_like(p.data)
+                    param_state["cached_mom"] = torch.zeros_like(p.data)
 
     def __getstate__(self):
         return {
-            'state': self.state,
-            'optimizer': self.optimizer,
-            'la_alpha': self.la_alpha,
-            '_la_step': self._la_step,
-            '_total_la_steps': self._total_la_steps,
-            'pullback_momentum': self.pullback_momentum
+            "state": self.state,
+            "optimizer": self.optimizer,
+            "la_alpha": self.la_alpha,
+            "_la_step": self._la_step,
+            "_total_la_steps": self._total_la_steps,
+            "pullback_momentum": self.pullback_momentum,
         }
 
     def zero_grad(self):
@@ -292,21 +300,20 @@ class Lookahead(Optimizer):
         self.optimizer.load_state_dict(state_dict)
 
     def _backup_and_load_cache(self):
-        """Useful for performing evaluation on the slow weights (which typically generalize better)
-        """
+        """Useful for performing evaluation on the slow weights (which typically generalize better)"""
         for group in self.optimizer.param_groups:
-            for p in group['params']:
+            for p in group["params"]:
                 param_state = self.state[p]
-                param_state['backup_params'] = torch.zeros_like(p.data)
-                param_state['backup_params'].copy_(p.data)
-                p.data.copy_(param_state['cached_params'])
+                param_state["backup_params"] = torch.zeros_like(p.data)
+                param_state["backup_params"].copy_(p.data)
+                p.data.copy_(param_state["cached_params"])
 
     def _clear_and_load_backup(self):
         for group in self.optimizer.param_groups:
-            for p in group['params']:
+            for p in group["params"]:
                 param_state = self.state[p]
-                p.data.copy_(param_state['backup_params'])
-                del param_state['backup_params']
+                p.data.copy_(param_state["backup_params"])
+                del param_state["backup_params"]
 
     @property
     def param_groups(self):
@@ -325,19 +332,29 @@ class Lookahead(Optimizer):
             self._la_step = 0
             # Lookahead and cache the current optimizer parameters
             for group in self.optimizer.param_groups:
-                for p in group['params']:
+                for p in group["params"]:
                     param_state = self.state[p]
-                    p.data.mul_(self.la_alpha).add_(param_state['cached_params'], alpha=1.0 - self.la_alpha)  # crucial line
-                    param_state['cached_params'].copy_(p.data)
+                    p.data.mul_(self.la_alpha).add_(
+                        param_state["cached_params"], alpha=1.0 - self.la_alpha
+                    )  # crucial line
+                    param_state["cached_params"].copy_(p.data)
                     if self.pullback_momentum == "pullback":
                         internal_momentum = self.optimizer.state[p]["momentum_buffer"]
-                        self.optimizer.state[p]["momentum_buffer"] = internal_momentum.mul_(self.la_alpha).add_(
-                            1.0 - self.la_alpha, param_state["cached_mom"])
-                        param_state["cached_mom"] = self.optimizer.state[p]["momentum_buffer"]
+                        self.optimizer.state[p][
+                            "momentum_buffer"
+                        ] = internal_momentum.mul_(self.la_alpha).add_(
+                            1.0 - self.la_alpha, param_state["cached_mom"]
+                        )
+                        param_state["cached_mom"] = self.optimizer.state[p][
+                            "momentum_buffer"
+                        ]
                     elif self.pullback_momentum == "reset":
-                        self.optimizer.state[p]["momentum_buffer"] = torch.zeros_like(p.data)
+                        self.optimizer.state[p]["momentum_buffer"] = torch.zeros_like(
+                            p.data
+                        )
 
         return loss
+
 
 def get_optimizer_name(optimizer: Optimizer) -> str:
     """
