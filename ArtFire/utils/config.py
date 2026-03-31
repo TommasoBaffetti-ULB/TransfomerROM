@@ -5,9 +5,10 @@ import os
 
 from dotenv import load_dotenv
 
-#load_dotenv()  # <-- this is required
+# load_dotenv()  # <-- this is required
 
-#BASE_DIR = Path(os.environ["PROJECT_ROOT"])
+# BASE_DIR = Path(os.environ["PROJECT_ROOT"])
+
 
 def load_config(path: Path) -> Dict[str, Any]:
     with open(path, "r") as f:

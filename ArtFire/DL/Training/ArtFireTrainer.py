@@ -4,15 +4,21 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from pathlib import Path
 from typing import List, Dict
+from ArtFire.DL.Loss.Loss import Loss
+from ArtFire.DL.Loss.ArtFireLoss import (
+    MAEReconstructionLoss,
+    MSEReconstructionLoss,
+    SmoothL1ReconstructionLoss,
+)
 
 
-class ForecasterTrainer:
+class ArtFireTrainer:
     def __init__(
         self,
         model: ARTransformerForecaster,
         loaders: List[DataLoader],
         optimizer: torch.optim.Optimizer,
-        criterion: torch.nn = torch.nn.MSELoss(),
+        criterion: Loss = MSEReconstructionLoss(),
         scheduler: torch.optim.lr_scheduler = None,
         device: torch.device = "cuda",
         gradient_clip=3,
@@ -33,16 +39,16 @@ class ForecasterTrainer:
         total_samples = 0
 
         for batch in self.train_loader:
-            z_t = batch["z_t"].to(self.device)
-            z_seq = batch["z_seq"].to(self.device)
+            x_t = batch["x_t"].to(self.device)
+            x_seq = batch["x_seq"].to(self.device)
 
-            B = z_t.size(0)
-            horizon = z_seq.shape[1]
+            B = x_t.size(0)
+            horizon = x_seq.shape[1]
 
             self.optimizer.zero_grad()
-            pred_seq = self.model(z_t, horizon=horizon)
+            pred_seq = self.model(x_t, horizon=horizon)
 
-            loss = self.criterion(pred_seq, z_seq)
+            _, loss = self.criterion(pred_seq, x_seq)
 
             loss.backward()
             if self.gradient_clip > 0:
@@ -62,21 +68,27 @@ class ForecasterTrainer:
 
         total_loss = 0.0
         n_batches = 0
+        time_loss = None
 
         for batch in loader:
-            z_t = batch["z_t"].to(self.device)  # [B, N, D]
-            z_seq = batch["z_seq"].to(self.device)  # [B, H, N, D]
+            x_t = batch["x_t"].to(self.device)  # [B, N, D]
+            x_seq = batch["x_seq"].to(self.device)  # [B, H, N, D]
 
-            horizon = z_seq.shape[1]
+            horizon = x_seq.shape[1]
+            if time_loss is None:
+                time_loss = torch.zeros(horizon, requires_grad=False)
 
-            pred_seq = self.model(z_t, horizon=horizon)
-            loss = self.criterion(pred_seq, z_seq)
+            pred_seq = self.model(x_t, horizon=horizon)
+            loss, loss_m = self.criterion(pred_seq, x_seq)
 
-            total_loss += loss.item()
+            time_loss += loss
+
+            total_loss += loss_m.item()
             n_batches += 1
 
         avg_loss = total_loss / max(n_batches, 1)
-        return {f"{mode} loss": avg_loss}
+        time_loss = time_loss / max(n_batches, 1)
+        return {f"{mode} loss": avg_loss, f"{mode} time loss": time_loss}
 
     def learn(self, num_epochs: int):
         best_val_loss = float("inf")

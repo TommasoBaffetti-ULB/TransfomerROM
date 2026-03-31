@@ -17,7 +17,7 @@ class CNNblock(nn.Module):
     ):
         super().__init__()
 
-        assert dim in [1,2]
+        assert dim in [1, 2]
         assert output_channels is not None or hidden_channels is not None
         if hidden_channels is None:
             hidden_channels = []
@@ -55,7 +55,13 @@ class CNNblock(nn.Module):
                 f"Choose from {list(activations.keys())}."
             )
 
-        if normalization not in ["Batch-Norm", "Layer-Norm", "Instance-Norm", "Group-Norm", None]:
+        if normalization not in [
+            "Batch-Norm",
+            "Layer-Norm",
+            "Instance-Norm",
+            "Group-Norm",
+            None,
+        ]:
             raise ValueError(
                 "Unsupported normalization. Choose from "
                 "['Batch-Norm', 'Layer-Norm', 'Instance-Norm', 'Group-Norm', None]"
@@ -79,7 +85,9 @@ class CNNblock(nn.Module):
                     k=k,
                     s=s,
                     p=p,
-                    bias=(normalization is None), ## batchnorm is equivalent to learn biases
+                    bias=(
+                        normalization is None
+                    ),  ## batchnorm is equivalent to learn biases
                 )
             )
 
@@ -102,9 +110,10 @@ class CNNblock(nn.Module):
     @staticmethod
     def _make_conv(dim, in_ch, out_ch, k, s, p, bias):
         if dim == 1:
-            return nn.Conv1d(in_ch, out_ch, kernel_size=k, stride=s, padding=p, bias=bias)
+            return nn.Conv1d(
+                in_ch, out_ch, kernel_size=k, stride=s, padding=p, bias=bias
+            )
         return nn.Conv2d(in_ch, out_ch, kernel_size=k, stride=s, padding=p, bias=bias)
-
 
     @staticmethod
     def _expand_param(param, n_layers: int, name: str):
@@ -112,7 +121,9 @@ class CNNblock(nn.Module):
             return [param] * n_layers
         if isinstance(param, list):
             if len(param) != n_layers:
-                raise ValueError(f"{name} must have length {n_layers}, got {len(param)}")
+                raise ValueError(
+                    f"{name} must have length {n_layers}, got {len(param)}"
+                )
             return param
         raise TypeError(f"{name} must be int, tuple, or list")
 
@@ -151,11 +162,16 @@ class TCNNblock(nn.Module):
         strides = self._expand_param(strides, n_layers, "strides")
 
         if paddings is None:
-            paddings = [k // 2 if isinstance(k, int) else tuple(kk // 2 for kk in k) for k in kernel_sizes]
+            paddings = [
+                k // 2 if isinstance(k, int) else tuple(kk // 2 for kk in k)
+                for k in kernel_sizes
+            ]
         else:
             paddings = self._expand_param(paddings, n_layers, "paddings")
 
-        output_paddings = self._expand_param(output_paddings, n_layers, "output_paddings")
+        output_paddings = self._expand_param(
+            output_paddings, n_layers, "output_paddings"
+        )
 
         activations = {
             "relu": nn.ReLU,
@@ -182,7 +198,7 @@ class TCNNblock(nn.Module):
         activation_fn = activations[activation]
         layers = []
 
-        for i in range(n_layers-1):
+        for i in range(n_layers - 1):
             in_ch = channels[i]
             out_ch = channels[i + 1]
             k = kernel_sizes[i]
@@ -242,12 +258,22 @@ class TCNNblock(nn.Module):
     def _make_conv_transpose(dim, in_ch, out_ch, k, s, p, op, bias):
         if dim == 1:
             return nn.ConvTranspose1d(
-                in_ch, out_ch, kernel_size=k, stride=s, padding=p,
-                output_padding=op, bias=bias
+                in_ch,
+                out_ch,
+                kernel_size=k,
+                stride=s,
+                padding=p,
+                output_padding=op,
+                bias=bias,
             )
         return nn.ConvTranspose2d(
-            in_ch, out_ch, kernel_size=k, stride=s, padding=p,
-            output_padding=op, bias=bias
+            in_ch,
+            out_ch,
+            kernel_size=k,
+            stride=s,
+            padding=p,
+            output_padding=op,
+            bias=bias,
         )
 
     @staticmethod
@@ -256,7 +282,9 @@ class TCNNblock(nn.Module):
             return [param] * n_layers
         if isinstance(param, list):
             if len(param) != n_layers:
-                raise ValueError(f"{name} must have length {n_layers}, got {len(param)}")
+                raise ValueError(
+                    f"{name} must have length {n_layers}, got {len(param)}"
+                )
             return param
         raise TypeError(f"{name} must be int, tuple, or list")
 

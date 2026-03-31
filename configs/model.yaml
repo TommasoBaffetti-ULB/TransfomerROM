@@ -46,4 +46,3 @@ Transformer:
     normalization: None
     activation: gelu
     initialization: default
-

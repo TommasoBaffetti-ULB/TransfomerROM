@@ -6,7 +6,7 @@ CAE:
    val_batch_size: 32
    test_batch_size: 64
    loader:
-     loaders_num_workers: 8
+     loaders_num_workers: 4
      pin_memory: true
      persistent_workers: true
 
@@ -19,14 +19,21 @@ Transformer:
   test_batch_size: 32 # 64
   cae_dataloader:
     batch_size: 64
-    loaders_num_workers: 8
+    loaders_num_workers: 4
     pin_memory: true
     persistent_workers: true
   loader:
-    loaders_num_workers: 8
-    pin_memory: true
-    persistent_workers: true
+    loaders_num_workers: 0
+    pin_memory: false
+    persistent_workers: false
 
-
-
-
+ArtFire:
+  split: [0.6,0.2,0.2]
+  normalize: true
+  train_batch_size: 12 #32
+  val_batch_size: 12 #32
+  test_batch_size: 32 # 64
+  loader:
+    loaders_num_workers: 0
+    pin_memory: false
+    persistent_workers: false

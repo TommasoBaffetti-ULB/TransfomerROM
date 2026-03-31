@@ -2,6 +2,7 @@ import random
 import numpy as np
 import torch
 
+
 def set_seed(seed: int = 42) -> None:
     """Set seed for all sources of randomness in the ArtFire pipeline.
 
@@ -39,6 +40,6 @@ def seed_worker(worker_id: int) -> None:
     Usage:
         DataLoader(..., worker_init_fn=seed_worker, generator=torch.Generator().manual_seed(seed))
     """
-    worker_seed = torch.initial_seed() % (2 ** 32)
+    worker_seed = torch.initial_seed() % (2**32)
     random.seed(worker_seed)
     np.random.seed(worker_seed)

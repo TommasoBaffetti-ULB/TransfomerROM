@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 from pathlib import Path
@@ -27,8 +26,8 @@ class CAEDataset(BaseDataset):
     def __init__(
         self,
         npy_path: str | Path,
-        split: Tuple[float, float, float],   # (train, val, test)
-        mode: str,                           # "train" | "val" | "test"
+        split: Tuple[float, float, float],  # (train, val, test)
+        mode: str,  # "train" | "val" | "test"
         normalize: bool = True,
         stats: Optional[Tuple[Tensor, Tensor]] = None,
     ) -> None:
@@ -54,7 +53,9 @@ class CAEDataset(BaseDataset):
         if data_np.ndim != 4:
             raise ValueError(f"Expected [T, C, H, W], got {data_np.shape}")
 
-        self.data = torch.from_numpy(np.asarray(data_np, dtype=np.float32))  # CPU tensor
+        self.data = torch.from_numpy(
+            np.asarray(data_np, dtype=np.float32)
+        )  # CPU tensor
         self.T, self.C, self.H, self.W = self.data.shape
 
         train_frac, val_frac, test_frac = split
@@ -76,7 +77,7 @@ class CAEDataset(BaseDataset):
             if stats is None:
                 train_data = self.data[:train_end]  # [T_train, C, H, W]
                 self.mean = train_data.mean(dim=(0, 2, 3))  # [C]
-                self.std = train_data.std(dim=(0, 2, 3))    # [C]
+                self.std = train_data.std(dim=(0, 2, 3))  # [C]
                 self.std = torch.clamp(self.std, min=1e-6)
             else:
                 self.mean, self.std = stats

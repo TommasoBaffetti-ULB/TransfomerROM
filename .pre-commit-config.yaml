@@ -1,0 +1,13 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0  # Usa l'ultima versione disponibile
+    hooks:
+    -   id: trailing-whitespace     # Rimuove spazi vuoti a fine riga
+    -   id: end-of-file-fixer       # Assicura che i file finiscano con una riga vuota
+    -   id: check-yaml              # Verifica la sintassi dei file YAML
+    -   id: check-added-large-files # Impedisce il commit di file giganti
+
+-   repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+    -   id: black                   # Formattatore automatico di codice Python

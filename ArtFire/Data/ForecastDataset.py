@@ -29,10 +29,10 @@ class ForecastDataset(BaseDataset):
 
     def __init__(
         self,
-        cae_dataset: DataLoader,          # should be FULL dataset (e.g. mode="train" but full coverage)
+        cae_dataset: DataLoader,  # should be FULL dataset (e.g. mode="train" but full coverage)
         encoder: torch.nn.Module,
         split: Tuple[float, float, float],
-        mode: str,                        # "train" | "val" | "test"
+        mode: str,  # "train" | "val" | "test"
         horizon: int,
         normalize: bool = True,
         stats: Optional[Tuple[Tensor, Tensor]] = None,
@@ -43,7 +43,9 @@ class ForecastDataset(BaseDataset):
         if mode not in {"train", "val", "test"}:
             raise ValueError("mode must be one of: 'train', 'val', 'test'")
 
-        if len(split) != 3 or not torch.isclose(torch.tensor(sum(split)), torch.tensor(1.0)):
+        if len(split) != 3 or not torch.isclose(
+            torch.tensor(sum(split)), torch.tensor(1.0)
+        ):
             raise ValueError(f"split must sum to 1, got {split}")
 
         self.mode = mode
@@ -87,10 +89,12 @@ class ForecastDataset(BaseDataset):
         # --------------------------------------------------
         if self.normalize:
             if stats is None:
-                train_latents = self.latents[:train_end]  # [T_train, Tokens, dim_tokens ]
+                train_latents = self.latents[
+                    :train_end
+                ]  # [T_train, Tokens, dim_tokens ]
 
                 self.mean = train_latents.mean(dim=(0, 1))  # [D]
-                self.std = train_latents.std(dim=(0, 1))    # [D]
+                self.std = train_latents.std(dim=(0, 1))  # [D]
                 self.std = torch.clamp(self.std, min=1e-6)
             else:
                 self.mean, self.std = stats
@@ -137,12 +141,7 @@ class ForecastDataset(BaseDataset):
     # --------------------------------------------------
 
     @torch.no_grad()
-    def _encode_full_dataset(
-        self,
-        cae_dataset: DataLoader
-    ) -> Tensor:
-
-
+    def _encode_full_dataset(self, cae_dataset: DataLoader) -> Tensor:
         latents = []
 
         for batch in tqdm(cae_dataset, desc="Encoding full dataset"):

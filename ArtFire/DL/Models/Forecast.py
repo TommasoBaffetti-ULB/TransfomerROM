@@ -3,7 +3,7 @@ from __future__ import annotations
 import torch
 import torch.nn as nn
 from torch import Tensor
-from typing import Any,Dict
+from typing import Any, Dict
 from ArtFire.DL.Models.MLP import CustomMLP
 
 
@@ -20,8 +20,7 @@ class PositionalEncoding(nn.Module):
                                  sinusoidal functions.
     """
 
-
-    def __init__(self, d_model: int , seq_len: int):
+    def __init__(self, d_model: int, seq_len: int):
         """
         Initializes the PositionalEncoding class.
 
@@ -40,13 +39,15 @@ class PositionalEncoding(nn.Module):
         super(PositionalEncoding, self).__init__()
         self.encoding = torch.zeros(seq_len, d_model)
         position = torch.arange(0, seq_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-torch.log(torch.tensor(10000.0)) / d_model))
+        div_term = torch.exp(
+            torch.arange(0, d_model, 2).float()
+            * (-torch.log(torch.tensor(10000.0)) / d_model)
+        )
         self.encoding[:, 0::2] = torch.sin(position * div_term)
         self.encoding[:, 1::2] = torch.cos(position * div_term)
         self.encoding = self.encoding.unsqueeze(0)
 
     def forward(self, x):
-
         """
         Adds positional encodings to the input embeddings.
 
@@ -56,8 +57,9 @@ class PositionalEncoding(nn.Module):
         Returns:
             torch.Tensor: The input embeddings augmented with positional encodings.
                           The shape is the same as the input: (batch_size, seq_len, d_model).
-       """
-        return x + self.encoding[:, :x.size(1), :].to(x.device)
+        """
+        return x + self.encoding[:, : x.size(1), :].to(x.device)
+
 
 class LearnablePositionalEncoding(nn.Module):
     def __init__(self, n_tokens: int, d_model: int):
@@ -65,7 +67,7 @@ class LearnablePositionalEncoding(nn.Module):
         self.pos_embed = nn.Parameter(torch.randn(1, n_tokens, d_model) * 0.02)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return x + self.pos_embed[:, :x.size(1), :]
+        return x + self.pos_embed[:, : x.size(1), :]
 
 
 class TransformerBlock(nn.Module):
@@ -89,7 +91,7 @@ class TransformerBlock(nn.Module):
         mlp_config["output_dim"] = d_model
 
         self.norm2 = nn.LayerNorm(d_model)
-        self.mlp=CustomMLP(**mlp_config)
+        self.mlp = CustomMLP(**mlp_config)
 
     def forward(self, x: Tensor) -> Tensor:
         # x: [B, N, d_model]
@@ -126,16 +128,24 @@ class ARTransformerForecaster(nn.Module):
         d_model: int = 512,
         n_heads: int = 8,
         n_layers: int = 6,
-        mlp_config: Dict[str,Any] =  {"hidden_layers":[128], "dropout_p": 0.0, "normalization":"Batch-Norm",
-                 "activation":"leaky_relu", "seed":42, "initialization": "kaiming uniform"},
+        mlp_config: Dict[str, Any] = {
+            "hidden_layers": [128],
+            "dropout_p": 0.0,
+            "normalization": "Batch-Norm",
+            "activation": "leaky_relu",
+            "seed": 42,
+            "initialization": "kaiming uniform",
+        },
         dropout: float = 0.0,
-        pos_encoding : str= "sinusoidal",  # either sinusoidal or learnable
+        pos_encoding: str = "sinusoidal",  # either sinusoidal or learnable
         use_residual: bool = True,
     ) -> None:
         super().__init__()
 
-        if d_model % n_heads != 0:  # each head takes x as input and returns a vetor of shape d_model/n_heads, then all
-                                    # outputs are conatenated
+        if (
+            d_model % n_heads != 0
+        ):  # each head takes x as input and returns a vetor of shape d_model/n_heads, then all
+            # outputs are conatenated
             raise ValueError(
                 f"d_model ({d_model}) must be divisible by n_heads ({n_heads})."
             )
@@ -147,8 +157,11 @@ class ARTransformerForecaster(nn.Module):
 
         self.input_proj = nn.Linear(token_dim, d_model)
 
-        self.pos_embed=PositionalEncoding(d_model=d_model, seq_len=n_tokens) if pos_encoding=="sinusoidal" else LearnablePositionalEncoding(n_tokens=n_tokens, d_model=d_model)
-
+        self.pos_embed = (
+            PositionalEncoding(d_model=d_model, seq_len=n_tokens)
+            if pos_encoding == "sinusoidal"
+            else LearnablePositionalEncoding(n_tokens=n_tokens, d_model=d_model)
+        )
 
         self.blocks = nn.ModuleList(
             [
@@ -180,22 +193,18 @@ class ARTransformerForecaster(nn.Module):
 
         bsz, n_tokens, token_dim = z.shape
         if n_tokens != self.n_tokens:
-            raise ValueError(
-                f"Expected {self.n_tokens} tokens, got {n_tokens}."
-            )
+            raise ValueError(f"Expected {self.n_tokens} tokens, got {n_tokens}.")
         if token_dim != self.token_dim:
-            raise ValueError(
-                f"Expected token dim {self.token_dim}, got {token_dim}."
-            )
+            raise ValueError(f"Expected token dim {self.token_dim}, got {token_dim}.")
 
-        x = self.input_proj(z)                  # [B, N, d_model]
-        x =  self.pos_embed(x)                 # token identity encoding
+        x = self.input_proj(z)  # [B, N, d_model]
+        x = self.pos_embed(x)  # token identity encoding
 
         for block in self.blocks:
             x = block(x)
 
         x = self.norm(x)
-        delta = self.output_proj(x)             # [B, N, D_in]
+        delta = self.output_proj(x)  # [B, N, D_in]
 
         if self.use_residual:
             z_next = z + delta
@@ -221,8 +230,10 @@ class ARTransformerForecaster(nn.Module):
             raise ValueError(f"horizon must be > 0, got {horizon}")
 
         squeeze_batch = False
-        if z_t.ndim == 2:  # if it is a single element to predict in a batch (no batch index)
-            z_t = z_t.unsqueeze(0)   # [1, N, D]
+        if (
+            z_t.ndim == 2
+        ):  # if it is a single element to predict in a batch (no batch index)
+            z_t = z_t.unsqueeze(0)  # [1, N, D]
             squeeze_batch = True
 
         if z_t.ndim != 3:
@@ -234,12 +245,12 @@ class ARTransformerForecaster(nn.Module):
         z = z_t
 
         for _ in range(horizon):
-            z = self._forward_one_step(z)   # autoregressive update
+            z = self._forward_one_step(z)  # autoregressive update
             preds.append(z)
 
-        preds = torch.stack(preds, dim=1)   # [B, H, N, D]
+        preds = torch.stack(preds, dim=1)  # [B, H, N, D]
 
         if squeeze_batch:
-            preds = preds.squeeze(0)        # [H, N, D]
+            preds = preds.squeeze(0)  # [H, N, D]
 
         return preds
