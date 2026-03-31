@@ -4,7 +4,7 @@ CAE:
   weight_decay: 5.0e-5
   optimizer: adamw
   use_lookahead: true
-  n_epochs: 1 #2 #20
+  n_epochs: 20
   gradient_clip: -1
   saving_folder: training_CAE
   scheduler:
@@ -20,7 +20,7 @@ Transformer:
   weight_decay: 1.0e-4
   optimizer: adamw
   use_lookahead: true
-  n_epochs:  1 #15
+  n_epochs:  15
   gradient_clip: 3
   saving_folder: training_Transformer
   scheduler:
@@ -36,7 +36,7 @@ ArtFire:
   weight_decay: 1.0e-3
   optimizer: adamw
   use_lookahead: true
-  n_epochs: 1 #5
+  n_epochs: 5
   gradient_clip: 1
   saving_folder: training_ArtFire
   scheduler:
