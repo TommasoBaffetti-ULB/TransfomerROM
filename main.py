@@ -55,6 +55,9 @@ def main(verbose=False):
     gc.collect()
     torch.cuda.empty_cache()
 
+    if torch.cuda.is_available():
+        print("cuda available")
+
     print("\nLoading config...\n")
     data_config = load_data_config()
     model_config = load_model_config()
