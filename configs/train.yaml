@@ -4,7 +4,7 @@ CAE:
   weight_decay: 5.0e-4
   optimizer: adamw
   use_lookahead: true
-  n_epochs: 40
+  n_epochs: 60
   gradient_clip: -1
   saving_folder: training_CAE
   scheduler:
@@ -20,7 +20,7 @@ Transformer:
   weight_decay: 1.0e-4
   optimizer: adamw
   use_lookahead: true
-  n_epochs:  40
+  n_epochs:  60
   gradient_clip: 3
   saving_folder: training_Transformer
   scheduler:
@@ -36,12 +36,12 @@ ArtFire:
   weight_decay: 1.0e-3
   optimizer: adamw
   use_lookahead: true
-  n_epochs: 15
+  n_epochs: 40
   gradient_clip: 1
   saving_folder: training_ArtFire
   scheduler:
     power: 2
     min_lr: 5.0e-8
     min_lr_warmup: 5.0e-8
-    warmup_steps: 10
+    warmup_steps: 15
     warmup_type: linear
