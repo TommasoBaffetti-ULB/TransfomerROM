@@ -15,7 +15,7 @@ from ArtFire.DL.Models.ArtFire import Artfire
 
 # PYTORCH IMPORT
 from pytorch_scheduler.scheduler.polynomial import PolynomialScheduler
-from pytorch_scheduler.base.warmup import WarmupScheduler
+from ArtFire.DL.Optimization.warmup import WarmupScheduler
 from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch

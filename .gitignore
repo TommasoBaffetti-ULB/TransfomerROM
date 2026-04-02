@@ -379,4 +379,6 @@ D_t2001_f13_z256_x64.npy
 # json results
 training_CAE/*.json
 training_Transformer/*.json
+
+requirements_1.txt
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,python,jupyternotebooks,git,visualstudiocode,linux,windows
