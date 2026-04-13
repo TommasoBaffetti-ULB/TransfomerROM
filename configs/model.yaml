@@ -36,12 +36,12 @@ Transformer:
   n_tokens: 63
   token_dim: 2880
   d_model: 512
-  n_heads: 4
-  n_layers: 2
+  n_heads: 8
+  n_layers: 4
   dropout: 0.1
   use_residual: true
   mlp_config:
-    hidden_layers: [256]
+    hidden_layers: [512, 256]
     dropout_p: 0.0
     normalization: None
     activation: gelu
