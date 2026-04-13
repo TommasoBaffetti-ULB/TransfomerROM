@@ -27,6 +27,8 @@ class TransformerLoss(Loss):
 
 
     def forward(self, prediction: torch.Tensor, target: torch.Tensor, **kwargs):
+        print(" shape of prediction: ", prediction.shape)
+        print(" shape of target: ", target.shape)
         loss_t, loss_m=self.loss(prediction=prediction, target=target, **kwargs)
         return loss_t, self.lambda_t2 * loss_m + self.lambda_t1 * loss_t[0]
 
