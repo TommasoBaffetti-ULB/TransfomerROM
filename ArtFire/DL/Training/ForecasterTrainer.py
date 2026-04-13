@@ -42,7 +42,7 @@ class ForecasterTrainer:
             self.optimizer.zero_grad()
             pred_seq = self.model(z_t, horizon=horizon)
 
-            loss = self.criterion(pred_seq, z_seq)
+            _,loss = self.criterion(pred_seq, z_seq)
 
             loss.backward()
             if self.gradient_clip > 0:
@@ -70,7 +70,7 @@ class ForecasterTrainer:
             horizon = z_seq.shape[1]
 
             pred_seq = self.model(z_t, horizon=horizon)
-            loss = self.criterion(pred_seq, z_seq)
+            _,loss = self.criterion(pred_seq, z_seq)
 
             total_loss += loss.item()
             n_batches += 1
