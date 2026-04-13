@@ -2,7 +2,7 @@ from ArtFire.DL.Models.convolution import CNNblock, TCNNblock
 import torch.nn as nn
 
 
-class CAE(nn.Module):
+class CAEst(nn.Module):
     def __init__(self, ConvEncoder, ConvDecoder):
         super().__init__()
         self.ConvEncoder = ConvEncoder
@@ -13,7 +13,7 @@ class CAE(nn.Module):
         return self.ConvDecoder(x)
 
 
-class ConvEncoder(nn.Module):
+class ConvEncoderst(nn.Module):
     def __init__(self, config_spatial_conv, config_temporal_conv):
         super().__init__()
         self.sp_conv = CNNblock(**config_spatial_conv)
@@ -30,7 +30,7 @@ class ConvEncoder(nn.Module):
         return x.flatten(start_dim=2)  # .reshape((B,H,-1))
 
 
-class ConvDecoder(nn.Module):
+class ConvDecoderst(nn.Module):
     def __init__(self, config_spatial_tconv, config_temporal_tconv, no_flatten_dim):
         super().__init__()
         self.sp_tconv = TCNNblock(**config_spatial_tconv)
@@ -45,3 +45,43 @@ class ConvDecoder(nn.Module):
         x = x.squeeze(dim=2)
         x = x.permute(0, 2, 1, 3)
         return self.sp_tconv(x)
+
+
+
+class CAE(nn.Module):
+    def __init__(self, ConvEncoder, ConvDecoder):
+        super().__init__()
+        self.ConvEncoder = ConvEncoder
+        self.ConvDecoder = ConvDecoder
+
+    def forward(self, x):
+        x = self.ConvEncoder(x)
+        return self.ConvDecoder(x)
+
+
+class ConvEncoder(nn.Module):
+    def __init__(self, config_spatial_conv):
+        super().__init__()
+        self.conv = CNNblock(**config_spatial_conv)
+
+    def forward(self, x):
+        x = self.conv(x)
+        #B,C,H,W
+        return x.flatten(start_dim=1)  # B, Nd
+
+    def get_no_flatten_dim(self, x):
+        return self.conv(x).shape
+
+
+class ConvDecoder(nn.Module):
+    def __init__(self, config_tconv, no_flatten_dim):
+        super().__init__()
+        self.tconv = TCNNblock(**config_tconv)
+        self.C, self.H, self.W = no_flatten_dim
+
+    def forward(self, x):
+        B = x.shape[0]
+        x = x.view(B, self.C, self.H, self.W)
+        return self.tconv(x)
+
+
