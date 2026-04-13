@@ -1,5 +1,5 @@
 CAE:
-  device: cuda
+  device: mps
   lr: 1e-3
   weight_decay: 5.0e-5
   optimizer: adamw
@@ -15,7 +15,7 @@ CAE:
     warmup_type: linear
 
 Transformer:
-  device: cuda
+  device: mps
   lr: 1.0e-4
   weight_decay: 1.0e-4
   optimizer: adamw
@@ -29,9 +29,13 @@ Transformer:
     min_lr_warmup: 5.0e-6
     warmup_steps: 5
     warmup_type: linear
+  criterion:
+    type: MSE
+    lambda_t1: 0.5
+    lambda_t2: 0.5
 
 ArtFire:
-  device: cuda
+  device: mps
   lr: 1.0e-6
   weight_decay: 1.0e-3
   optimizer: adamw
@@ -45,3 +49,7 @@ ArtFire:
     min_lr_warmup: 5.0e-8
     warmup_steps: 2
     warmup_type: linear
+  criterion:
+    type: MSE
+    lambda_t1: 0.5
+    lambda_t2: 0.5

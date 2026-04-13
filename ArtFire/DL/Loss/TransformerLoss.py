@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from ArtFire.DL.Loss.Loss import Loss
 
 
-class ArtFireLoss(Loss):
+class TransformerLoss(Loss):
     def __init__(self, type:Literal["MSE","MAE""Huber","SmoothL1"]="MSE", lambda_t1:float=0.7, lambda_t2:float=0.3, reduction: Literal["mean", "sum"] = "mean") -> None:
         if type == "MSE":
             self.loss=MSEReconstructionLoss(reduction=reduction)
@@ -34,7 +34,7 @@ class MSEReconstructionLoss(Loss):
     Mean Squared Error reconstruction loss for a sequence of images.
 
     Expected tensor shape:
-        [B, T, C, H, W]
+        [B, T, DT]
     but any matching shape is accepted.
     """
 
@@ -55,7 +55,7 @@ class MSEReconstructionLoss(Loss):
         loss_m = loss.mean()
 
         return (
-            loss.mean(dim=(0, 2, 3, 4)),
+            loss.mean(dim=(0, 2)),
             loss_m,
         )  # the first one keeps the temporal dimension
 
@@ -81,7 +81,7 @@ class MAEReconstructionLoss(Loss):
 
         loss_m = loss.mean()
 
-        return loss.mean(dim=(0, 2, 3, 4)), loss_m
+        return loss.mean(dim=(0, 2)), loss_m
 
 
 class HuberReconstructionLoss(Loss):
@@ -115,7 +115,7 @@ class HuberReconstructionLoss(Loss):
 
         loss_m = loss.mean()
 
-        return loss.mean(dim=(0, 2, 3, 4)), loss_m
+        return loss.mean(dim=(0, 2)), loss_m
 
 
 class SmoothL1ReconstructionLoss(Loss):
@@ -149,4 +149,4 @@ class SmoothL1ReconstructionLoss(Loss):
 
         loss_m = loss.mean()
 
-        return loss.mean(dim=(0, 2, 3, 4)), loss_m
+        return loss.mean(dim=(0, 2)), loss_m

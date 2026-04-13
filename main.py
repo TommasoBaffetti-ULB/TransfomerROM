@@ -12,6 +12,8 @@ from ArtFire.DL.Models.Forecast import ARTransformerForecaster
 from ArtFire.utils.save import save_json
 from ArtFire.utils.seed import set_seed, seed_worker
 from ArtFire.DL.Models.ArtFire import Artfire
+from ArtFire.DL.Loss.ArtFireLoss import ArtFireLoss
+from ArtFire.DL.Loss.TransformerLoss import TransformerLoss
 
 # PYTORCH IMPORT
 from pytorch_scheduler.scheduler.polynomial import PolynomialScheduler
@@ -338,6 +340,7 @@ def main(verbose=False):
         model=model_forecast,
         loaders=[train_dataloader, val_dataloader, test_dataloader],
         optimizer=trans_optimizer,
+        criterion=TransformerLoss(**train_config["Transformer"]["criterion"]),
         scheduler=trans_warmup_scheduler,
         device=train_config["Transformer"]["device"],
         gradient_clip=train_config["Transformer"]["gradient_clip"],
@@ -478,6 +481,7 @@ def main(verbose=False):
         model=arf_model,
         loaders=[train_loader, val_loader, test_loader],
         optimizer=artfire_optimizer,
+        criterion=ArtFireLoss(**train_config["ArtFire"]["criterion"]),
         scheduler=artfire_warmup_scheduler,
         device=train_config["ArtFire"]["device"],
         gradient_clip=train_config["ArtFire"]["gradient_clip"],
