@@ -27,8 +27,6 @@ class TransformerLoss(Loss):
 
 
     def forward(self, prediction: torch.Tensor, target: torch.Tensor, **kwargs):
-        print(" shape of prediction: ", prediction.shape)
-        print(" shape of target: ", target.shape)
         loss_t, loss_m=self.loss(prediction=prediction, target=target, **kwargs)
         return loss_t, self.lambda_t2 * loss_m + self.lambda_t1 * loss_t[0]
 
@@ -39,7 +37,7 @@ class MSEReconstructionLoss(Loss):
     Mean Squared Error reconstruction loss for a sequence of images.
 
     Expected tensor shape:
-        [B, T, DT]
+        [B, T,NT, DT]
     but any matching shape is accepted.
     """
 
@@ -60,7 +58,7 @@ class MSEReconstructionLoss(Loss):
         loss_m = loss.mean()
 
         return (
-            loss.mean(dim=(0, 2)),
+            loss.mean(dim=(0, 2, 3)),
             loss_m,
         )  # the first one keeps the temporal dimension
 
@@ -86,7 +84,7 @@ class MAEReconstructionLoss(Loss):
 
         loss_m = loss.mean()
 
-        return loss.mean(dim=(0, 2)), loss_m
+        return loss.mean(dim=(0, 2, 3)), loss_m
 
 
 class HuberReconstructionLoss(Loss):
@@ -120,7 +118,7 @@ class HuberReconstructionLoss(Loss):
 
         loss_m = loss.mean()
 
-        return loss.mean(dim=(0, 2)), loss_m
+        return loss.mean(dim=(0, 2, 3)), loss_m
 
 
 class SmoothL1ReconstructionLoss(Loss):
@@ -154,4 +152,4 @@ class SmoothL1ReconstructionLoss(Loss):
 
         loss_m = loss.mean()
 
-        return loss.mean(dim=(0, 2)), loss_m
+        return loss.mean(dim=(0, 2, 3)), loss_m
