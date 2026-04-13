@@ -137,12 +137,15 @@ def main(verbose=False):
     no_flatten_dim= CAEenc.get_no_flatten_dim(x)
     output_paddings=[(0,0) for i in model_config["CAE"]["conv_config"]["hidden_channels"]]+[(1,1)]
 
-    tconv_config={"input_channels":model_config["CAE"]["conv_config"]["output_channels"],
-                  "output_channels":C,
-                  "hidden_channels":model_config["CAE"]["conv_config"]["hidden_channels"][::-1],
-                  "paddings":model_config["CAE"]["conv_config"]["paddings"],
-                  "output_paddings":output_paddings,
-                  "strides":model_config["CAE"]["conv_config"]["strides"]
+    _cae_conv = model_config["CAE"]["conv_config"]
+    tconv_config={"input_channels": _cae_conv["output_channels"],
+                  "output_channels": C,
+                  "hidden_channels": _cae_conv["hidden_channels"][::-1],
+                  "paddings": _cae_conv["paddings"],
+                  "output_paddings": output_paddings,
+                  "strides": _cae_conv["strides"],
+                  "normalization": _cae_conv.get("normalization", "Batch-Norm"),
+                  "activation": _cae_conv.get("activation", "gelu"),
                   }
 
     CAEdec = ConvDecoder(
