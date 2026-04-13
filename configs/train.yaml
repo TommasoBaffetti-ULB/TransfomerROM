@@ -1,17 +1,17 @@
 CAE:
   device: cuda
-  lr: 1e-3
-  weight_decay: 5.0e-4
+  lr: 0.005180583798538568
+  weight_decay: 0.0007482351349895603
   optimizer: adamw
-  use_lookahead: true
-  n_epochs: 80
+  use_lookahead: false
+  n_epochs: 40
   gradient_clip: -1
   saving_folder: training_CAE
   scheduler:
-    power: 2
-    min_lr: 5.0e-4
-    min_lr_warmup: 5.0e-4
-    warmup_steps: 10
+    power: 1
+    min_lr: 0.0022932130341988483
+    min_lr_warmup: 0.00022932130341988483
+    warmup_steps: 2
     warmup_type: linear
 
 Transformer:
