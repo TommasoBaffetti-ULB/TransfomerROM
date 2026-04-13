@@ -2,8 +2,8 @@ CAE:
    data_path: D_t2001_f13_z256_x64.npy
    split: [0.6,0.2,0.2]
    normalize: true
-   train_batch_size: 32
-   val_batch_size: 32
+   train_batch_size: 16
+   val_batch_size: 64
    test_batch_size: 64
    loader:
      loaders_num_workers: 4

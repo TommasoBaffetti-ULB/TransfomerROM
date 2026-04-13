@@ -50,9 +50,11 @@ Transformer:
 
 CAE:
   conv_config:
-    output_channels: 64
+    output_channels: 128
     hidden_channels: [32]
     dim: 2
     paddings: 0  # set it to be 0
     strides: 2  # set it to be 2
+    normalization: None
+    activation: elu
 
