@@ -14,26 +14,26 @@ Transformer:
   split: [0.6,0.2,0.2]
   horizon: 30
   normalize: true
-  train_batch_size: 10 #32
-  val_batch_size: 10 #32
-  test_batch_size: 32 # 64
+  train_batch_size: 32
+  val_batch_size: 32
+  test_batch_size: 64
   cae_dataloader:
     batch_size: 64
-    loaders_num_workers: 4
+    loaders_num_workers: 8
     pin_memory: true
     persistent_workers: true
   loader:
-    loaders_num_workers: 0
-    pin_memory: false
-    persistent_workers: false
+    loaders_num_workers: 8
+    pin_memory: true
+    persistent_workers: true
 
 ArtFire:
   split: [0.6,0.2,0.2]
   normalize: true
-  train_batch_size: 10 #32
-  val_batch_size: 10 #32
-  test_batch_size: 32 # 64
+  train_batch_size: 32
+  val_batch_size: 32
+  test_batch_size:  64
   loader:
-    loaders_num_workers: 0
-    pin_memory: false
-    persistent_workers: false
+    loaders_num_workers: 8
+    pin_memory: true
+    persistent_workers: true

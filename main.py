@@ -17,7 +17,7 @@ from ArtFire.DL.Loss.TransformerLoss import TransformerLoss
 
 # PYTORCH IMPORT
 from pytorch_scheduler.scheduler.polynomial import PolynomialScheduler
-from pytorch_scheduler.base.warmup import WarmupScheduler
+from ArtFire.DL.Optimization.warmup import WarmupScheduler
 from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch
@@ -56,6 +56,9 @@ def main(verbose=False):
     )
     gc.collect()
     torch.cuda.empty_cache()
+
+    if torch.cuda.is_available():
+        print("cuda available")
 
     print("\nLoading config...\n")
     data_config = load_data_config()
