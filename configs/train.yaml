@@ -1,5 +1,5 @@
 CAE:
-  device: mps
+  device: cuda
   lr: 1e-3
   weight_decay: 5.0e-4
   optimizer: adamw
@@ -15,7 +15,7 @@ CAE:
     warmup_type: linear
 
 Transformer:
-  device: mps
+  device: cuda
   lr: 1.0e-4
   weight_decay: 1.0e-4
   optimizer: adamw
@@ -35,7 +35,7 @@ Transformer:
     lambda_t2: 0.5
 
 ArtFire:
-  device: mps
+  device: cuda
   lr: 1.0e-6
   weight_decay: 1.0e-3
   optimizer: adamw
