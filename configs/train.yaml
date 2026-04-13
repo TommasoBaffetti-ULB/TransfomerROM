@@ -4,7 +4,7 @@ CAE:
   weight_decay: 0.0007482351349895603
   optimizer: adamw
   use_lookahead: false
-  n_epochs: 40
+  n_epochs: 60
   gradient_clip: -1
   saving_folder: training_CAE
   scheduler:
