@@ -9,16 +9,18 @@ from ArtFire.DL.Loss.Loss import Loss
 
 
 class TransformerLoss(Loss):
-    def __init__(self, type:Literal["MSE","MAE""Huber","SmoothL1"]="MSE", lambda_t1:float=0.7, lambda_t2:float=0.3, reduction: Literal["mean", "sum"] = "mean") -> None:
+    def __init__(self, type:Literal["MSE","MAE","Huber","SmoothL1"]="MSE", lambda_t1:float=0.7, lambda_t2:float=0.3, reduction: Literal["mean", "sum"] = "mean") -> None:
         super().__init__(name="transformer loss")
         if type == "MSE":
             self.loss=MSEReconstructionLoss(reduction=reduction)
-        if type=="MAE":
+        elif type=="MAE":
             self.loss=MAEReconstructionLoss(reduction=reduction)
-        if type=="Huber":
+        elif type=="Huber":
             self.loss=HuberReconstructionLoss(reduction=reduction)
-        if type=="SmoothL1":
+        elif type=="SmoothL1":
             self.loss=SmoothL1ReconstructionLoss(reduction=reduction)
+        else:
+            raise ValueError(f"Unknown loss type: {type}")
 
         self.lambda_t1 = lambda_t1
         self.lambda_t2 = lambda_t2
@@ -75,7 +77,7 @@ class MAEReconstructionLoss(Loss):
         prediction: torch.Tensor,
         target: torch.Tensor,
         **kwargs,
-    ) -> Dict[str, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         self._validate_shapes(prediction, target)
 
         loss = torch.abs(prediction - target)
@@ -104,7 +106,7 @@ class HuberReconstructionLoss(Loss):
         prediction: torch.Tensor,
         target: torch.Tensor,
         **kwargs,
-    ) -> Dict[str, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         self._validate_shapes(prediction, target)
 
         loss = F.huber_loss(
@@ -138,7 +140,7 @@ class SmoothL1ReconstructionLoss(Loss):
         prediction: torch.Tensor,
         target: torch.Tensor,
         **kwargs,
-    ) -> Dict[str, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         self._validate_shapes(prediction, target)
 
         loss = F.smooth_l1_loss(
