@@ -1,17 +1,17 @@
 CAE:
   device: mps
   lr: 1e-3
-  weight_decay: 5.0e-5
+  weight_decay: 5.0e-4
   optimizer: adamw
   use_lookahead: true
-  n_epochs: 20
+  n_epochs: 80
   gradient_clip: -1
   saving_folder: training_CAE
   scheduler:
     power: 2
     min_lr: 5.0e-4
     min_lr_warmup: 5.0e-4
-    warmup_steps: 0
+    warmup_steps: 10
     warmup_type: linear
 
 Transformer:
@@ -20,14 +20,14 @@ Transformer:
   weight_decay: 1.0e-4
   optimizer: adamw
   use_lookahead: true
-  n_epochs:  15
+  n_epochs:  60
   gradient_clip: 3
   saving_folder: training_Transformer
   scheduler:
     power: 2
     min_lr: 5.0e-5
     min_lr_warmup: 5.0e-6
-    warmup_steps: 5
+    warmup_steps: 15
     warmup_type: linear
   criterion:
     type: MSE
@@ -40,14 +40,14 @@ ArtFire:
   weight_decay: 1.0e-3
   optimizer: adamw
   use_lookahead: true
-  n_epochs: 5
+  n_epochs: 40
   gradient_clip: 1
   saving_folder: training_ArtFire
   scheduler:
     power: 2
     min_lr: 5.0e-8
     min_lr_warmup: 5.0e-8
-    warmup_steps: 2
+    warmup_steps: 15
     warmup_type: linear
   criterion:
     type: MSE
