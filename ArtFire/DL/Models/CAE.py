@@ -77,7 +77,7 @@ class ConvDecoder(nn.Module):
     def __init__(self, config_tconv, no_flatten_dim):
         super().__init__()
         self.tconv = TCNNblock(**config_tconv)
-        self.C, self.H, self.W = no_flatten_dim
+        _,self.C, self.H, self.W = no_flatten_dim
 
     def forward(self, x):
         B = x.shape[0]
