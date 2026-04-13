@@ -127,8 +127,8 @@ def main(verbose=False):
     print("\nInitializing CAE model...\n")
 
     # infer input shape
-    x=next(iter(train_loader))
-    B,C,H,W=x.shape
+    batch=next(iter(train_loader))
+    B,C,H,W=batch["x"].shape
 
     model_config["CAE"]["conv_config"]["input_channels"]=C
     CAEenc = ConvEncoder(
