@@ -10,6 +10,7 @@ from ArtFire.DL.Loss.Loss import Loss
 
 class TransformerLoss(Loss):
     def __init__(self, type:Literal["MSE","MAE""Huber","SmoothL1"]="MSE", lambda_t1:float=0.7, lambda_t2:float=0.3, reduction: Literal["mean", "sum"] = "mean") -> None:
+        super().__init__(name="transformer loss")
         if type == "MSE":
             self.loss=MSEReconstructionLoss(reduction=reduction)
         if type=="MAE":
