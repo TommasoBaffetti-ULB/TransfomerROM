@@ -58,3 +58,28 @@ CAE:
     normalization: None
     activation: elu
 
+Baseline:
+  model_name: unet
+  UNet:
+    out_channels: null
+    base_channels: 32
+    use_residual: true
+  ResNet:
+    out_channels: null
+    hidden_channels: 64
+    n_blocks: 6
+    use_residual: true
+  FNO2D:
+    out_channels: null
+    modes1: 12
+    modes2: 12
+    width: 32
+    n_layers: 4
+    use_residual: true
+  FNO3D:
+    out_channels: null
+    modes1: 8
+    modes2: 8
+    modes3: 8
+    width: 20
+    n_layers: 4
