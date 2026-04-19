@@ -1,0 +1,1 @@
+python3: can't open file '/globalsc/users/b/a/baffetti/research/TransfomerROM/CAE_hpo.py --n-trials 100 --hpo-epochs 25 --storage sqlite:///hpo.db': [Errno 2] No such file or directory

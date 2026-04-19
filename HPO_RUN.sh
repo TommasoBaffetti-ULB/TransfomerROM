@@ -1,15 +1,15 @@
 #!/bin/bash
 #SBATCH --job-name=hpo_%j
-#SBATCH --output=logs/hpo_%j.out
-#SBATCH --error=logs/hpo_%j.err
+#SBATCH --output=logs_hpo/hpo_%j.out
+#SBATCH --error=logs_hpo/hpo_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
 #SBATCH --partition=batch
 #SBATCH --gres=gpu:1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=128G
-#SBATCH --time=10:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=64G
+#SBATCH --time=2:00:00
 
 set -euo pipefail
 
@@ -17,7 +17,7 @@ set -euo pipefail
 PYTHON_MODULE="${PYTHON_MODULE:-Python/3.11.3-GCCcore-12.3.0}"
 VENV_PATH="${VENV_PATH:-/globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate}"
 PROJECT_DIR="${PROJECT_DIR:-$SLURM_SUBMIT_DIR}"
-ENTRYPOINT="${ENTRYPOINT:-CAE_hpo.py --n-trials 100 --hpo-epochs 25 --storage sqlite:///hpo.db}"
+ENTRYPOINT="${ENTRYPOINT:-CAE_hpo.py}"
 
 mkdir -p "$PROJECT_DIR/logs_hpo"
 cd "$PROJECT_DIR"
@@ -51,6 +51,6 @@ python -c "import sys; print(sys.executable)"
 echo "Torch test:"
 python -c "import torch; print(torch.__version__)"
 
-python3 "$ENTRYPOINT"
+python3 "$ENTRYPOINT" --n-trials 100 --hpo-epochs 25 --storage sqlite:///hpo.db
 
 echo "[$(date)] Job finished"

@@ -1,0 +1,25 @@
+model:
+  CAE:
+    conv_config:
+      output_channels: 128
+      hidden_channels:
+      - 64
+      dim: 2
+      paddings: 0
+      strides: 2
+      normalization: null
+      activation: silu
+training:
+  CAE:
+    lr: 0.009222841973790466
+    weight_decay: 1.1087299957162628e-05
+    optimizer: adam
+    use_lookahead: true
+    gradient_clip: 5.0
+    train_batch_size: 16
+    scheduler:
+      power: 1
+      warmup_steps: 6
+      warmup_type: linear
+      min_lr: 0.00335345307713364
+      min_lr_warmup: 0.00033534530771336403
