@@ -53,3 +53,19 @@ ArtFire:
     type: MSE
     lambda_t1: 0.5
     lambda_t2: 0.5
+
+Baseline:
+  device: cuda
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  optimizer: adamw
+  use_lookahead: false
+  n_epochs: 60
+  gradient_clip: 1
+  saving_folder: training_Baseline
+  scheduler:
+    power: 2
+    min_lr: 5.0e-5
+    min_lr_warmup: 5.0e-6
+    warmup_steps: 10
+    warmup_type: linear
