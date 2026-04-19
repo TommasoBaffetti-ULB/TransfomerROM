@@ -1,5 +1,5 @@
 CAE:
-   data_path: D_t2001_f13_z256_x64.npy
+   data_path: /globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/data/D_t2001_f13_z256_x64.npy
    split: [0.6,0.2,0.2]
    normalize: true
    train_batch_size: 16

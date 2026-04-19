@@ -1,0 +1,165 @@
+[Fri Apr 17 02:56:16 PM CEST 2026] Job started on ly-w110
+SLURM_JOB_ID=783789
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=CAE_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Fri Apr 17 14:56:16 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   38C    P8             27W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+CUDA available — running on GPU
+
+Loading datasets from: /globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/data/D_t2001_f13_z256_x64.npy
+Dataset: 1200 train / 400 val samples, C=13, H=256, W=64
+
+HPO config: 100 trials × 25 epochs on cuda
+
+[I 2026-04-17 14:57:26,269] Trial 6 finished with value: 0.0849863600730896 and parameters: {'arch': '[16,32]→128', 'normalization': 'Group-Norm', 'activation': 'gelu', 'lr': 0.0005404103854647331, 'weight_decay': 0.00023345864076016249, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 32, 'scheduler_power': 1, 'warmup_steps': 2, 'min_lr_ratio': 0.34527418299095686}. Best is trial 4 with value: 0.03972625330090523.
+[I 2026-04-17 14:57:58,756] Trial 7 finished with value: 0.045999690890312195 and parameters: {'arch': '[16,32]→128', 'normalization': 'Instance-Norm', 'activation': 'elu', 'lr': 0.004544383960336014, 'weight_decay': 0.00011756010900231849, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 32, 'scheduler_power': 3, 'warmup_steps': 16, 'min_lr_ratio': 0.04628187934970428}. Best is trial 4 with value: 0.03972625330090523.
+[I 2026-04-17 14:58:29,767] Trial 8 finished with value: 0.04907020315527916 and parameters: {'arch': '[16,32]→64', 'normalization': 'Instance-Norm', 'activation': 'relu', 'lr': 0.0018742210985555703, 'weight_decay': 8.771380343280557e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': -1.0, 'batch_size': 32, 'scheduler_power': 2, 'warmup_steps': 18, 'min_lr_ratio': 0.4037993176805661}. Best is trial 4 with value: 0.03972625330090523.
+[I 2026-04-17 14:59:02,421] Trial 9 finished with value: 0.03972625330090523 and parameters: {'arch': '[16]→32', 'normalization': 'Group-Norm', 'activation': 'silu', 'lr': 0.008411909465645722, 'weight_decay': 5.69307476764461e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 20, 'min_lr_ratio': 0.1286070830406352}. Best is trial 4 with value: 0.03972625330090523.
+[I 2026-04-17 14:59:35,799] Trial 10 finished with value: 0.0845774120092392 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.00018838307787619773, 'weight_decay': 0.0001054870271491805, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 64, 'scheduler_power': 3, 'warmup_steps': 13, 'min_lr_ratio': 0.17612459761386334}. Best is trial 4 with value: 0.03972625330090523.
+[I 2026-04-17 15:00:07,095] Trial 11 finished with value: 0.03916981935501099 and parameters: {'arch': '[32]→128', 'normalization': 'Instance-Norm', 'activation': 'silu', 'lr': 0.001991892049219753, 'weight_decay': 0.0035291509251299, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 12, 'min_lr_ratio': 0.2513336699712433}. Best is trial 11 with value: 0.03916981935501099.
+[I 2026-04-17 15:00:38,399] Trial 12 finished with value: 0.04354026362299919 and parameters: {'arch': '[]→64', 'normalization': 'Instance-Norm', 'activation': 'relu', 'lr': 0.0018433189211875753, 'weight_decay': 0.0014610612282659852, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 9, 'min_lr_ratio': 0.13539242072456276}. Best is trial 11 with value: 0.03916981935501099.
+[I 2026-04-17 15:01:10,140] Trial 13 finished with value: 0.040784999430179596 and parameters: {'arch': '[16,64]→128', 'normalization': 'Instance-Norm', 'activation': 'silu', 'lr': 0.00228981002636501, 'weight_decay': 0.00018785530544922018, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 7, 'min_lr_ratio': 0.28694408834891577}. Best is trial 11 with value: 0.03916981935501099.
+[I 2026-04-17 15:01:41,570] Trial 14 finished with value: 0.03551682710647583 and parameters: {'arch': '[32]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.0013580551307968538, 'weight_decay': 0.0014109659604326, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 8, 'min_lr_ratio': 0.30109150845845367}. Best is trial 14 with value: 0.03551682710647583.
+[I 2026-04-17 15:02:03,122] Trial 15 pruned. 
+[I 2026-04-17 15:02:34,611] Trial 16 finished with value: 0.03911846578121185 and parameters: {'arch': '[32]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.0005494441455303723, 'weight_decay': 0.0003306486256484885, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 6, 'min_lr_ratio': 0.30724813719296007}. Best is trial 14 with value: 0.03551682710647583.
+[I 2026-04-17 15:02:48,983] Trial 17 pruned. 
+[I 2026-04-17 15:02:57,783] Trial 18 pruned. 
+[I 2026-04-17 15:03:29,415] Trial 19 finished with value: 0.0375268691778183 and parameters: {'arch': '[16,64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.0019493080836390931, 'weight_decay': 0.0011191928531524944, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 5, 'min_lr_ratio': 0.372074954192681}. Best is trial 14 with value: 0.03551682710647583.
+[I 2026-04-17 15:03:38,356] Trial 20 pruned. 
+[I 2026-04-17 15:04:10,874] Trial 21 finished with value: 0.040398911833763124 and parameters: {'arch': '[16,64]→128', 'normalization': 'Batch-Norm', 'activation': 'silu', 'lr': 0.0021220711266259477, 'weight_decay': 0.00010581578423517147, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 14, 'min_lr_ratio': 0.39445908093030213}. Best is trial 14 with value: 0.03551682710647583.
+[I 2026-04-17 15:04:19,536] Trial 22 pruned. 
+[I 2026-04-17 15:04:51,240] Trial 23 finished with value: 0.035282735526561734 and parameters: {'arch': '[32,64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.0015789061817144357, 'weight_decay': 9.785902374950016e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 4, 'min_lr_ratio': 0.2795699902831308}. Best is trial 23 with value: 0.035282735526561734.
+[I 2026-04-17 15:04:58,937] Trial 24 pruned. 
+[I 2026-04-17 15:05:06,664] Trial 25 pruned. 
+[I 2026-04-17 15:05:37,928] Trial 26 finished with value: 0.03241260290145874 and parameters: {'arch': '[16]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.0029295465340220144, 'weight_decay': 0.00016622247815457797, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 2, 'min_lr_ratio': 0.19098037951189883}. Best is trial 26 with value: 0.03241260290145874.
+[I 2026-04-17 15:06:09,061] Trial 27 finished with value: 0.03094079039990902 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'relu', 'lr': 0.003948942309899091, 'weight_decay': 4.4642040742826434e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 1, 'min_lr_ratio': 0.11575522373422314}. Best is trial 27 with value: 0.03094079039990902.
+[I 2026-04-17 15:06:40,716] Trial 28 finished with value: 0.038959174156188964 and parameters: {'arch': '[32,64]→128', 'normalization': 'Batch-Norm', 'activation': 'relu', 'lr': 0.009297584351245622, 'weight_decay': 0.00015296925292737577, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 1, 'min_lr_ratio': 0.05591161706937933}. Best is trial 27 with value: 0.03094079039990902.
+[I 2026-04-17 15:06:52,597] Trial 29 pruned. 
+[I 2026-04-17 15:07:23,872] Trial 30 finished with value: 0.01981381930410862 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.009423111339843585, 'weight_decay': 0.00029465757739348213, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 1, 'min_lr_ratio': 0.2556428919067159}. Best is trial 30 with value: 0.01981381930410862.
+[I 2026-04-17 15:07:55,257] Trial 31 finished with value: 0.030350469797849656 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.004307991722963354, 'weight_decay': 3.9582761039699075e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 3, 'min_lr_ratio': 0.07913091122896557}. Best is trial 30 with value: 0.01981381930410862.
+[I 2026-04-17 15:08:26,771] Trial 32 finished with value: 0.033332176208496093 and parameters: {'arch': '[16]→64', 'normalization': None, 'activation': 'relu', 'lr': 0.002859551428797183, 'weight_decay': 1.8646060362371725e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 0, 'min_lr_ratio': 0.1367552533511777}. Best is trial 30 with value: 0.01981381930410862.
+[I 2026-04-17 15:08:58,287] Trial 33 finished with value: 0.030744262263178824 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.0023828139827337734, 'weight_decay': 3.924106440825582e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 11, 'min_lr_ratio': 0.09173335902467009}. Best is trial 30 with value: 0.01981381930410862.
+[I 2026-04-17 15:09:06,485] Trial 34 pruned. 
+[I 2026-04-17 15:09:14,731] Trial 35 pruned. 
+[I 2026-04-17 15:09:50,109] Trial 36 finished with value: 0.020779954642057417 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.0055517774131023205, 'weight_decay': 0.00026675920935953994, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 13, 'min_lr_ratio': 0.2516890423356245}. Best is trial 30 with value: 0.01981381930410862.
+[I 2026-04-17 15:09:58,956] Trial 37 pruned. 
+[I 2026-04-17 15:10:34,366] Trial 38 finished with value: 0.02747525483369827 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'gelu', 'lr': 0.003864853206195724, 'weight_decay': 7.316513887918897e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 15, 'min_lr_ratio': 0.09022741832920739}. Best is trial 30 with value: 0.01981381930410862.
+[I 2026-04-17 15:11:09,595] Trial 39 finished with value: 0.0180429045855999 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.0070663434034508, 'weight_decay': 0.0006097744341878717, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 13, 'min_lr_ratio': 0.3565340636690587}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:11:18,330] Trial 40 pruned. 
+[I 2026-04-17 15:11:26,593] Trial 41 pruned. 
+[I 2026-04-17 15:11:58,030] Trial 42 finished with value: 0.02052472561597824 and parameters: {'arch': '[32,64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.004842040862504917, 'weight_decay': 0.00031573029035613645, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 13, 'min_lr_ratio': 0.4032000456181793}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:12:33,366] Trial 43 finished with value: 0.027067485600709915 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.003236518752080779, 'weight_decay': 0.0013638782536258146, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 11, 'min_lr_ratio': 0.39796242112179775}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:12:42,035] Trial 44 pruned. 
+[I 2026-04-17 15:12:51,005] Trial 45 pruned. 
+[I 2026-04-17 15:13:27,061] Trial 46 finished with value: 0.02419195741415024 and parameters: {'arch': '[32,64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.0034911586281836542, 'weight_decay': 5.4179924675456956e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 8, 'min_lr_ratio': 0.34385172642254314}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:13:37,305] Trial 47 pruned. 
+[I 2026-04-17 15:14:13,134] Trial 48 finished with value: 0.02517559826374054 and parameters: {'arch': '[16]→64', 'normalization': None, 'activation': 'elu', 'lr': 0.003090988576212683, 'weight_decay': 2.4662599406683643e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 12, 'min_lr_ratio': 0.4611481647250867}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:14:43,773] Trial 49 pruned. 
+[I 2026-04-17 15:14:52,488] Trial 50 pruned. 
+[I 2026-04-17 15:15:00,414] Trial 51 pruned. 
+[I 2026-04-17 15:15:32,191] Trial 52 finished with value: 0.02431373082101345 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.007597956858841504, 'weight_decay': 0.0004192854292996474, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 5, 'min_lr_ratio': 0.15949253946112169}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:16:03,734] Trial 53 finished with value: 0.026309130489826204 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'gelu', 'lr': 0.004848641967413082, 'weight_decay': 0.00016627652560321742, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 8, 'min_lr_ratio': 0.2188221942734017}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:16:35,536] Trial 54 finished with value: 0.021679196059703826 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.006494149151409103, 'weight_decay': 0.0044415884703177845, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 7, 'min_lr_ratio': 0.2163777056744789}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:16:57,107] Trial 55 pruned. 
+[I 2026-04-17 15:17:28,760] Trial 56 finished with value: 0.030370559617877005 and parameters: {'arch': '[16]→32', 'normalization': None, 'activation': 'silu', 'lr': 0.005430059375176525, 'weight_decay': 0.001999802393042507, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 2, 'min_lr_ratio': 0.28660821287752397}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:18:00,945] Trial 57 finished with value: 0.01863146059215069 and parameters: {'arch': '[32,64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.0068388089842719236, 'weight_decay': 7.900800280631747e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 12, 'min_lr_ratio': 0.4467724972265529}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:18:15,143] Trial 58 pruned. 
+[I 2026-04-17 15:18:26,752] Trial 59 pruned. 
+[I 2026-04-17 15:18:34,960] Trial 60 pruned. 
+[I 2026-04-17 15:19:05,983] Trial 61 finished with value: 0.029713689163327218 and parameters: {'arch': '[32]→64', 'normalization': None, 'activation': 'silu', 'lr': 0.009058825056127784, 'weight_decay': 0.001234837628644412, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 32, 'scheduler_power': 3, 'warmup_steps': 8, 'min_lr_ratio': 0.2653979711369779}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:19:37,672] Trial 62 finished with value: 0.019902539253234864 and parameters: {'arch': '[32,64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.006304532824859399, 'weight_decay': 0.0001945676806820067, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 11, 'min_lr_ratio': 0.48041365493877486}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:19:45,977] Trial 63 pruned. 
+[I 2026-04-17 15:20:17,943] Trial 64 finished with value: 0.02386279806494713 and parameters: {'arch': '[32]→64', 'normalization': None, 'activation': 'elu', 'lr': 0.004116694715918023, 'weight_decay': 0.00013856670559473443, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 11, 'min_lr_ratio': 0.4487742558151769}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:20:25,859] Trial 65 pruned. 
+[I 2026-04-17 15:20:33,647] Trial 66 pruned. 
+[I 2026-04-17 15:21:05,365] Trial 67 finished with value: 0.022512520849704742 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.005985896460764044, 'weight_decay': 0.0018700671457393763, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 6, 'min_lr_ratio': 0.18632514676483983}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:21:13,128] Trial 68 pruned. 
+[I 2026-04-17 15:21:48,841] Trial 69 finished with value: 0.024993819072842597 and parameters: {'arch': '[]→64', 'normalization': None, 'activation': 'elu', 'lr': 0.0035251403031293337, 'weight_decay': 0.0004246621355572258, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 17, 'min_lr_ratio': 0.28283140688883}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:21:57,452] Trial 70 pruned. 
+[I 2026-04-17 15:22:11,684] Trial 71 pruned. 
+[I 2026-04-17 15:22:43,355] Trial 72 finished with value: 0.024845042377710343 and parameters: {'arch': '[32,64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.004614434553681012, 'weight_decay': 0.000401207696243764, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 7, 'min_lr_ratio': 0.4255734925044426}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:22:51,241] Trial 73 pruned. 
+[I 2026-04-17 15:23:27,323] Trial 74 finished with value: 0.02184663601219654 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.005407390918151495, 'weight_decay': 0.0017945742188847575, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 9, 'min_lr_ratio': 0.18466621652954732}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:24:03,185] Trial 75 finished with value: 0.020892773270606995 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.005887594286414788, 'weight_decay': 0.00026412029106356313, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.22638218393144605}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:24:39,063] Trial 76 finished with value: 0.021850350499153137 and parameters: {'arch': '[16]→64', 'normalization': None, 'activation': 'elu', 'lr': 0.006964892788818806, 'weight_decay': 0.000271315583799313, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 0, 'min_lr_ratio': 0.16205676520228912}. Best is trial 39 with value: 0.0180429045855999.
+[I 2026-04-17 15:25:10,687] Trial 77 finished with value: 0.01557003367692232 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.00951505212889796, 'weight_decay': 0.00016388219101609862, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 4, 'min_lr_ratio': 0.2501007543377237}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:25:46,435] Trial 78 finished with value: 0.019187938943505286 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.007098867112517621, 'weight_decay': 0.00012854656968766114, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 4, 'min_lr_ratio': 0.3500753371075127}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:25:58,074] Trial 79 pruned. 
+[I 2026-04-17 15:26:29,651] Trial 80 finished with value: 0.017099178209900857 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.007531235364064051, 'weight_decay': 0.00011024100103723103, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 10, 'min_lr_ratio': 0.32376749743927424}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:26:40,767] Trial 81 pruned. 
+[I 2026-04-17 15:27:12,486] Trial 82 finished with value: 0.01810905560851097 and parameters: {'arch': '[16]→32', 'normalization': None, 'activation': 'silu', 'lr': 0.009807679965770989, 'weight_decay': 8.423324693522954e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 9, 'min_lr_ratio': 0.4349341271479107}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:27:20,612] Trial 83 pruned. 
+[I 2026-04-17 15:27:54,418] Trial 84 finished with value: 0.022120766639709473 and parameters: {'arch': '[16]→32', 'normalization': None, 'activation': 'silu', 'lr': 0.008567793208805343, 'weight_decay': 0.00018904012836740025, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 10, 'min_lr_ratio': 0.336331640415769}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:28:25,766] Trial 85 finished with value: 0.01767523854970932 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.008794725323603602, 'weight_decay': 0.0002643749539084323, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 6, 'min_lr_ratio': 0.2767385714429587}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:28:33,623] Trial 86 pruned. 
+[I 2026-04-17 15:28:41,472] Trial 87 pruned. 
+[I 2026-04-17 15:29:12,822] Trial 88 finished with value: 0.024170742705464363 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'relu', 'lr': 0.004770135684921847, 'weight_decay': 0.00012056227961873253, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 3, 'min_lr_ratio': 0.28753715770809}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:29:26,935] Trial 89 pruned. 
+[I 2026-04-17 15:29:58,510] Trial 90 finished with value: 0.019054462164640427 and parameters: {'arch': '[16,32]→64', 'normalization': None, 'activation': 'silu', 'lr': 0.009348120219893265, 'weight_decay': 5.933093095280689e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.3923305398743973}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:30:30,611] Trial 91 finished with value: 0.016786852329969407 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.007731085106463743, 'weight_decay': 4.9558763517736295e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 5, 'min_lr_ratio': 0.39109515701892583}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:31:06,121] Trial 92 finished with value: 0.022225994393229486 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.006987415283591505, 'weight_decay': 6.148012777879305e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 7, 'min_lr_ratio': 0.35129574614580444}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:31:16,436] Trial 93 pruned. 
+[I 2026-04-17 15:31:49,509] Trial 94 pruned. 
+[I 2026-04-17 15:31:57,544] Trial 95 pruned. 
+[I 2026-04-17 15:32:06,469] Trial 96 pruned. 
+[I 2026-04-17 15:32:41,927] Trial 97 finished with value: 0.023392728120088576 and parameters: {'arch': '[16]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.006480257586882432, 'weight_decay': 1.1766662265696072e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 7, 'min_lr_ratio': 0.42815632878132887}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:32:49,750] Trial 98 pruned. 
+[I 2026-04-17 15:33:25,979] Trial 99 finished with value: 0.022179471552371977 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.009199577354488718, 'weight_decay': 0.0011297938924810633, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 0, 'min_lr_ratio': 0.3874283985618776}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:34:01,982] Trial 100 finished with value: 0.019089965894818307 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.006162972554240185, 'weight_decay': 1.9198654930340037e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 4, 'min_lr_ratio': 0.39840216510666676}. Best is trial 77 with value: 0.01557003367692232.
+[I 2026-04-17 15:34:38,040] Trial 101 finished with value: 0.014958527348935604 and parameters: {'arch': '[64]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.009222841973790466, 'weight_decay': 1.1087299957162628e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 6, 'min_lr_ratio': 0.363603007257796}. Best is trial 101 with value: 0.014958527348935604.
+[I 2026-04-17 15:35:00,921] Trial 102 pruned. 
+[I 2026-04-17 15:35:14,879] Trial 103 pruned. 
+[I 2026-04-17 15:35:22,550] Trial 104 pruned. 
+[I 2026-04-17 15:35:31,645] Trial 105 pruned. 
+
+============================================================
+HPO Complete
+============================================================
+  Completed trials : 59
+  Pruned trials    : 45
+  Best trial       : #101
+  Best val MSE     : 0.014959
+
+Best hyperparameters:
+  arch                  : [64]→128
+  normalization         : None
+  activation            : silu
+  lr                    : 0.009222841973790466
+  weight_decay          : 1.1087299957162628e-05
+  optimizer             : adam
+  use_lookahead         : True
+  gradient_clip         : 5.0
+  batch_size            : 16
+  scheduler_power       : 1
+  warmup_steps          : 6
+  min_lr_ratio          : 0.363603007257796
+
+Best params saved to: hpo_best_params.yaml
+[Fri Apr 17 03:35:32 PM CEST 2026] Job finished
