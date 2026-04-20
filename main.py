@@ -126,14 +126,33 @@ def main(verbose=False):
 
     print("\nInitializing CAE model...\n")
 
+    cae_model_cfg = model_config.get("CAE", {})
+    if "spatial_conv_config" not in cae_model_cfg:
+        cae_model_cfg = model_config.get("CAEst", cae_model_cfg)
+
+    required_keys = [
+        "spatial_conv_config",
+        "temporal_conv_config",
+        "spatial_tconv_config",
+        "temporal_tconv_config",
+        "no_flatten_dim",
+    ]
+    missing_keys = [k for k in required_keys if k not in cae_model_cfg]
+    if missing_keys:
+        raise KeyError(
+            "Missing CAE model configuration keys: "
+            + ", ".join(missing_keys)
+            + ". Expected under 'CAE' or legacy 'CAEst' in configs/model.yaml."
+        )
+
     CAEenc = ConvEncoder(
-        model_config["CAE"]["spatial_conv_config"],
-        model_config["CAE"]["temporal_conv_config"],
+        cae_model_cfg["spatial_conv_config"],
+        cae_model_cfg["temporal_conv_config"],
     )
     CAEdec = ConvDecoder(
-        model_config["CAE"]["spatial_tconv_config"],
-        model_config["CAE"]["temporal_tconv_config"],
-        model_config["CAE"]["no_flatten_dim"],
+        cae_model_cfg["spatial_tconv_config"],
+        cae_model_cfg["temporal_tconv_config"],
+        cae_model_cfg["no_flatten_dim"],
     )
 
     CAEmodel = CAE(CAEenc, CAEdec).to(train_config["CAE"]["device"])

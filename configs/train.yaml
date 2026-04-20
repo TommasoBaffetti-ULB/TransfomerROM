@@ -62,6 +62,7 @@ Baseline:
   use_lookahead: false
   n_epochs: 60
   gradient_clip: 1
+  micro_batch_size: 2
   saving_folder: training_Baseline
   scheduler:
     power: 2
