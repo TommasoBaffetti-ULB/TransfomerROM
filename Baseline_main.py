@@ -195,6 +195,7 @@ def main(verbose: bool = False) -> None:
         scheduler=warmup_scheduler,
         device=baseline_train_cfg["device"],
         gradient_clip=baseline_train_cfg["gradient_clip"],
+        micro_batch_size=baseline_train_cfg.get("micro_batch_size"),
         best_model_path=save_root / "best_baseline.pt",
     )
 

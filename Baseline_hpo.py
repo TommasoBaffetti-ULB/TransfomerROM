@@ -50,6 +50,23 @@ _PRUNER_WARMUP = 5
 VALID_MODELS = {"unet", "resnet", "fno2d", "fno3d"}
 
 
+def _clip_gradients(parameters, clip_value: float) -> None:
+    if clip_value <= 0:
+        return
+
+    params = [p for p in parameters if p.grad is not None]
+    if not params:
+        return
+
+    real_params = [p for p in params if not torch.is_complex(p.grad)]
+    complex_params = [p for p in params if torch.is_complex(p.grad)]
+
+    if real_params:
+        torch.nn.utils.clip_grad_value_(real_params, clip_value)
+    if complex_params:
+        torch.nn.utils.clip_grad_norm_(complex_params, max_norm=clip_value)
+
+
 def _suggest_hparams(trial: optuna.Trial, model_name: str) -> dict:
     hp = {
         "lr": trial.suggest_float("lr", 1e-5, 5e-3, log=True),
@@ -57,7 +74,7 @@ def _suggest_hparams(trial: optuna.Trial, model_name: str) -> dict:
         "optimizer": trial.suggest_categorical("optimizer", ["adamw", "adam"]),
         "use_lookahead": trial.suggest_categorical("use_lookahead", [True, False]),
         "gradient_clip": trial.suggest_categorical("gradient_clip", [-1.0, 1.0, 3.0, 5.0]),
-        "batch_size": trial.suggest_categorical("batch_size", [8, 16, 32]),
+        "batch_size": trial.suggest_categorical("batch_size", [1, 2, 4, 8]),
         "scheduler_power": trial.suggest_int("scheduler_power", 1, 3),
         "warmup_steps": trial.suggest_int("warmup_steps", 0, 20),
         "min_lr_ratio": trial.suggest_float("min_lr_ratio", 0.01, 0.5),
@@ -73,8 +90,8 @@ def _suggest_hparams(trial: optuna.Trial, model_name: str) -> dict:
     elif model_name == "resnet":
         hp.update(
             {
-                "hidden_channels": trial.suggest_categorical("hidden_channels", [32, 64, 96, 128]),
-                "n_blocks": trial.suggest_int("n_blocks", 2, 10),
+                "hidden_channels": trial.suggest_categorical("hidden_channels", [16, 32, 64]),
+                "n_blocks": trial.suggest_int("n_blocks", 2, 6),
                 "use_residual": trial.suggest_categorical("use_residual", [True, False]),
             }
         )
@@ -216,8 +233,7 @@ def objective(
                 pred_seq = model(x_t, horizon=x_seq.shape[1])
                 loss = criterion(pred_seq, x_seq)
                 loss.backward()
-                if hp["gradient_clip"] > 0:
-                    torch.nn.utils.clip_grad_value_(model.parameters(), hp["gradient_clip"])
+                _clip_gradients(model.parameters(), hp["gradient_clip"])
                 optimizer.step()
             scheduler.step()
 
