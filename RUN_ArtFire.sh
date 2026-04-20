@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=unet_%j
-#SBATCH --output=logs/unet_%j.out
-#SBATCH --error=logs/unet_%j.err
+#SBATCH --job-name=artfire_%j
+#SBATCH --output=logs/artfire_%j.out
+#SBATCH --error=logs/artfire_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
@@ -9,7 +9,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=128G
-#SBATCH --time=2-00:00:00
+#SBATCH --time=10:00:00
 
 set -euo pipefail
 
@@ -17,8 +17,7 @@ set -euo pipefail
 PYTHON_MODULE="${PYTHON_MODULE:-Python/3.11.3-GCCcore-12.3.0}"
 VENV_PATH="${VENV_PATH:-/globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate}"
 PROJECT_DIR="${PROJECT_DIR:-$SLURM_SUBMIT_DIR}"
-ENTRYPOINT="${ENTRYPOINT:-baseline_main.py}"
-BASELINE_MODEL="${BASELINE_MODEL:-unet}"
+ENTRYPOINT="${ENTRYPOINT:-main.py}"
 
 mkdir -p "$PROJECT_DIR/logs"
 cd "$PROJECT_DIR"
@@ -27,7 +26,6 @@ echo "[$(date)] Job started on $(hostname)"
 echo "SLURM_JOB_ID=${SLURM_JOB_ID:-N/A}"
 echo "PROJECT_DIR=$PROJECT_DIR"
 echo "ENTRYPOINT=$ENTRYPOINT"
-echo "BASELINE_MODEL=$BASELINE_MODEL"
 
 echo "Activating environment: $VENV_PATH"
 
@@ -39,7 +37,6 @@ else
 fi
 
 export PYTHONNOUSERSITE=1
-export BASELINE_MODEL
 
 which python
 which pip
@@ -47,8 +44,12 @@ which pip
 python3 --version
 nvidia-smi || true
 
-python -c "import sys; print('Python usato:', sys.executable)"
-python -c "import torch; print('torch version:', torch.__version__)"
+echo "Python usato:"
+which python
+python -c "import sys; print(sys.executable)"
+
+echo "Torch test:"
+python -c "import torch; print(torch.__version__)"
 
 python3 "$ENTRYPOINT"
 

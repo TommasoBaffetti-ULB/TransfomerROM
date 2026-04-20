@@ -1,0 +1,39 @@
+[Sun Apr 19 04:51:27 PM CEST 2026] Job started on ly-w102
+SLURM_JOB_ID=792630
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Sun Apr 19 16:51:27 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   38C    P8             24W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+[I 2026-04-19 17:07:50,344] Trial 0 finished with value: 0.16697610399207552 and parameters: {'lr': 0.0001025350969016849, 'weight_decay': 0.006351221010640704, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.09986820982818256, 'base_channels': 32, 'use_residual': True}. Best is trial 0 with value: 0.16697610399207552.
+[I 2026-04-19 17:25:11,908] Trial 1 finished with value: 2.5507728963284877 and parameters: {'lr': 6.144543785587468e-05, 'weight_decay': 2.9204338471814107e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 32, 'scheduler_power': 3, 'warmup_steps': 6, 'min_lr_ratio': 0.057859335863128095, 'base_channels': 16, 'use_residual': False}. Best is trial 0 with value: 0.16697610399207552.
+[I 2026-04-19 17:48:23,759] Trial 2 finished with value: 8.151226698385702 and parameters: {'lr': 4.993895014755656e-05, 'weight_decay': 0.0004467752817973908, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 0, 'min_lr_ratio': 0.16941186207399953, 'base_channels': 48, 'use_residual': False}. Best is trial 0 with value: 0.16697610399207552.
+[I 2026-04-19 18:06:11,156] Trial 3 finished with value: 0.21833350924221245 and parameters: {'lr': 2.4007683448156354e-05, 'weight_decay': 0.0016172900811143157, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 8, 'scheduler_power': 1, 'warmup_steps': 18, 'min_lr_ratio': 0.3154160821455034, 'base_channels': 16, 'use_residual': True}. Best is trial 0 with value: 0.16697610399207552.
+[I 2026-04-19 18:24:50,332] Trial 4 finished with value: 0.22271511820522513 and parameters: {'lr': 0.0024806219351771013, 'weight_decay': 7.742116473996259e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 6, 'min_lr_ratio': 0.25919963867070434, 'base_channels': 16, 'use_residual': True}. Best is trial 0 with value: 0.16697610399207552.
+[I 2026-04-19 18:43:38,456] Trial 5 finished with value: 0.18835717326885945 and parameters: {'lr': 6.0538336093556843e-05, 'weight_decay': 4.414536876494481e-06, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 4, 'min_lr_ratio': 0.2192828164268656, 'base_channels': 32, 'use_residual': True}. Best is trial 0 with value: 0.16697610399207552.
