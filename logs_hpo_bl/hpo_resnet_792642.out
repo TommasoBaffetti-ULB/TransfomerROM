@@ -1,0 +1,67 @@
+[Sun Apr 19 04:56:01 PM CEST 2026] Job started on ly-w113
+SLURM_JOB_ID=792642
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Sun Apr 19 16:56:01 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   39C    P8             26W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+[W 2026-04-19 16:56:55,592] Trial 0 failed with parameters: {'lr': 0.0001025350969016849, 'weight_decay': 0.006351221010640704, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.09986820982818256, 'hidden_channels': 64, 'n_blocks': 7, 'use_residual': False} because of the following error: OutOfMemoryError('CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 47.38 GiB of which 14.56 MiB is free. Including non-PyTorch memory, this process has 47.34 GiB memory in use. Of the allocated memory 46.08 GiB is allocated by PyTorch, and 797.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)').
+Traceback (most recent call last):
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 344, in <lambda>
+    lambda trial: objective(
+                  ^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 216, in objective
+    pred_seq = model(x_t, horizon=x_seq.shape[1])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 324, in forward
+    x = self._forward_one_step(x)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 303, in _forward_one_step
+    x = block(x)
+        ^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 38, in forward
+    return self.act(x + self.block(x))
+                    ~~^~~~~~~~~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 47.38 GiB of which 14.56 MiB is free. Including non-PyTorch memory, this process has 47.34 GiB memory in use. Of the allocated memory 46.08 GiB is allocated by PyTorch, and 797.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[W 2026-04-19 16:56:55,610] Trial 0 failed with value None.

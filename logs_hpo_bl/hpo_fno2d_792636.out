@@ -1,0 +1,50 @@
+[Sun Apr 19 04:53:42 PM CEST 2026] Job started on ly-w110
+SLURM_JOB_ID=792636
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Sun Apr 19 16:53:42 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   40C    P8             27W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+[W 2026-04-19 16:54:46,360] Trial 0 failed with parameters: {'lr': 0.0001025350969016849, 'weight_decay': 0.006351221010640704, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.09986820982818256, 'modes1': 12, 'modes2': 8, 'width': 24, 'n_layers': 2, 'use_residual': True} because of the following error: RuntimeError('"foreach_binary_op_scalar_cuda_" not implemented for \'ComplexFloat\'').
+Traceback (most recent call last):
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 344, in <lambda>
+    lambda trial: objective(
+                  ^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 220, in objective
+    torch.nn.utils.clip_grad_value_(model.parameters(), hp["gradient_clip"])
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 30, in _no_grad_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 181, in clip_grad_value_
+    torch._foreach_clamp_min_(cast(List[Tensor], grads), -clip_value)
+RuntimeError: "foreach_binary_op_scalar_cuda_" not implemented for 'ComplexFloat'
+[W 2026-04-19 16:54:46,384] Trial 0 failed with value None.

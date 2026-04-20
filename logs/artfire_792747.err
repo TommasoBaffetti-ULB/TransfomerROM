@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/main.py", line 509, in <module>
+    main()
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/main.py", line 130, in main
+    model_config["CAE"]["spatial_conv_config"],
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'spatial_conv_config'

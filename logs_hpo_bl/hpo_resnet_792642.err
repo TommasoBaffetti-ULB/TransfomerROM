@@ -1,0 +1,49 @@
+/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/_experimental.py:33: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-04-19 16:56:37,600] A new study created in RDB with name: baseline_hpo_resnet
+  0%|          | 0/100 [00:00<?, ?it/s]                                         0%|          | 0/100 [00:17<?, ?it/s]                                         0%|          | 0/100 [00:17<?, ?it/s]  0%|          | 0/100 [00:18<?, ?it/s]
+Traceback (most recent call last):
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 385, in <module>
+    run_hpo(
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 343, in run_hpo
+    study.optimize(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 68, in _optimize
+    _optimize_sequential(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 165, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 263, in _run_trial
+    raise func_err
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 344, in <lambda>
+    lambda trial: objective(
+                  ^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 216, in objective
+    pred_seq = model(x_t, horizon=x_seq.shape[1])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 324, in forward
+    x = self._forward_one_step(x)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 303, in _forward_one_step
+    x = block(x)
+        ^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 38, in forward
+    return self.act(x + self.block(x))
+                    ~~^~~~~~~~~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 47.38 GiB of which 14.56 MiB is free. Including non-PyTorch memory, this process has 47.34 GiB memory in use. Of the allocated memory 46.08 GiB is allocated by PyTorch, and 797.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

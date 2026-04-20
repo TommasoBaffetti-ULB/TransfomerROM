@@ -1,0 +1,56 @@
+  0%|          | 0/60 [00:00<?, ?it/s]  0%|          | 0/60 [00:03<?, ?it/s]
+Traceback (most recent call last):
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_main.py", line 211, in <module>
+    main()
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_main.py", line 201, in main
+    train_results = trainer.learn(num_epochs=baseline_train_cfg["n_epochs"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Training/BaselineTrainer.py", line 89, in learn
+    train_loss = self.train_one_epoch()
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Training/BaselineTrainer.py", line 47, in train_one_epoch
+    pred_seq = self.model(x_t, horizon=horizon)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 324, in forward
+    x = self._forward_one_step(x)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 303, in _forward_one_step
+    x = block(x)
+        ^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Models/Baselines.py", line 38, in forward
+    return self.act(x + self.block(x))
+                        ^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/functional.py", line 2812, in batch_norm
+    return torch.batch_norm(
+           ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 47.38 GiB of which 52.56 MiB is free. Including non-PyTorch memory, this process has 47.31 GiB memory in use. Of the allocated memory 46.05 GiB is allocated by PyTorch, and 796.89 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

@@ -1,0 +1,18 @@
+  0%|          | 0/60 [00:00<?, ?it/s]  0%|          | 0/60 [00:04<?, ?it/s]
+Traceback (most recent call last):
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_main.py", line 211, in <module>
+    main()
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_main.py", line 201, in main
+    train_results = trainer.learn(num_epochs=baseline_train_cfg["n_epochs"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Training/BaselineTrainer.py", line 89, in learn
+    train_loss = self.train_one_epoch()
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/ArtFire/DL/Training/BaselineTrainer.py", line 52, in train_one_epoch
+    torch.nn.utils.clip_grad_value_(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 30, in _no_grad_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/nn/utils/clip_grad.py", line 181, in clip_grad_value_
+    torch._foreach_clamp_min_(cast(List[Tensor], grads), -clip_value)
+RuntimeError: "foreach_binary_op_scalar_cuda_" not implemented for 'ComplexFloat'
