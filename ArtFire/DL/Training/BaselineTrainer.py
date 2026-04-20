@@ -18,6 +18,7 @@ class BaselineTrainer:
         scheduler: torch.optim.lr_scheduler.LRScheduler | None = None,
         device: torch.device | str = "cuda",
         gradient_clip: float = 3.0,
+        micro_batch_size: int | None = None,
         best_model_path: str | Path = "best_baseline.pt",
     ) -> None:
         self.model = model
@@ -29,7 +30,24 @@ class BaselineTrainer:
         self.scheduler = scheduler
         self.device = torch.device(device if torch.cuda.is_available() else "cpu")
         self.gradient_clip = gradient_clip
+        self.micro_batch_size = micro_batch_size
         self.best_model_path = Path(best_model_path)
+
+    def _clip_gradients(self) -> None:
+        if self.gradient_clip <= 0:
+            return
+
+        params = [p for p in self.model.parameters() if p.grad is not None]
+        if not params:
+            return
+
+        real_params = [p for p in params if not torch.is_complex(p.grad)]
+        complex_params = [p for p in params if torch.is_complex(p.grad)]
+
+        if real_params:
+            torch.nn.utils.clip_grad_value_(real_params, self.gradient_clip)
+        if complex_params:
+            torch.nn.utils.clip_grad_norm_(complex_params, max_norm=self.gradient_clip)
 
     def train_one_epoch(self) -> Dict[str, float]:
         self.model.train()
@@ -43,18 +61,25 @@ class BaselineTrainer:
             batch_size = x_t.size(0)
             horizon = x_seq.shape[1]
 
+            micro_batch_size = self.micro_batch_size or batch_size
             self.optimizer.zero_grad()
-            pred_seq = self.model(x_t, horizon=horizon)
-            loss = self.criterion(pred_seq, x_seq)
 
-            loss.backward()
-            if self.gradient_clip > 0:
-                torch.nn.utils.clip_grad_value_(
-                    self.model.parameters(), self.gradient_clip
-                )
+            batch_loss = 0.0
+            for start in range(0, batch_size, micro_batch_size):
+                end = min(start + micro_batch_size, batch_size)
+                x_t_mb = x_t[start:end]
+                x_seq_mb = x_seq[start:end]
+                mb_size = x_t_mb.size(0)
+
+                pred_seq = self.model(x_t_mb, horizon=horizon)
+                loss_mb = self.criterion(pred_seq, x_seq_mb)
+                (loss_mb * (mb_size / batch_size)).backward()
+                batch_loss += loss_mb.item() * mb_size
+
+            self._clip_gradients()
             self.optimizer.step()
 
-            total_loss += loss.item() * batch_size
+            total_loss += batch_loss
             total_samples += batch_size
 
         return {"training epoch loss": total_loss / max(total_samples, 1)}
