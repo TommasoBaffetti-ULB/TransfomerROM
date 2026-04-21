@@ -1,0 +1,44 @@
+/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/_experimental.py:33: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
+  optuna_warn(
+[I 2026-04-20 18:01:39,764] Using an existing study with name 'baseline_hpo_unet' instead of creating a new one.
+  0%|          | 0/100 [00:00<?, ?it/s]                                         0%|          | 0/100 [00:00<?, ?it/s]                                         0%|          | 0/100 [00:00<?, ?it/s]  0%|          | 0/100 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 401, in <module>
+    run_hpo(
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 359, in run_hpo
+    study.optimize(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 68, in _optimize
+    _optimize_sequential(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 165, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 263, in _run_trial
+    raise func_err
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 206, in _run_trial
+    value_or_values = func(trial)
+                      ^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 360, in <lambda>
+    lambda trial: objective(
+                  ^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 172, in objective
+    hp = _suggest_hparams(trial, model_name)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 77, in _suggest_hparams
+    "batch_size": trial.suggest_categorical("batch_size", [1, 2, 4, 8]),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/trial/_trial.py", line 414, in suggest_categorical
+    return self._suggest(name, CategoricalDistribution(choices=choices))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/trial/_trial.py", line 649, in _suggest
+    storage.set_trial_param(trial_id, name, param_value_in_internal_repr, distribution)
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/storages/_cached_storage.py", line 167, in set_trial_param
+    self._backend._set_trial_param(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/storages/_rdb/storage.py", line 597, in _set_trial_param
+    self._set_trial_param_without_commit(
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/storages/_rdb/storage.py", line 632, in _set_trial_param_without_commit
+    distributions.check_distribution_compatibility(previous_distribution, distribution)
+  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/distributions.py", line 656, in check_distribution_compatibility
+    raise ValueError(
+ValueError: CategoricalDistribution does not support dynamic value space.
