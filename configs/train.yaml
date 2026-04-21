@@ -60,7 +60,7 @@ Baseline:
   weight_decay: 1.0e-4
   optimizer: adamw
   use_lookahead: false
-  n_epochs: 60
+  n_epochs: 4
   gradient_clip: 1
   micro_batch_size: 2
   saving_folder: training_Baseline
