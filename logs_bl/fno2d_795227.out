@@ -1,0 +1,42 @@
+[Tue Apr 21 03:02:11 PM CEST 2026] Job started on ly-w110
+SLURM_JOB_ID=795227
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_main.py
+BASELINE_MODEL=fno2d
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Tue Apr 21 15:02:11 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   50C    P0             75W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato: /globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+torch version: 2.5.0+cu124
+
+Epoch 001 | train loss: 1.634835 | val loss: 1.322482
+
+Epoch 002 | train loss: 0.520604 | val loss: 0.091006
+
+Epoch 003 | train loss: 0.070611 | val loss: 0.068001
+
+Epoch 004 | train loss: 0.047304 | val loss: 0.037347
+Test loss: 0.037153
+Completed baseline training for model: fno2d
+[Tue Apr 21 03:16:27 PM CEST 2026] Job finished

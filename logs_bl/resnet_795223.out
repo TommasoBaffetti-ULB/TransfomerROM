@@ -1,0 +1,42 @@
+[Tue Apr 21 02:21:47 PM CEST 2026] Job started on ly-w110
+SLURM_JOB_ID=795223
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_main.py
+BASELINE_MODEL=resnet
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Tue Apr 21 14:21:47 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 43%   65C    P0             81W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato: /globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+torch version: 2.5.0+cu124
+
+Epoch 001 | train loss: 96.792384 | val loss: 34.160888
+
+Epoch 002 | train loss: 7.867665 | val loss: 6.091785
+
+Epoch 003 | train loss: 2.326761 | val loss: 3.898332
+
+Epoch 004 | train loss: 1.195966 | val loss: 1.518322
+Test loss: 1.514974
+Completed baseline training for model: resnet
+[Tue Apr 21 02:35:24 PM CEST 2026] Job finished
