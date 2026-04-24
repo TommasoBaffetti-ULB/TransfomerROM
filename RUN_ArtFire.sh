@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=AF_CAE_%j
-#SBATCH --output=logs/artfire_CAE_%j.out
-#SBATCH --error=logs/artfire_CAE_%j.err
+#SBATCH --job-name=af_CAEst_%j
+#SBATCH --output=logs/af_CAEst_%j.out
+#SBATCH --error=logs/af_CAEst_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
@@ -9,7 +9,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=128G
-#SBATCH --time=00:40:00
+#SBATCH --time=20:00:00
 
 set -euo pipefail
 
@@ -17,7 +17,7 @@ set -euo pipefail
 PYTHON_MODULE="${PYTHON_MODULE:-Python/3.11.3-GCCcore-12.3.0}"
 VENV_PATH="${VENV_PATH:-/globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate}"
 PROJECT_DIR="${PROJECT_DIR:-$SLURM_SUBMIT_DIR}"
-ENTRYPOINT="${ENTRYPOINT:-CAE_main.py}"
+ENTRYPOINT="${ENTRYPOINT:-CAEst_main.py}"
 
 mkdir -p "$PROJECT_DIR/logs"
 cd "$PROJECT_DIR"

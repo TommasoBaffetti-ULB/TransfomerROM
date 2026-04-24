@@ -489,7 +489,7 @@ def run_hpo(
     for k, v in study.best_params.items():
         print(f"  {k:22s}: {v}")
 
-    output_path = Path("hpo_best_params.yaml")
+    output_path = Path("CAE_hpo_best_params.yaml")
     _save_best_params(study.best_params, output_path)
     print(f"\nBest params saved to: {output_path}")
 

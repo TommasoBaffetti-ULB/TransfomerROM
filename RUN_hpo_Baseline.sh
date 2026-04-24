@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=hpo_bl_fno3d_%j
-#SBATCH --output=logs_hpo_bl/hpo_fno3d_%j.out
-#SBATCH --error=logs_hpo_bl/hpo_fno3d_%j.err
+#SBATCH --job-name=hpo_bl_fno2d_%j
+#SBATCH --output=logs_hpo_bl/hpo_fno2d_%j.out
+#SBATCH --error=logs_hpo_bl/hpo_fno2d_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
@@ -9,7 +9,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=128G
-#SBATCH --time=5:00:00
+#SBATCH --time=1-20:00:00
 
 set -euo pipefail
 
@@ -51,6 +51,6 @@ python -c "import sys; print(sys.executable)"
 echo "Torch test:"
 python -c "import torch; print(torch.__version__)"
 
-python3 "$ENTRYPOINT" --baseline-model fno3d --n-trials 100 --hpo-epochs 25 --storage sqlite:///hpo.db
+python3 "$ENTRYPOINT" --baseline-model fno2d --n-trials 30 --hpo-epochs 22 --storage sqlite:///hpo.db
 
 echo "[$(date)] Job finished"

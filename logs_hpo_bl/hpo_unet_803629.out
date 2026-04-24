@@ -1,0 +1,37 @@
+[Fri Apr 24 07:05:56 AM CEST 2026] Job started on ly-w113
+SLURM_JOB_ID=803629
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Fri Apr 24 07:05:56 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 35%   60C    P0            130W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+[I 2026-04-24 08:06:40,203] Trial 20 finished with value: 0.007639842480421067 and parameters: {'lr': 0.00029202978449399274, 'weight_decay': 0.00035393789583866185, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 4, 'scheduler_power': 3, 'warmup_steps': 3, 'min_lr_ratio': 0.15969973960292017, 'base_channels': 48, 'use_residual': True}. Best is trial 10 with value: 0.0009712135661519259.
+[I 2026-04-24 09:20:57,642] Trial 21 finished with value: 0.00792677485811952 and parameters: {'lr': 0.0027748194240833435, 'weight_decay': 0.001627365928314637, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 2, 'scheduler_power': 3, 'warmup_steps': 12, 'min_lr_ratio': 0.01891085474099141, 'base_channels': 32, 'use_residual': True}. Best is trial 10 with value: 0.0009712135661519259.
+[I 2026-04-24 09:40:35,723] Trial 22 pruned. 
+[I 2026-04-24 09:55:20,193] Trial 23 pruned. 

@@ -45,6 +45,7 @@ _N_TRIALS_DEFAULT = 50
 _HPO_EPOCHS_DEFAULT = 20
 _N_STARTUP_TRIALS = 10
 _PRUNER_WARMUP = 5
+_SEARCH_SPACE_VERSION = "v2"
 
 
 VALID_MODELS = {"unet", "resnet", "fno2d", "fno3d"}
@@ -302,7 +303,7 @@ def run_hpo(
     baseline_model: str,
     n_trials: int = _N_TRIALS_DEFAULT,
     hpo_epochs: int = _HPO_EPOCHS_DEFAULT,
-    study_name: str = "baseline_hpo",
+    study_name: str = f"baseline_hpo_{_SEARCH_SPACE_VERSION}",
     storage: Optional[str] = None,
     device: Optional[str] = None,
 ) -> optuna.Study:
@@ -393,7 +394,16 @@ if __name__ == "__main__":
     )
     parser.add_argument("--n-trials", type=int, default=_N_TRIALS_DEFAULT)
     parser.add_argument("--hpo-epochs", type=int, default=_HPO_EPOCHS_DEFAULT)
-    parser.add_argument("--study-name", type=str, default="baseline_hpo")
+    parser.add_argument(
+        "--study-name",
+        type=str,
+        default=f"baseline_hpo_{_SEARCH_SPACE_VERSION}",
+        help=(
+            "Base study name. "
+            "Bump this when the Optuna search space changes to avoid incompatibility "
+            "with older studies stored in the same database."
+        ),
+    )
     parser.add_argument("--storage", type=str, default=None)
     parser.add_argument("--device", type=str, default=None, choices=["cuda", "cpu"])
 

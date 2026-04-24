@@ -1,0 +1,82 @@
+[Tue Apr 21 04:41:17 PM CEST 2026] Job started on ly-w110
+SLURM_JOB_ID=795304
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=CAE_main.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Tue Apr 21 16:41:17 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   45C    P8             28W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+
+     █████╗ ██████╗ ████████╗███████╗██╗██████╗ ███████╗
+    ██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██║██╔══██╗██╔════╝
+    ███████║██████╔╝   ██║   █████╗  ██║██████╔╝█████╗
+    ██╔══██║██╔══██╗   ██║   ██╔══╝  ██║██╔══██╗██╔══╝
+    ██║  ██║██║  ██║   ██║   ██║     ██║██║  ██║███████╗
+    ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝
+
+     ████████╗██████╗  █████╗ ███╗   ██╗███████╗███████╗ ██████╗ ██████╗ ███╗   ███╗███████╗██████╗
+     ╚══██╔══╝██╔══██╗██╔══██╗████╗  ██║██╔════╝██╔════╝██╔═══██╗██╔══██╗████╗ ████║██╔════╝██╔══██╗
+        ██║   ██████╔╝███████║██╔██╗ ██║███████╗█████╗  ██║   ██║██████╔╝██╔████╔██║█████╗  ██████╔╝
+        ██║   ██╔══██╗██╔══██║██║╚██╗██║╚════██║██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██╔══╝  ██╔══██╗
+        ██║   ██║  ██║██║  ██║██║ ╚████║███████║██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║  ██║
+        ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
+
+                                   A R T F I R E   T R A N S F O R M E R
+    
+cuda available
+
+Loading config...
+
+
+Loading CAE data...
+
+
+Initializing CAE model...
+
+
+Setting up optimizer and scheduler...
+
+
+Setting up the CAE Trainer...
+
+
+learning for 4 epochs
+
+
+ Epoch 001 | train loss: 0.975077 | val loss: 0.268664
+
+ Epoch 002 | train loss: 0.096914 | val loss: 0.058906
+
+ Epoch 003 | train loss: 0.093478 | val loss: 0.049808
+
+ Epoch 004 | train loss: 0.044886 | val loss: 0.040598
+
+Evaluating CAE model...
+
+Test loss: 0.040397
+[Tue Apr 21 04:42:22 PM CEST 2026] Job finished

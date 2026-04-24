@@ -228,7 +228,7 @@ def main(verbose=False):
         scheduler,
         cae_warmup_scheduler,
     )
-
+    """
     return
 
 def other(CAEmodel, verbose=False):
@@ -247,7 +247,7 @@ def other(CAEmodel, verbose=False):
     cae_config = data_config["CAE"]
     data_path = cae_config["data_path"]
     cae_data_split = cae_config["split"]
-
+    """
     print("\nSetting up Transformer forecaster data...\n")
     trans_data_config = data_config["Transformer"]
     full_cae_dataset = CAEDataset(

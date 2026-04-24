@@ -55,8 +55,8 @@ CAE:
     dim: 2
     paddings: 0
     strides: 2
-    normalization: ~
-    activation: silu
+    normalization: null
+    activation: elu
 
 Baseline:
   model_name: fno2d

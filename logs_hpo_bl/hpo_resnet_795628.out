@@ -1,0 +1,55 @@
+[Wed Apr 22 08:53:17 AM CEST 2026] Job started on ly-w115
+SLURM_JOB_ID=795628
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Wed Apr 22 08:53:17 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   37C    P8             28W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+[I 2026-04-22 10:06:30,907] Trial 0 finished with value: 1.9875064392347594 and parameters: {'lr': 0.0001025350969016849, 'weight_decay': 0.006351221010640704, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 2, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.1590786990501735, 'hidden_channels': 16, 'n_blocks': 5, 'use_residual': False}. Best is trial 0 with value: 1.9875064392347594.
+[I 2026-04-22 11:25:18,022] Trial 1 finished with value: 0.27701901922354827 and parameters: {'lr': 9.745399020374078e-05, 'weight_decay': 6.672367170464208e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 2, 'scheduler_power': 1, 'warmup_steps': 14, 'min_lr_ratio': 0.22567472193240465, 'hidden_channels': 32, 'n_blocks': 6, 'use_residual': False}. Best is trial 1 with value: 0.27701901922354827.
+[I 2026-04-22 12:25:55,484] Trial 2 finished with value: 0.38825360311044227 and parameters: {'lr': 6.939031266619747e-05, 'weight_decay': 0.00012030178871154674, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 8, 'scheduler_power': 2, 'warmup_steps': 5, 'min_lr_ratio': 0.4160813794844454, 'hidden_channels': 64, 'n_blocks': 2, 'use_residual': True}. Best is trial 1 with value: 0.27701901922354827.
+[I 2026-04-22 13:45:37,463] Trial 3 finished with value: 0.01564854746432723 and parameters: {'lr': 0.004608697883952073, 'weight_decay': 0.001227380098785297, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 2, 'scheduler_power': 1, 'warmup_steps': 6, 'min_lr_ratio': 0.16933982779310605, 'hidden_channels': 64, 'n_blocks': 4, 'use_residual': False}. Best is trial 3 with value: 0.01564854746432723.
+[I 2026-04-22 14:55:49,265] Trial 4 finished with value: 0.026436245693145573 and parameters: {'lr': 0.0011306704080979888, 'weight_decay': 0.0001758364027000851, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 4, 'scheduler_power': 2, 'warmup_steps': 15, 'min_lr_ratio': 0.122111101090895, 'hidden_channels': 32, 'n_blocks': 6, 'use_residual': True}. Best is trial 3 with value: 0.01564854746432723.
+[I 2026-04-22 15:59:17,746] Trial 5 finished with value: 0.7524628639221191 and parameters: {'lr': 0.0022492927989859177, 'weight_decay': 0.0016394127471631608, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': -1.0, 'batch_size': 4, 'scheduler_power': 2, 'warmup_steps': 8, 'min_lr_ratio': 0.11883282713065782, 'hidden_channels': 64, 'n_blocks': 3, 'use_residual': False}. Best is trial 3 with value: 0.01564854746432723.
+[I 2026-04-22 17:00:33,877] Trial 6 finished with value: 0.029149702453130002 and parameters: {'lr': 9.581320979450773e-05, 'weight_decay': 0.007711312991331112, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 4, 'scheduler_power': 1, 'warmup_steps': 10, 'min_lr_ratio': 0.4929687225141943, 'hidden_channels': 64, 'n_blocks': 3, 'use_residual': True}. Best is trial 3 with value: 0.01564854746432723.
+[I 2026-04-22 17:55:58,691] Trial 7 finished with value: 0.10088944962701282 and parameters: {'lr': 0.0005088320637823439, 'weight_decay': 0.0003420730367009227, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 8, 'scheduler_power': 1, 'warmup_steps': 14, 'min_lr_ratio': 0.19950031968726334, 'hidden_channels': 16, 'n_blocks': 2, 'use_residual': True}. Best is trial 3 with value: 0.01564854746432723.
+[I 2026-04-22 18:55:33,869] Trial 8 finished with value: 2.080313749571104 and parameters: {'lr': 4.967944278666239e-05, 'weight_decay': 0.00043645169468077945, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 8, 'scheduler_power': 3, 'warmup_steps': 16, 'min_lr_ratio': 0.324595506615601, 'hidden_channels': 64, 'n_blocks': 5, 'use_residual': False}. Best is trial 3 with value: 0.01564854746432723.
+[I 2026-04-22 19:49:29,378] Trial 9 finished with value: 0.013193379272077534 and parameters: {'lr': 0.000617691140953651, 'weight_decay': 1.0477226564098284e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 4, 'scheduler_power': 2, 'warmup_steps': 1, 'min_lr_ratio': 0.19018074349912242, 'hidden_channels': 64, 'n_blocks': 3, 'use_residual': True}. Best is trial 9 with value: 0.013193379272077534.
+[I 2026-04-22 20:44:33,336] Trial 10 finished with value: 0.009017658621274136 and parameters: {'lr': 0.002655879015325616, 'weight_decay': 1.3566155551847202e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 4, 'scheduler_power': 2, 'warmup_steps': 5, 'min_lr_ratio': 0.11983353892841639, 'hidden_channels': 64, 'n_blocks': 2, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
+[I 2026-04-22 21:42:28,355] Trial 11 finished with value: 0.012534963707062039 and parameters: {'lr': 0.0008278748140605213, 'weight_decay': 1.6458336744008225e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 4, 'scheduler_power': 2, 'warmup_steps': 1, 'min_lr_ratio': 0.25551267823868545, 'hidden_channels': 64, 'n_blocks': 2, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
+[I 2026-04-22 22:41:19,795] Trial 12 finished with value: 0.04103087996308868 and parameters: {'lr': 0.00159885949084448, 'weight_decay': 0.00010842590794017982, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 4, 'scheduler_power': 3, 'warmup_steps': 5, 'min_lr_ratio': 0.01171990035705707, 'hidden_channels': 16, 'n_blocks': 2, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
+[I 2026-04-22 23:32:13,296] Trial 13 finished with value: 0.009496484304199347 and parameters: {'lr': 0.001480741011122263, 'weight_decay': 1.1050886097739642e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 4, 'scheduler_power': 3, 'warmup_steps': 19, 'min_lr_ratio': 0.14709482938789453, 'hidden_channels': 64, 'n_blocks': 2, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
+[I 2026-04-23 00:27:37,786] Trial 14 finished with value: 0.01074996652031267 and parameters: {'lr': 0.0043483481152430505, 'weight_decay': 4.621137468205714e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 4, 'scheduler_power': 3, 'warmup_steps': 20, 'min_lr_ratio': 0.21979198149445625, 'hidden_channels': 64, 'n_blocks': 2, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
+[I 2026-04-23 00:41:23,895] Trial 15 pruned. 
+[I 2026-04-23 01:50:37,268] Trial 16 finished with value: 0.016723606890898097 and parameters: {'lr': 0.0018328597713096655, 'weight_decay': 1.4588836362332175e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 1, 'scheduler_power': 3, 'warmup_steps': 14, 'min_lr_ratio': 0.1723208352857801, 'hidden_channels': 32, 'n_blocks': 3, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
+[I 2026-04-23 02:04:54,674] Trial 17 pruned. 
+[I 2026-04-23 02:18:55,702] Trial 18 pruned. 
+[I 2026-04-23 03:20:12,196] Trial 19 finished with value: 0.011107795010950114 and parameters: {'lr': 0.0045663308419541995, 'weight_decay': 4.177214311283852e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 4, 'scheduler_power': 1, 'warmup_steps': 12, 'min_lr_ratio': 0.028176884883908876, 'hidden_channels': 64, 'n_blocks': 2, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
+[I 2026-04-23 03:40:57,728] Trial 20 pruned. 
+[I 2026-04-23 04:34:34,082] Trial 21 finished with value: 0.01614093434166264 and parameters: {'lr': 0.003791078350666792, 'weight_decay': 1.4819786790166698e-06, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 2, 'scheduler_power': 3, 'warmup_steps': 20, 'min_lr_ratio': 0.14760628694078357, 'hidden_channels': 64, 'n_blocks': 2, 'use_residual': True}. Best is trial 10 with value: 0.009017658621274136.
