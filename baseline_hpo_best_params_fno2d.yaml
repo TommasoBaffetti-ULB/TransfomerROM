@@ -1,0 +1,37 @@
+baseline_model: fno2d
+best_value: 0.00015876048139919452
+params:
+  lr: 0.0004007621756120142
+  weight_decay: 8.241904603704708e-05
+  optimizer: adamw
+  use_lookahead: true
+  gradient_clip: 5.0
+  batch_size: 1
+  scheduler_power: 1
+  warmup_steps: 2
+  min_lr_ratio: 0.4440895519392593
+  modes1: 20
+  modes2: 20
+  width: 64
+  n_layers: 4
+  use_residual: true
+suggested_config_patch:
+  model:
+    Baseline:
+      model_name: fno2d
+  train:
+    Baseline:
+      lr: 0.0004007621756120142
+      weight_decay: 8.241904603704708e-05
+      optimizer: adamw
+      use_lookahead: true
+      gradient_clip: 5.0
+      scheduler:
+        power: 1
+        warmup_steps: 2
+        warmup_type: linear
+        min_lr: 0.00017797429500174215
+        min_lr_warmup: 1.7797429500174215e-05
+  data:
+    Baseline:
+      train_batch_size: 1

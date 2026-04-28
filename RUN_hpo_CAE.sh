@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=hpo_%j
-#SBATCH --output=logs_hpo/hpo_%j.out
-#SBATCH --error=logs_hpo/hpo_%j.err
+#SBATCH --job-name=hpo_CAEst_%j
+#SBATCH --output=logs_hpo/hpo_CAEst_%j.out
+#SBATCH --error=logs_hpo/hpo_CAEst_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
@@ -17,7 +17,7 @@ set -euo pipefail
 PYTHON_MODULE="${PYTHON_MODULE:-Python/3.11.3-GCCcore-12.3.0}"
 VENV_PATH="${VENV_PATH:-/globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate}"
 PROJECT_DIR="${PROJECT_DIR:-$SLURM_SUBMIT_DIR}"
-ENTRYPOINT="${ENTRYPOINT:-CAE_hpo.py}"
+ENTRYPOINT="${ENTRYPOINT:-CAEst_hpo.py}"
 
 mkdir -p "$PROJECT_DIR/logs_hpo"
 cd "$PROJECT_DIR"

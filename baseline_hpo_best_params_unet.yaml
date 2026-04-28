@@ -1,34 +1,34 @@
 baseline_model: unet
-best_value: 3.0665694636267586
+best_value: 0.0009712135661519259
 params:
-  lr: 9.745399020374078e-05
-  weight_decay: 6.672367170464208e-05
+  lr: 0.003491096030337895
+  weight_decay: 0.0005724341889174792
   optimizer: adamw
   use_lookahead: false
-  gradient_clip: 1.0
-  batch_size: 2
-  scheduler_power: 1
-  warmup_steps: 14
-  min_lr_ratio: 0.22567472193240465
+  gradient_clip: 5.0
+  batch_size: 4
+  scheduler_power: 3
+  warmup_steps: 8
+  min_lr_ratio: 0.0464815219112705
   base_channels: 64
-  use_residual: false
+  use_residual: true
 suggested_config_patch:
   model:
     Baseline:
       model_name: unet
   train:
     Baseline:
-      lr: 9.745399020374078e-05
-      weight_decay: 6.672367170464208e-05
+      lr: 0.003491096030337895
+      weight_decay: 0.0005724341889174792
       optimizer: adamw
       use_lookahead: false
-      gradient_clip: 1.0
+      gradient_clip: 5.0
       scheduler:
-        power: 1
-        warmup_steps: 14
+        power: 3
+        warmup_steps: 8
         warmup_type: linear
-        min_lr: 2.199290214043249e-05
-        min_lr_warmup: 2.199290214043249e-06
+        min_lr: 0.00016227145662850033
+        min_lr_warmup: 1.6227145662850033e-05
   data:
     Baseline:
-      train_batch_size: 2
+      train_batch_size: 4

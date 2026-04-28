@@ -1,0 +1,96 @@
+[Sat Apr 25 02:49:54 AM CEST 2026] Job started on ly-w114
+SLURM_JOB_ID=804383
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=Baseline_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Sat Apr 25 02:49:54 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   54C    P3             93W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+[I 2026-04-25 03:39:11,862] Trial 48 finished with value: 0.0006423078810110235 and parameters: {'lr': 0.0005525856984935708, 'weight_decay': 5.081336786418775e-06, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.3658596088200576, 'modes1': 8, 'modes2': 10, 'modes3': 4, 'width': 32, 'n_layers': 6}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 04:21:08,063] Trial 49 finished with value: 0.0006167853295148627 and parameters: {'lr': 0.003595016822010744, 'weight_decay': 9.823588852650391e-06, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 4, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.15516554852905498, 'modes1': 6, 'modes2': 8, 'modes3': 8, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 04:34:29,748] Trial 50 pruned. 
+[I 2026-04-25 05:19:01,836] Trial 51 finished with value: 0.0004623806655463586 and parameters: {'lr': 0.0034962599652824107, 'weight_decay': 0.0008063290560730657, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 0, 'min_lr_ratio': 0.19603573499133695, 'modes1': 6, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 06:02:45,696] Trial 52 finished with value: 0.0003951122691678638 and parameters: {'lr': 0.0035213809148132214, 'weight_decay': 0.001437762460493242, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 2, 'min_lr_ratio': 0.10373135617226631, 'modes1': 6, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 4}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 06:47:57,170] Trial 53 finished with value: 0.0004390887394578926 and parameters: {'lr': 0.0019359586092087082, 'weight_decay': 4.93439292572008e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 3, 'min_lr_ratio': 0.3129097568477931, 'modes1': 10, 'modes2': 6, 'modes3': 4, 'width': 32, 'n_layers': 4}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 07:00:36,055] Trial 54 pruned. 
+[I 2026-04-25 07:43:32,714] Trial 55 finished with value: 0.0006772267567686031 and parameters: {'lr': 0.002165233896704607, 'weight_decay': 0.0007229885001721478, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 2, 'min_lr_ratio': 0.29623021161281904, 'modes1': 10, 'modes2': 6, 'modes3': 4, 'width': 20, 'n_layers': 3}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 08:31:37,748] Trial 56 finished with value: 0.0004896345821278472 and parameters: {'lr': 0.0023640235851672986, 'weight_decay': 1.1797349233797279e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 2, 'min_lr_ratio': 0.2806397782483194, 'modes1': 10, 'modes2': 6, 'modes3': 6, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 08:51:58,359] Trial 57 pruned. 
+[I 2026-04-25 09:14:53,638] Trial 58 pruned. 
+[I 2026-04-25 10:00:35,235] Trial 59 finished with value: 0.0004703080889649337 and parameters: {'lr': 0.001737454463950082, 'weight_decay': 6.230884545252398e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 0, 'min_lr_ratio': 0.2422151120372901, 'modes1': 10, 'modes2': 10, 'modes3': 4, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 10:13:37,544] Trial 60 pruned. 
+[I 2026-04-25 11:04:27,625] Trial 61 finished with value: 0.0005172670626937336 and parameters: {'lr': 0.0018934374330173403, 'weight_decay': 0.0006885981638790141, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 3, 'warmup_steps': 11, 'min_lr_ratio': 0.28266621494707095, 'modes1': 10, 'modes2': 8, 'modes3': 6, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 11:16:30,454] Trial 62 pruned. 
+[I 2026-04-25 11:26:44,830] Trial 63 pruned. 
+[I 2026-04-25 11:38:47,676] Trial 64 pruned. 
+[I 2026-04-25 11:51:06,378] Trial 65 pruned. 
+[I 2026-04-25 12:33:15,821] Trial 66 finished with value: 0.0005269301924665735 and parameters: {'lr': 0.004403532469419381, 'weight_decay': 0.00018277211719196283, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 1, 'min_lr_ratio': 0.18915154115810942, 'modes1': 6, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 2}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 13:15:57,084] Trial 67 finished with value: 0.0006159503928486359 and parameters: {'lr': 0.0023772713768383624, 'weight_decay': 0.00014042163570844715, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 2, 'min_lr_ratio': 0.19604799874572376, 'modes1': 10, 'modes2': 10, 'modes3': 8, 'width': 16, 'n_layers': 3}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 13:27:09,204] Trial 68 pruned. 
+[I 2026-04-25 13:38:08,990] Trial 69 pruned. 
+[I 2026-04-25 14:02:59,461] Trial 70 pruned. 
+[I 2026-04-25 14:15:30,534] Trial 71 pruned. 
+[I 2026-04-25 14:28:04,555] Trial 72 pruned. 
+[I 2026-04-25 14:42:19,912] Trial 73 pruned. 
+[I 2026-04-25 15:31:04,605] Trial 74 finished with value: 0.0005461489183928918 and parameters: {'lr': 0.002224916261344236, 'weight_decay': 0.00020207103077163989, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 0, 'min_lr_ratio': 0.2632501373728941, 'modes1': 6, 'modes2': 4, 'modes3': 10, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 15:58:16,723] Trial 75 pruned. 
+[I 2026-04-25 16:20:22,399] Trial 76 pruned. 
+[I 2026-04-25 17:08:51,343] Trial 77 finished with value: 0.00046614485869901504 and parameters: {'lr': 0.0012042996721278966, 'weight_decay': 0.00024029143258086133, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 0, 'min_lr_ratio': 0.1833005258730449, 'modes1': 10, 'modes2': 10, 'modes3': 4, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 17:57:00,952] Trial 78 finished with value: 0.000531693671537387 and parameters: {'lr': 0.004230173976976619, 'weight_decay': 1.6211775429540346e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 1, 'min_lr_ratio': 0.2730522348749755, 'modes1': 6, 'modes2': 4, 'modes3': 4, 'width': 32, 'n_layers': 5}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 18:14:01,725] Trial 79 pruned. 
+[I 2026-04-25 18:55:17,350] Trial 80 finished with value: 0.0004988070037782293 and parameters: {'lr': 0.0016642565464390158, 'weight_decay': 0.003885278011400354, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 4, 'scheduler_power': 1, 'warmup_steps': 2, 'min_lr_ratio': 0.20547314896349414, 'modes1': 8, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 4}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 19:34:35,157] Trial 81 pruned. 
+[I 2026-04-25 19:47:14,231] Trial 82 pruned. 
+[I 2026-04-25 20:04:13,585] Trial 83 pruned. 
+[I 2026-04-25 20:15:13,362] Trial 84 pruned. 
+[I 2026-04-25 21:02:08,820] Trial 85 finished with value: 0.0004001529694604058 and parameters: {'lr': 0.002378466026026784, 'weight_decay': 2.682229272292165e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 3.0, 'batch_size': 1, 'scheduler_power': 2, 'warmup_steps': 2, 'min_lr_ratio': 0.1452183376590036, 'modes1': 8, 'modes2': 10, 'modes3': 4, 'width': 32, 'n_layers': 4}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 21:15:48,670] Trial 86 pruned. 
+[I 2026-04-25 21:28:36,725] Trial 87 pruned. 
+[I 2026-04-25 21:40:49,671] Trial 88 pruned. 
+[I 2026-04-25 22:28:22,164] Trial 89 finished with value: 0.00036584167391993103 and parameters: {'lr': 0.0038706371470303095, 'weight_decay': 0.00022888832467838976, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 0, 'min_lr_ratio': 0.11307982324142718, 'modes1': 6, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 4}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 23:12:04,840] Trial 90 finished with value: 0.0003864912314629937 and parameters: {'lr': 0.0033991295535185243, 'weight_decay': 2.367027329129092e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 1, 'min_lr_ratio': 0.06617086783023379, 'modes1': 6, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 3}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-25 23:23:57,500] Trial 91 pruned. 
+[I 2026-04-26 00:07:03,800] Trial 92 finished with value: 0.00043588279324860587 and parameters: {'lr': 0.001335342338143523, 'weight_decay': 8.758418066251017e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 1, 'min_lr_ratio': 0.21771114713289855, 'modes1': 6, 'modes2': 6, 'modes3': 10, 'width': 32, 'n_layers': 3}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-26 00:42:59,038] Trial 93 pruned. 
+[I 2026-04-26 00:54:53,867] Trial 94 pruned. 
+[I 2026-04-26 01:05:44,382] Trial 95 pruned. 
+[I 2026-04-26 01:17:57,664] Trial 96 pruned. 
+[I 2026-04-26 01:37:19,469] Trial 97 pruned. 
+[I 2026-04-26 01:51:14,195] Trial 98 pruned. 
+[I 2026-04-26 02:01:43,842] Trial 99 pruned. 
+[I 2026-04-26 02:13:22,379] Trial 100 pruned. 
+[I 2026-04-26 02:57:54,957] Trial 101 finished with value: 0.00039256802513075337 and parameters: {'lr': 0.00224172976792541, 'weight_decay': 2.1020490880234415e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.05969671072878521, 'modes1': 6, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 3}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-26 03:43:30,317] Trial 102 finished with value: 0.0005107106506428052 and parameters: {'lr': 0.0007955385794168458, 'weight_decay': 2.1420922947676576e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 1, 'min_lr_ratio': 0.03221089237454698, 'modes1': 6, 'modes2': 10, 'modes3': 10, 'width': 32, 'n_layers': 3}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-26 03:54:22,634] Trial 103 pruned. 
+[I 2026-04-26 04:16:00,707] Trial 104 pruned. 
+[I 2026-04-26 05:08:33,441] Trial 105 finished with value: 0.0005369107286930336 and parameters: {'lr': 0.0008615510119760097, 'weight_decay': 1.2265825704361703e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': -1.0, 'batch_size': 1, 'scheduler_power': 1, 'warmup_steps': 3, 'min_lr_ratio': 0.21004582788739956, 'modes1': 6, 'modes2': 10, 'modes3': 8, 'width': 32, 'n_layers': 3}. Best is trial 21 with value: 0.00034304604219820197.
+[I 2026-04-26 05:19:26,034] Trial 106 pruned. 
+[I 2026-04-26 05:31:37,805] Trial 107 pruned. 
+Best params saved to: baseline_hpo_best_params_fno3d.yaml
+Best value (val MSE): 0.000343
+[Sun Apr 26 05:31:40 AM CEST 2026] Job finished

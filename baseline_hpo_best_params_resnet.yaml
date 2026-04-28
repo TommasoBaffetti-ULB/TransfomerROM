@@ -1,0 +1,35 @@
+baseline_model: resnet
+best_value: 0.00314340651211505
+params:
+  lr: 0.0025206584898946364
+  weight_decay: 5.177080533302475e-06
+  optimizer: adam
+  use_lookahead: false
+  gradient_clip: 1.0
+  batch_size: 2
+  scheduler_power: 3
+  warmup_steps: 11
+  min_lr_ratio: 0.24245055682945058
+  hidden_channels: 64
+  n_blocks: 2
+  use_residual: true
+suggested_config_patch:
+  model:
+    Baseline:
+      model_name: resnet
+  train:
+    Baseline:
+      lr: 0.0025206584898946364
+      weight_decay: 5.177080533302475e-06
+      optimizer: adam
+      use_lookahead: false
+      gradient_clip: 1.0
+      scheduler:
+        power: 3
+        warmup_steps: 11
+        warmup_type: linear
+        min_lr: 0.0006111350544518367
+        min_lr_warmup: 6.111350544518367e-05
+  data:
+    Baseline:
+      train_batch_size: 2

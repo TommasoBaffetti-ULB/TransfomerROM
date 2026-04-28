@@ -53,6 +53,12 @@ ArtFire:
     type: MSE
     lambda_t1: 0.5
     lambda_t2: 0.5
+    lambda_data: 0.5
+    lambda_mass: 0.5
+    phys_channel_start: 5
+    phys_channel_end: 13
+    phys_target_value: 1.0
+
 
 Baseline:
   device: cuda
