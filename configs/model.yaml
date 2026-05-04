@@ -71,15 +71,15 @@ Baseline:
     use_residual: true
   FNO2D:
     out_channels: null
-    modes1: 12
-    modes2: 12
-    width: 32
+    modes1: 20
+    modes2: 20
+    width: 64
     n_layers: 4
     use_residual: true
   FNO3D:
     out_channels: null
-    modes1: 8
-    modes2: 8
-    modes3: 8
-    width: 20
+    modes1: 10
+    modes2: 6
+    modes3: 4
+    width: 32
     n_layers: 4

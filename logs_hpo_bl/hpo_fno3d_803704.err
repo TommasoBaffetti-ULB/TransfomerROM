@@ -1,112 +1,0 @@
-/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/_experimental.py:33: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
-  optuna_warn(
-[I 2026-04-24 08:45:25,115] Using an existing study with name 'baseline_hpo_v2_fno3d' instead of creating a new one.
-  0%|          | 0/60 [00:00<?, ?it/s]/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
-  warnings.warn(
-/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
-  warnings.warn(
-                                        0%|          | 0/60 [17:42<?, ?it/s]Best trial: 21. Best value: 0.000343046:   0%|          | 0/60 [17:42<?, ?it/s]Best trial: 21. Best value: 0.000343046:   2%|▏         | 1/60 [17:42<17:24:38, 1062.35s/it]                                                                                            Best trial: 21. Best value: 0.000343046:   2%|▏         | 1/60 [35:45<17:24:38, 1062.35s/it]Best trial: 21. Best value: 0.000343046:   2%|▏         | 1/60 [35:45<17:24:38, 1062.35s/it]Best trial: 21. Best value: 0.000343046:   3%|▎         | 2/60 [35:45<17:18:35, 1074.40s/it]                                                                                            Best trial: 21. Best value: 0.000343046:   3%|▎         | 2/60 [1:30:45<17:18:35, 1074.40s/it]Best trial: 21. Best value: 0.000343046:   3%|▎         | 2/60 [1:30:45<17:18:35, 1074.40s/it]Best trial: 21. Best value: 0.000343046:   5%|▌         | 3/60 [1:30:45<33:06:22, 2090.93s/it]Best trial: 21. Best value: 0.000343046:   5%|▌         | 3/60 [2:03:49<39:12:42, 2476.54s/it]
-Traceback (most recent call last):
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-    self.dialect.do_execute(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: attempt to write a readonly database
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/storages/_rdb/storage.py", line 80, in _create_scoped_session
-    session.commit()
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
-    trans.commit(_to_root=True)
-  File "<string>", line 2, in commit
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
-    ret_value = fn(self, *arg, **kw)
-                ^^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
-    self._prepare_impl()
-  File "<string>", line 2, in _prepare_impl
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
-    ret_value = fn(self, *arg, **kw)
-                ^^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
-    self.session.flush()
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
-    self._flush(objects)
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
-    with util.safe_reraise():
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
-    flush_context.execute()
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
-    rec.execute(self)
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 85, in save_obj
-    _emit_update_statements(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 912, in _emit_update_statements
-    c = connection.execute(
-        ^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
-    return meth(
-           ^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
-    return connection._execute_clauseelement(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
-    ret = self._execute_context(
-          ^^^^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-    return self._exec_single_context(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-    self.dialect.do_execute(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) attempt to write a readonly database
-[SQL: UPDATE trials SET state=?, datetime_complete=? WHERE trials.trial_id = ?]
-[parameters: ('FAIL', '2026-04-24 10:49:14.660762', 345)]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 218, in _run_trial
-    updated_state, values, warning_message = _tell_with_warning(
-                                             ^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_tell.py", line 174, in _tell_with_warning
-    study._storage.set_trial_state_values(frozen_trial._trial_id, state, values)
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/storages/_cached_storage.py", line 194, in set_trial_state_values
-    return self._backend.set_trial_state_values(trial_id, state=state, values=values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/storages/_rdb/storage.py", line 657, in set_trial_state_values
-    with _create_scoped_session(self.scoped_session) as session:
-  File "/opt/sw/arch/easybuild/2023a/software/Python/3.11.3-GCCcore-12.3.0/lib/python3.11/contextlib.py", line 144, in __exit__
-    next(self.gen)
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/storages/_rdb/storage.py", line 98, in _create_scoped_session
-    raise optuna.exceptions.StorageInternalError(message) from e
-optuna.exceptions.StorageInternalError: An exception is raised during the commit. This typically happens due to invalid data in the commit, e.g. exceeding max length. 
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 411, in <module>
-    run_hpo(
-  File "/globalsc/users/b/a/baffetti/research/TransfomerROM/Baseline_hpo.py", line 360, in run_hpo
-    study.optimize(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/study.py", line 490, in optimize
-    _optimize(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 68, in _optimize
-    _optimize_sequential(
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 165, in _optimize_sequential
-    frozen_trial_id = _run_trial(study, func, catch)
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/globalsc/users/b/a/baffetti/envs/artfire_new/lib/python3.11/site-packages/optuna/study/_optimize.py", line 256, in _run_trial
-    assert False, "Should not reach."
-AssertionError: Should not reach.
