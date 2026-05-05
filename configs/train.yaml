@@ -53,26 +53,21 @@ ArtFire:
     type: MSE
     lambda_t1: 0.5
     lambda_t2: 0.5
-    lambda_data: 0.5
-    lambda_mass: 0.5
-    phys_channel_start: 5
-    phys_channel_end: 13
-    phys_target_value: 1.0
 
 
 Baseline:
   device: cuda
-  lr: 0.0004007621756120142
-  weight_decay: 8.241904603704708e-05
+  lr: 0.003491096030337895
+  weight_decay: 0.0005724341889174792
   optimizer: adamw
-  use_lookahead: true
+  use_lookahead: false
   n_epochs: 300
   gradient_clip: 5.0
   micro_batch_size: 2
   saving_folder: training_Baseline
   scheduler:
-    power: 1
-    min_lr: 0.00017797429500174215
-    min_lr_warmup: 1.7797429500174215e-05
-    warmup_steps: 2
+    power: 3
+    min_lr: 0.00016227145662850033
+    min_lr_warmup: 1.6227145662850033e-05
+    warmup_steps: 8
     warmup_type: linear

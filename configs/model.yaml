@@ -59,10 +59,10 @@ CAE:
     activation: elu
 
 Baseline:
-  model_name: fno2d
+  model_name: unet
   UNet:
     out_channels: null
-    base_channels: 32
+    base_channels: 64
     use_residual: true
   ResNet:
     out_channels: null

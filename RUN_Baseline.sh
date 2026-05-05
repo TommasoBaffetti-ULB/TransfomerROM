@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=fno2d_%j
-#SBATCH --output=logs_bl/fno2d_%j.out
-#SBATCH --error=logs_bl/fno2d_%j.err
+#SBATCH --job-name=unet_%j
+#SBATCH --output=logs_bl/unet_%j.out
+#SBATCH --error=logs_bl/unet_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
@@ -18,7 +18,7 @@ PYTHON_MODULE="${PYTHON_MODULE:-Python/3.11.3-GCCcore-12.3.0}"
 VENV_PATH="${VENV_PATH:-/globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate}"
 PROJECT_DIR="${PROJECT_DIR:-$SLURM_SUBMIT_DIR}"
 ENTRYPOINT="${ENTRYPOINT:-Baseline_main.py}"
-BASELINE_MODEL="${BASELINE_MODEL:-fno2d}"
+BASELINE_MODEL="${BASELINE_MODEL:-unet}"
 
 mkdir -p "$PROJECT_DIR/logs_bl"
 cd "$PROJECT_DIR"
