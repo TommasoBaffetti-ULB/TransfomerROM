@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=af_CAEst_%j
-#SBATCH --output=logs/af_CAEst_%j.out
-#SBATCH --error=logs/af_CAEst_%j.err
+#SBATCH --job-name=AF_CAEst_%j
+#SBATCH --output=logs/AF_CAEst_%j.out
+#SBATCH --error=logs/AF_CAEst_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
@@ -9,7 +9,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=100G
-#SBATCH --time=2:00:00
+#SBATCH --time=20:00:00
 
 set -euo pipefail
 

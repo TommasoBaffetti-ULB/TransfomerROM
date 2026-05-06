@@ -1,0 +1,62 @@
+model:
+  CAEst:
+    spatial_conv_config:
+      output_channels: 128
+      hidden_channels: []
+      dim: 2
+      paddings: 0
+      strides: 2
+      normalization: null
+      activation: silu
+    temporal_conv_config:
+      output_channels: 128
+      hidden_channels: []
+      dim: 2
+      paddings: 0
+      strides: 2
+      normalization: null
+      activation: silu
+    spatial_tconv_config:
+      input_channels: 128
+      output_channels: 13
+      hidden_channels: []
+      dim: 2
+      paddings: 0
+      output_paddings:
+      - !!python/tuple
+        - 1
+        - 1
+      strides: 2
+      normalization: null
+      activation: silu
+    temporal_tconv_config:
+      input_channels: 128
+      output_channels: 1
+      hidden_channels: []
+      dim: 2
+      paddings: 0
+      output_paddings:
+      - !!python/tuple
+        - 1
+        - 0
+      strides: 2
+      normalization: null
+      activation: silu
+    no_flatten_dim:
+    - 128
+    - 63
+    - 15
+training:
+  CAE:
+    lr: 0.009862490280798981
+    weight_decay: 3.386540833241391e-05
+    optimizer: adamw
+    use_lookahead: false
+    gradient_clip: 1.0
+    train_batch_size: 16
+    scheduler:
+      power: 2
+      warmup_steps: 17
+      warmup_type: linear
+      min_lr: 0.004824960313984368
+      min_lr_warmup: 0.0004824960313984368

@@ -1,17 +1,17 @@
 CAE:
   device: cuda
-  lr: 0.00828214765761879
-  weight_decay: 0.0011363161966523366
+  lr: 0.009862490280798981
+  weight_decay: 3.386540833241391e-05
   optimizer: adamw
   use_lookahead: false
-  n_epochs: 4
-  gradient_clip: -1.0
-  saving_folder: training_CAE
+  n_epochs: 60
+  gradient_clip: 1.0
+  saving_folder: training_CAEst
   scheduler:
     power: 2
-    min_lr: 0.0026702302964439926
-    min_lr_warmup: 0.00026702302964439926
-    warmup_steps: 13
+    min_lr: 0.004824960313984368
+    min_lr_warmup: 0.0004824960313984368
+    warmup_steps: 17
     warmup_type: linear
 
 Transformer:
@@ -20,7 +20,7 @@ Transformer:
   weight_decay: 1.0e-4
   optimizer: adamw
   use_lookahead: true
-  n_epochs:  4
+  n_epochs:  60
   gradient_clip: 3
   saving_folder: training_Transformer
   scheduler:
@@ -40,7 +40,7 @@ ArtFire:
   weight_decay: 1.0e-3
   optimizer: adamw
   use_lookahead: true
-  n_epochs: 4
+  n_epochs: 300
   gradient_clip: 1
   saving_folder: training_ArtFire
   scheduler:
@@ -57,17 +57,17 @@ ArtFire:
 
 Baseline:
   device: cuda
-  lr: 0.003491096030337895
-  weight_decay: 0.0005724341889174792
-  optimizer: adamw
+  lr: 0.0025206584898946364
+  weight_decay: 5.177080533302475e-06
+  optimizer: adam
   use_lookahead: false
   n_epochs: 300
-  gradient_clip: 5.0
+  gradient_clip: 1.0
   micro_batch_size: 2
   saving_folder: training_Baseline
   scheduler:
     power: 3
     min_lr: 0.00016227145662850033
-    min_lr_warmup: 1.6227145662850033e-05
-    warmup_steps: 8
+    min_lr_warmup: 6.111350544518367e-05
+    warmup_steps: 11
     warmup_type: linear

@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=unet_%j
-#SBATCH --output=logs_bl/unet_%j.out
-#SBATCH --error=logs_bl/unet_%j.err
+#SBATCH --job-name=resnet_%j
+#SBATCH --output=logs_bl/resnet_%j.out
+#SBATCH --error=logs_bl/resnet_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=tommaso.baffetti@ulb.be
 
@@ -9,7 +9,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=128G
-#SBATCH --time=20:00:00
+#SBATCH --time=12:00:00
 
 set -euo pipefail
 
@@ -18,7 +18,7 @@ PYTHON_MODULE="${PYTHON_MODULE:-Python/3.11.3-GCCcore-12.3.0}"
 VENV_PATH="${VENV_PATH:-/globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate}"
 PROJECT_DIR="${PROJECT_DIR:-$SLURM_SUBMIT_DIR}"
 ENTRYPOINT="${ENTRYPOINT:-Baseline_main.py}"
-BASELINE_MODEL="${BASELINE_MODEL:-unet}"
+BASELINE_MODEL="${BASELINE_MODEL:-resnet}"
 
 mkdir -p "$PROJECT_DIR/logs_bl"
 cd "$PROJECT_DIR"

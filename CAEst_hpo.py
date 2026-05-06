@@ -151,8 +151,8 @@ def _build_model(
         x = x.permute((0, 2, 1, 3)).unsqueeze(2).reshape(bsz * h_tokens, 1, x.shape[1], x.shape[3])
         no_flatten_dim = encoder.t_conv(x).shape[1:]
 
-    sp_output_paddings = [(0, 0)] * len(hidden_channels) + [(1, 1)]
-    t_output_paddings = [(0, 0)] * len(hidden_channels) + [(1, 0)]
+    sp_output_paddings = [[0, 0] for _ in hidden_channels] + [[1, 1]]
+    t_output_paddings = [[0, 0] for _ in hidden_channels] + [[1, 0]]
 
     sp_tconv_config = {
         "input_channels": hp["output_channels"],
@@ -285,19 +285,65 @@ def objective(
     return best_val_loss
 
 
-def _save_best_params(best_params: dict, output_path: Path) -> None:
+def _infer_no_flatten_dim(best_params: dict, input_channels: int, sample_x: torch.Tensor, device: torch.device) -> list[int]:
+    """Infer decoder no_flatten_dim for the best architecture on a sample input."""
+    arch_cfg = _ARCH_CONFIGS[best_params["arch"]]
+    hidden_channels = list(arch_cfg["hidden_channels"])
+    output_channels = arch_cfg["output_channels"]
+
+    sp_conv_config = {
+        "input_channels": input_channels,
+        "output_channels": output_channels,
+        "hidden_channels": hidden_channels,
+        "dim": 2,
+        "paddings": 0,
+        "strides": 2,
+        "normalization": best_params["normalization"],
+        "activation": best_params["activation"],
+    }
+    t_conv_config = {
+        "input_channels": 1,
+        "output_channels": output_channels,
+        "hidden_channels": hidden_channels,
+        "dim": 2,
+        "paddings": 0,
+        "strides": 2,
+        "normalization": best_params["normalization"],
+        "activation": best_params["activation"],
+    }
+
+    encoder = ConvEncoderst(sp_conv_config, t_conv_config).to(device)
+    try:
+        with torch.no_grad():
+            x = encoder.sp_conv(sample_x.to(device))
+            bsz, h_tokens = x.shape[0], x.shape[2]
+            x = x.permute((0, 2, 1, 3)).unsqueeze(2).reshape(
+                bsz * h_tokens, 1, x.shape[1], x.shape[3]
+            )
+            return list(encoder.t_conv(x).shape[1:])
+    finally:
+        del encoder
+
+
+def _save_best_params(
+    best_params: dict,
+    output_path: Path,
+    input_channels: int,
+    no_flatten_dim: list[int],
+) -> None:
     """Write best CAEst hyperparameters to a structured YAML file."""
     arch_cfg = _ARCH_CONFIGS[best_params["arch"]]
-    hidden_channels = arch_cfg["hidden_channels"]
+    hidden_channels = list(arch_cfg["hidden_channels"])
     output_channels = arch_cfg["output_channels"]
     min_lr = best_params["lr"] * best_params["min_lr_ratio"]
 
     structured = {
         "model": {
             "CAEst": {
+                "arch": best_params["arch"],
                 "spatial_conv_config": {
                     "output_channels": output_channels,
-                    "hidden_channels": hidden_channels,
+                    "hidden_channels": list(hidden_channels),
                     "dim": 2,
                     "paddings": 0,
                     "strides": 2,
@@ -306,7 +352,7 @@ def _save_best_params(best_params: dict, output_path: Path) -> None:
                 },
                 "temporal_conv_config": {
                     "output_channels": output_channels,
-                    "hidden_channels": hidden_channels,
+                    "hidden_channels": list(hidden_channels),
                     "dim": 2,
                     "paddings": 0,
                     "strides": 2,
@@ -315,11 +361,11 @@ def _save_best_params(best_params: dict, output_path: Path) -> None:
                 },
                 "spatial_tconv_config": {
                     "input_channels": output_channels,
-                    "output_channels": "<set_input_channels>",
-                    "hidden_channels": hidden_channels[::-1],
+                    "output_channels": int(input_channels),
+                    "hidden_channels": list(hidden_channels[::-1]),
                     "dim": 2,
                     "paddings": 0,
-                    "output_paddings": [(0, 0)] * len(hidden_channels) + [(1, 1)],
+                    "output_paddings": [[0, 0] for _ in hidden_channels] + [[1, 1]],
                     "strides": 2,
                     "normalization": best_params["normalization"],
                     "activation": best_params["activation"],
@@ -327,15 +373,15 @@ def _save_best_params(best_params: dict, output_path: Path) -> None:
                 "temporal_tconv_config": {
                     "input_channels": output_channels,
                     "output_channels": 1,
-                    "hidden_channels": hidden_channels[::-1],
+                    "hidden_channels": list(hidden_channels[::-1]),
                     "dim": 2,
                     "paddings": 0,
-                    "output_paddings": [(0, 0)] * len(hidden_channels) + [(1, 0)],
+                    "output_paddings": [[0, 0] for _ in hidden_channels] + [[1, 0]],
                     "strides": 2,
                     "normalization": best_params["normalization"],
                     "activation": best_params["activation"],
                 },
-                "no_flatten_dim": "<compute_from_sample>",
+                "no_flatten_dim": list(no_flatten_dim),
             }
         },
         "training": {
@@ -357,7 +403,7 @@ def _save_best_params(best_params: dict, output_path: Path) -> None:
         },
     }
     with open(output_path, "w") as f:
-        yaml.dump(structured, f, default_flow_style=False, sort_keys=False)
+        yaml.safe_dump(structured, f, default_flow_style=False, sort_keys=False)
 
 
 def run_hpo(
@@ -458,7 +504,8 @@ def run_hpo(
         print(f"  {k:22s}: {v}")
 
     output_path = Path("caest_hpo_best_params.yaml")
-    _save_best_params(study.best_params, output_path)
+    no_flatten_dim = _infer_no_flatten_dim(study.best_params, input_channels, sample_x, device_obj)
+    _save_best_params(study.best_params, output_path, input_channels, no_flatten_dim)
     print(f"\nBest params saved to: {output_path}")
 
     return study
