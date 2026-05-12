@@ -1,5 +1,6 @@
 model:
   CAEst:
+    arch: "[]\u2192128"
     spatial_conv_config:
       output_channels: 128
       hidden_channels: []
@@ -23,8 +24,7 @@ model:
       dim: 2
       paddings: 0
       output_paddings:
-      - !!python/tuple
-        - 1
+      - - 1
         - 1
       strides: 2
       normalization: null
@@ -36,8 +36,7 @@ model:
       dim: 2
       paddings: 0
       output_paddings:
-      - !!python/tuple
-        - 1
+      - - 1
         - 0
       strides: 2
       normalization: null

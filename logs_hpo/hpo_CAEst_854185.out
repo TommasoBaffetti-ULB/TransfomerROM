@@ -1,0 +1,165 @@
+[Wed May  6 01:07:07 PM CEST 2026] Job started on ly-w210
+SLURM_JOB_ID=854185
+PROJECT_DIR=/globalsc/users/b/a/baffetti/research/TransfomerROM
+ENTRYPOINT=CAEst_hpo.py
+Activating environment: /globalsc/ulb/atm/baffetti/envs/artfire_new/bin/activate
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/pip
+Python 3.11.3
+Wed May  6 13:07:07 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX 6000 Ada Gene...    On  |   00000000:01:00.0 Off |                  Off |
+| 30%   41C    P8             33W /  300W |       2MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python usato:
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+/globalsc/users/b/a/baffetti/envs/artfire_new/bin/python
+Torch test:
+2.5.0+cu124
+CUDA available — running on GPU
+
+Loading datasets from: /globalsc/ulb/atm/baffetti/research/Transformer/ArtFire_files/data/D_t2001_f13_z256_x64.npy
+Dataset: 1200 train / 400 val samples, C=13, H=256, W=64
+
+HPO config: 100 trials × 25 epochs on cuda
+
+[I 2026-05-06 13:10:58,545] Trial 289 finished with value: 0.014127708375453948 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.006893201033940844, 'weight_decay': 2.7572321933881005e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 17, 'min_lr_ratio': 0.40636354558448695}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:11:08,207] Trial 290 pruned. 
+[I 2026-05-06 13:11:17,634] Trial 291 pruned. 
+[I 2026-05-06 13:14:20,292] Trial 292 finished with value: 0.014194932915270329 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.005810475096468831, 'weight_decay': 2.440030442457764e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 12, 'min_lr_ratio': 0.4501103405483595}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:15:04,589] Trial 293 pruned. 
+[I 2026-05-06 13:15:49,146] Trial 294 pruned. 
+[I 2026-05-06 13:16:51,430] Trial 295 finished with value: 0.013653454259037972 and parameters: {'arch': '[]→64', 'normalization': None, 'activation': 'silu', 'lr': 0.008633933954836654, 'weight_decay': 7.20102834513267e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 19, 'min_lr_ratio': 0.4185923169700895}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:17:38,324] Trial 296 pruned. 
+[I 2026-05-06 13:19:06,293] Trial 297 pruned. 
+[I 2026-05-06 13:19:15,470] Trial 298 pruned. 
+[I 2026-05-06 13:19:59,699] Trial 299 pruned. 
+[I 2026-05-06 13:20:46,500] Trial 300 pruned. 
+[I 2026-05-06 13:21:33,318] Trial 301 pruned. 
+[I 2026-05-06 13:24:36,510] Trial 302 finished with value: 0.013115185424685477 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.00868966943439546, 'weight_decay': 0.00017009407416152377, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 17, 'min_lr_ratio': 0.4116291857117611}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:25:20,759] Trial 303 pruned. 
+[I 2026-05-06 13:25:28,720] Trial 304 pruned. 
+[I 2026-05-06 13:25:58,273] Trial 305 pruned. 
+[I 2026-05-06 13:26:07,292] Trial 306 pruned. 
+[I 2026-05-06 13:26:07,668] Trial 307 pruned. 
+[I 2026-05-06 13:26:34,654] Trial 308 pruned. 
+[I 2026-05-06 13:26:34,885] Trial 309 pruned. 
+[I 2026-05-06 13:26:44,560] Trial 310 pruned. 
+[I 2026-05-06 13:27:32,089] Trial 311 pruned. 
+[I 2026-05-06 13:28:17,425] Trial 312 pruned. 
+[I 2026-05-06 13:28:17,649] Trial 313 pruned. 
+[I 2026-05-06 13:28:56,288] Trial 314 finished with value: 0.014757183752954007 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'silu', 'lr': 0.00801848900806591, 'weight_decay': 1.9228895672512042e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 14, 'min_lr_ratio': 0.4969851772230592}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:28:56,508] Trial 315 pruned. 
+[I 2026-05-06 13:28:56,739] Trial 316 pruned. 
+[I 2026-05-06 13:29:05,321] Trial 317 pruned. 
+[I 2026-05-06 13:29:05,541] Trial 318 pruned. 
+[I 2026-05-06 13:29:32,155] Trial 319 pruned. 
+[I 2026-05-06 13:32:35,389] Trial 320 finished with value: 0.013705002591013909 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.009071496012853383, 'weight_decay': 0.00016760627560272046, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 20, 'min_lr_ratio': 0.4541619513580985}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:33:22,485] Trial 321 pruned. 
+[I 2026-05-06 13:33:30,490] Trial 322 pruned. 
+[I 2026-05-06 13:36:33,789] Trial 323 finished with value: 0.012645172774791718 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.008312362145492455, 'weight_decay': 8.69740592094343e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 19, 'min_lr_ratio': 0.4879406245807237}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:37:18,063] Trial 324 pruned. 
+[I 2026-05-06 13:38:02,388] Trial 325 pruned. 
+[I 2026-05-06 13:38:49,768] Trial 326 pruned. 
+[I 2026-05-06 13:39:41,359] Trial 327 pruned. 
+[I 2026-05-06 13:40:28,283] Trial 328 pruned. 
+[I 2026-05-06 13:41:15,241] Trial 329 pruned. 
+[I 2026-05-06 13:44:18,471] Trial 330 finished with value: 0.013488517925143242 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'elu', 'lr': 0.009001223204812867, 'weight_decay': 3.2624314411016826e-05, 'optimizer': 'adamw', 'use_lookahead': True, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 12, 'min_lr_ratio': 0.38590058728854326}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:44:26,528] Trial 331 pruned. 
+[I 2026-05-06 13:45:10,734] Trial 332 pruned. 
+[I 2026-05-06 13:45:57,526] Trial 333 pruned. 
+[I 2026-05-06 13:46:44,350] Trial 334 pruned. 
+[I 2026-05-06 13:46:52,376] Trial 335 pruned. 
+[I 2026-05-06 13:49:55,734] Trial 336 finished with value: 0.012412002682685852 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'gelu', 'lr': 0.009113064339782607, 'weight_decay': 1.7982236017866185e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 17, 'min_lr_ratio': 0.34811200678797927}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:50:05,671] Trial 337 pruned. 
+[I 2026-05-06 13:50:13,713] Trial 338 pruned. 
+[I 2026-05-06 13:53:17,268] Trial 339 finished with value: 0.012553832568228245 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.008294099166228195, 'weight_decay': 1.5910731806230877e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 14, 'min_lr_ratio': 0.40999000778421857}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 13:54:09,010] Trial 340 pruned. 
+[I 2026-05-06 13:55:59,302] Trial 341 pruned. 
+[I 2026-05-06 13:56:46,574] Trial 342 pruned. 
+[I 2026-05-06 13:57:14,466] Trial 343 pruned. 
+[I 2026-05-06 13:58:35,278] Trial 344 pruned. 
+[I 2026-05-06 14:00:10,819] Trial 345 pruned. 
+[I 2026-05-06 14:00:27,028] Trial 346 pruned. 
+[I 2026-05-06 14:00:27,251] Trial 347 pruned. 
+[I 2026-05-06 14:01:12,685] Trial 348 pruned. 
+[I 2026-05-06 14:01:21,344] Trial 349 pruned. 
+[I 2026-05-06 14:01:21,637] Trial 350 pruned. 
+[I 2026-05-06 14:04:25,047] Trial 351 finished with value: 0.013875428549945355 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.00748279622157418, 'weight_decay': 2.8153161625351384e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 3.0, 'batch_size': 16, 'scheduler_power': 3, 'warmup_steps': 13, 'min_lr_ratio': 0.4415015841567858}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:04:33,276] Trial 352 pruned. 
+[I 2026-05-06 14:04:33,529] Trial 353 pruned. 
+[I 2026-05-06 14:04:41,829] Trial 354 pruned. 
+[I 2026-05-06 14:04:57,748] Trial 355 pruned. 
+[I 2026-05-06 14:04:57,980] Trial 356 pruned. 
+[I 2026-05-06 14:08:01,380] Trial 357 finished with value: 0.015374759770929813 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.008730528532460029, 'weight_decay': 5.9805347511804436e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 3, 'min_lr_ratio': 0.3169996078246312}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:08:16,553] Trial 358 pruned. 
+[I 2026-05-06 14:08:24,692] Trial 359 pruned. 
+[I 2026-05-06 14:08:32,814] Trial 360 pruned. 
+[I 2026-05-06 14:08:50,446] Trial 361 pruned. 
+[I 2026-05-06 14:11:53,920] Trial 362 finished with value: 0.012713828645646573 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.009702147867645118, 'weight_decay': 3.286274744834073e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 18, 'min_lr_ratio': 0.3695150981032914}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:14:57,483] Trial 363 finished with value: 0.012469368986785412 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.009655994171647463, 'weight_decay': 6.763883696482288e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 5.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 18, 'min_lr_ratio': 0.46219214134888437}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:16:18,419] Trial 364 pruned. 
+[I 2026-05-06 14:16:18,651] Trial 365 pruned. 
+[I 2026-05-06 14:16:27,589] Trial 366 pruned. 
+[I 2026-05-06 14:16:27,852] Trial 367 pruned. 
+[I 2026-05-06 14:19:31,483] Trial 368 finished with value: 0.01621801219880581 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.006118719923718406, 'weight_decay': 1.491635355475548e-05, 'optimizer': 'adamw', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 5, 'min_lr_ratio': 0.49790593599432004}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:20:15,884] Trial 369 pruned. 
+[I 2026-05-06 14:20:43,703] Trial 370 pruned. 
+[I 2026-05-06 14:20:52,187] Trial 371 pruned. 
+[I 2026-05-06 14:20:52,412] Trial 372 pruned. 
+[I 2026-05-06 14:23:19,368] Trial 373 pruned. 
+[I 2026-05-06 14:23:19,598] Trial 374 pruned. 
+[I 2026-05-06 14:26:23,311] Trial 375 finished with value: 0.014460589699447156 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'gelu', 'lr': 0.006244356674011244, 'weight_decay': 2.494675619036636e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 2, 'warmup_steps': 13, 'min_lr_ratio': 0.4364867072435498}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:27:08,766] Trial 376 pruned. 
+[I 2026-05-06 14:27:16,987] Trial 377 pruned. 
+[I 2026-05-06 14:27:44,303] Trial 378 pruned. 
+[I 2026-05-06 14:27:44,541] Trial 379 pruned. 
+[I 2026-05-06 14:27:54,052] Trial 380 pruned. 
+[I 2026-05-06 14:28:30,632] Trial 381 finished with value: 0.014531575180590152 and parameters: {'arch': '[]→32', 'normalization': None, 'activation': 'elu', 'lr': 0.00865282025944107, 'weight_decay': 1.0426168838200993e-05, 'optimizer': 'adam', 'use_lookahead': False, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 9, 'min_lr_ratio': 0.38935178421950345}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:28:38,920] Trial 382 pruned. 
+[I 2026-05-06 14:29:23,068] Trial 383 pruned. 
+[I 2026-05-06 14:29:23,302] Trial 384 pruned. 
+[I 2026-05-06 14:29:31,501] Trial 385 pruned. 
+[I 2026-05-06 14:29:31,720] Trial 386 pruned. 
+[I 2026-05-06 14:32:35,032] Trial 387 finished with value: 0.012796371094882488 and parameters: {'arch': '[]→128', 'normalization': None, 'activation': 'silu', 'lr': 0.009825256087459691, 'weight_decay': 1.8994776876184153e-05, 'optimizer': 'adam', 'use_lookahead': True, 'gradient_clip': 1.0, 'batch_size': 16, 'scheduler_power': 1, 'warmup_steps': 8, 'min_lr_ratio': 0.4825097272810692}. Best is trial 170 with value: 0.01185424342751503.
+[I 2026-05-06 14:32:44,307] Trial 388 pruned. 
+
+============================================================
+HPO Complete
+============================================================
+  Completed trials : 125
+  Pruned trials    : 263
+  Best trial       : #170
+  Best val MSE     : 0.011854
+
+Best hyperparameters:
+  arch                  : []→128
+  normalization         : None
+  activation            : silu
+  lr                    : 0.009862490280798981
+  weight_decay          : 3.386540833241391e-05
+  optimizer             : adamw
+  use_lookahead         : False
+  gradient_clip         : 1.0
+  batch_size            : 16
+  scheduler_power       : 2
+  warmup_steps          : 17
+  min_lr_ratio          : 0.4892233276394659
+
+Best params saved to: caest_hpo_best_params.yaml
+[Wed May  6 02:32:45 PM CEST 2026] Job finished
