@@ -382,3 +382,27 @@ training_Transformer/*.json
 
 requirements_1.txt
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,python,jupyternotebooks,git,visualstudiocode,linux,windows
+
+# Project artifacts to keep local
+logs/
+logs_bl/
+logs_hpo/
+logs_bl_hpo/
+
+training_ArtFire/
+training_baseline/
+training_Baseline/
+training_CAE/
+training_transformer/
+
+baseline_hpo_best_params_fno2d.yaml
+baseline_hpo_best_params_fno3d.yaml
+baseline_hpo_best_params_resnet.yaml
+baseline_hpo_best_params_unet.yaml
+CAE_hpo_best_params.yaml
+CAEst_hpo_best_params.yaml
+
+best_artfire.pt
+best_CAE.pt
+best_cae.pt
+best_transformer.pt
